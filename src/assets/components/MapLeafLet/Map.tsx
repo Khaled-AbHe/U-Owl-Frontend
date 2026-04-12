@@ -14,9 +14,7 @@ export default function Map() {
 
     //https://docs.maptiler.com/vite/
     config.apiKey = MAPTILER_API_KEY;
-    console.log('API KEY:', MAPTILER_API_KEY);
     map.current = new MapT({ container : container.current});
-    console.log('Map')
   },[])
 
   return (
