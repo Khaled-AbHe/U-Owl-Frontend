@@ -16,8 +16,6 @@ This template provides a minimal setup to get React working in Vite with HMR and
 | `/reservations/removeOrderItem/:orderItemId`| Remove a reservation|
 | `/products`      | Product listing with search & filter           |
 | `/products/:id`  | Product detail with add-to-cart                |
-| `/checkout`      | Checkout form                                  |
-| `/orders`        | Order history with status management           |
 ---
 
 
