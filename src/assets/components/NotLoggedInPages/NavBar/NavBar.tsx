@@ -1,9 +1,15 @@
 import { useState } from "react";
-import "../../Styles/navbar.css"
+import "../../../Styles/navbar.css"
+import { Link } from "react-router-dom";
+
+interface NavItem{
+    label : string;
+    path : string;
+}
 
 interface NavBarProps {
   imageSrcPath: string;
-  navItems: string[];
+  navItems: NavItem[];
 }
 
 function NavBar({imageSrcPath, navItems }: NavBarProps) {
@@ -39,22 +45,22 @@ function NavBar({imageSrcPath, navItems }: NavBarProps) {
          navbar-collapse"
         id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-md-1">
-            {navItems.map((items, index) => (
+            {navItems.map((item, index) => (
               <li
-                key={items}
+                key={item.label}
                 className="nav-item"
                 onClick={() => setSelectedIndex(index)}
               >
-                <a
-                  className={
+                <Link
+                    className={
                     selectedIndex == index
                       ? "nav-link active fw-bold"
                       : "nav-link"
                   }
-                  href="#"
+                  to={item.path}
                 >
-                  {items}
-                </a>
+                  {item.label}
+                </Link>
               </li>
             ))}
           </ul>
