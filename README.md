@@ -1,6 +1,24 @@
-# React + TypeScript + Vite
+# U-Owl-Frontend (React + TypeScript + Vite)     
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+
+
+## Pages
+
+| Route            | Description                                    |
+|------------------|------------------------------------------------|
+| `/`              | Home — hero banner + featured products         |
+| `/auth/signUp`   | Create a new user                              |
+| `/auth/signIn`   | Allows a user to login                         |
+| `/cart`          | Shopping cart                                  |
+| `/reservations`  | Access reserved vehicles                       |
+| `/reservations/addVehicle`| Add a reservation                     |
+| `/reservations/removeOrderItem/:orderItemId`| Remove a reservation|
+| `/products`      | Product listing with search & filter           |
+| `/products/:id`  | Product detail with add-to-cart                |
+---
+
+
 
 Currently, two official plugins are available:
 
