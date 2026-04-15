@@ -6,20 +6,20 @@ import tiktok from "../../images/NavBar/tiktok.jpg";
 
 const Footer = () => {
     return (
-        <footer style={{backgroundColor: '#389fff', color: 'black', padding: '30px', textAlign: 'center', bottom: 0, left:0,}}>
-            <p>&copy; {new Date().getFullYear()} U-Owl</p>
+        <footer style={{backgroundColor: '#389fff', color: 'black', padding: '2px', textAlign: 'center', bottom: 0, left:0,}}>
+            <p style={{color: "white"}}>&copy; {new Date().getFullYear()} U-Owl</p>
             <div className="footer">
                 <a href="https://x.com/?lang=fr">
-                    <img src={xlogo} alt="x logo" width={55} height={55} style={{ margin: "0 10px" }}/>
+                    <img src={xlogo} alt="x logo" width={55} height={55} style={{ margin: "0 10px", borderRadius: 50}}/>
                 </a>
                 <a href="https://www.instagram.com/">
-                    <img src={ig} alt="ig logo" width={55} height={55} style={{ margin: "0 10px" }}/>
+                    <img src={ig} alt="ig logo" width={55} height={55} style={{ margin: "0 10px", borderRadius: 50}}/>
                 </a>
                 <a href="https://www.youtube.com/">
-                    <img src={youtube} alt="yt logo" width={55} height={55} style={{ margin: "0 10px" }}/>
+                    <img src={youtube} alt="yt logo" width={55} height={55} style={{ margin: "0 10px", borderRadius: 50 }}/>
                 </a>
                 <a href="https://www.tiktok.com/fr-CA/">
-                    <img src={tiktok} alt="tiktok logo" width={55} height={55} style={{ margin: "0 10px" }}/>
+                    <img src={tiktok} alt="tiktok logo" width={55} height={55} style={{ margin: "0 10px", borderRadius: 50 }}/>
                 </a>               
             </div>
         </footer>

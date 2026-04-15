@@ -1,4 +1,5 @@
-.navbar-nav .nav-item .nav-link:hover {
-    color: black; 
-    background-color: white; 
-  }
+.btn-outline-success:hover {
+  background-color: #389fff !important;
+  border-color: #389fff !important;
+  color: white !important;
+}
