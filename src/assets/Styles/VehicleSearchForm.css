@@ -3,3 +3,10 @@
     height: 1px;
     background-color: #389fff;
 }
+
+.dateInput {
+  border-radius: 8px;
+  border: 1px solid #389fff;
+  padding: 8px;
+  color: #389fff;
+}
