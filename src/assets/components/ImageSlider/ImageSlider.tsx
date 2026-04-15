@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { ArrowBigLeft, ArrowBigRight } from 'lucide-react';
 
 import "../../Styles/imgSlider.css";
+import { ChevronFirst, ChevronLast } from "lucide-react";
 
 type ImageSilderProps = {
     imageUrls: string[]
@@ -26,18 +26,18 @@ export default function ImagesSlider({ imageUrls }: ImageSilderProps) {
     }
 
     return (
-        <div style={{ width: "80%", margin: "0 auto", position: "relative"}}>
+        <div style={{ width: "80%", margin: "0 auto", position: "relative", paddingTop: 50}}>
             
             <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "10px"}}>
                 
-                <button onClick={showPrevImage}>
-                    <ArrowBigLeft />
+                <button onClick={showPrevImage} style={{background:"white", borderRadius: 50, width: 70, height: 70, borderColor: "#389fff"}}>
+                    <ChevronFirst color="#389fff"/>
                 </button>
                 
                 <img src={imageUrls[imageIndex]} className="imageSlider"/>
                 
-                <button onClick={showNextImage}>
-                    <ArrowBigRight />
+                <button onClick={showNextImage} style={{background:"white", borderRadius: 50, width: 70, height: 70, borderColor: "#389fff"}}>
+                    <ChevronLast color="#389fff"/>
                 </button>
             </div>
         </div>

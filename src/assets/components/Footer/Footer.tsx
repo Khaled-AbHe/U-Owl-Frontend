@@ -1,29 +1,22 @@
-import xlogo from "../../images/NavBar/xlogo.jpg";
-import ig from "../../images/NavBar/ig.jpg";
-import youtube from "../../images/NavBar/youtube.png";
-import tiktok from "../../images/NavBar/tiktok.jpg";
-
+import { FaInstagram, FaYoutube, FaTiktok } from "react-icons/fa";
+import { SiX } from "react-icons/si";
 
 const Footer = () => {
     return (
-        <footer style={{backgroundColor: '#389fff', color: 'black', padding: '2px', textAlign: 'center', bottom: 0, left:0,}}>
-            <p style={{color: "white"}}>&copy; {new Date().getFullYear()} U-Owl</p>
-            <div className="footer">
-                <a href="https://x.com/?lang=fr">
-                    <img src={xlogo} alt="x logo" width={55} height={55} style={{ margin: "0 10px", borderRadius: 50}}/>
-                </a>
-                <a href="https://www.instagram.com/">
-                    <img src={ig} alt="ig logo" width={55} height={55} style={{ margin: "0 10px", borderRadius: 50}}/>
-                </a>
-                <a href="https://www.youtube.com/">
-                    <img src={youtube} alt="yt logo" width={55} height={55} style={{ margin: "0 10px", borderRadius: 50 }}/>
-                </a>
-                <a href="https://www.tiktok.com/fr-CA/">
-                    <img src={tiktok} alt="tiktok logo" width={55} height={55} style={{ margin: "0 10px", borderRadius: 50 }}/>
-                </a>               
+        <footer style={{backgroundColor: "#389fff", color: "black", textAlign: "center", height: 70}}>
+            <p style={{ color: "white" }}>&copy; {new Date().getFullYear()} U-Owl</p>
+
+            <div className="footer" style={{ display: "flex", justifyContent: "center" }}>
+                <a href="https://x.com/?lang=fr" style={{ margin: "0 12px" }}><SiX size={20} color="white"/></a>
+
+                <a href="https://www.instagram.com/" style={{ margin: "0 12px" }}> <FaInstagram size={20} color="white"/></a>
+
+                <a href="https://www.youtube.com/" style={{ margin: "0 12px" }}><FaYoutube size={20} color="white"/></a>
+
+                <a href="https://www.tiktok.com/fr-CA/" style={{ margin: "0 12px" }}><FaTiktok size={20} color="white"/></a>
             </div>
         </footer>
-    )
-}
+    );
+};
 
 export default Footer;

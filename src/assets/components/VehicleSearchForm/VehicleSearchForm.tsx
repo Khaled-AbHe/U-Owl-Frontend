@@ -16,15 +16,15 @@ export default function VehicleSearch() {
     };
 
   return (
-    <div style={{width: 300, height: 300, backgroundColor: 'white', border: '1px solid black', position: "absolute", zIndex: 2, left: 230, bottom: 250}}> 
+    <div style={{width: 350, height: 350, backgroundColor: 'white', border: '1px solid #389fff', position: "absolute", zIndex: 2, left: 230, bottom: 170, borderRadius: 8, padding: 25}}> 
         <p style={{fontSize: '25px', color: "#389fff"}}>Trucks & Trailers</p>
         <div className="ligne"></div>
         <p></p>
         <p style={{fontSize: '15px', color: "#389fff"}}>Location*</p>
-        <input type="text" value={text} onChange={handleChange} placeholder="Addresse"/>
+        <input type="text" value={text} onChange={handleChange} placeholder="Addresse" style={{borderColor: "#389fff",color: "#389fff" ,borderRadius: 8}}/>
         <p></p>
         <p style={{fontSize: '15px', color: "#389fff"}}>Date*</p>
-        <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
+        <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} className="dateInput"/>
         <p></p>
         <button style={{width: 150, backgroundColor: "#389fff", borderRadius: 5, color: "white"}}>Search</button>
     </div>
