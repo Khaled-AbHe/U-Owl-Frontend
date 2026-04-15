@@ -1,7 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import logo from "./assets/images/NavBar/image.png";
 import NavBar from "./assets/components/NotLoggedInPages/NavBar/NavBar.tsx";
-import Footer from "./assets/components/Footer/Footer.tsx";
 
 import Home from "./assets/components/NotLoggedInPages/Home/Home.tsx";
 import Trucks from "./assets/components/NotLoggedInPages/Trucks/Trucks.tsx";
@@ -26,35 +25,21 @@ export function App() {
     { label: "SignUp", path: "/auth/signUp" },
     { label: "Cart", path: "/cart" },
   ];
-
   return (
-    <div
-      style={{
-        minHeight: "100vh",
-        display: "flex",
-        flexDirection: "column"
-      }}
-    >
-      <BrowserRouter>
-        <NavBar imageSrcPath={logo} navItems={items} />
+    <BrowserRouter>
+      <NavBar imageSrcPath={logo} navItems={items} />
 
-        <div style={{ flex: 1 }}>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/trucks" element={<Trucks />} />
-            <Route path="/trailers" element={<Trailers />} />
-            <Route path="/reservations" element={<Reservations />} />
-            <Route path="/joinDealer" element={<BecomeAdealer />} />
-            <Route path="/location" element={<Location />} />
-            <Route path="/auth/signIn" element={<SignIn />} />
-            <Route path="/auth/signUp" element={<SignUp />} />
-            <Route path="/cart" element={<Cart />} />
-          </Routes>
-        </div>
-      </BrowserRouter>
-
-      <Footer />
-    </div>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/trucks" element={<Trucks />} />
+        <Route path="/trailers" element={<Trailers />} />
+        <Route path="/reservations" element={<Reservations />} />
+        <Route path="/joinDealer" element={<BecomeAdealer />} />
+        <Route path="/location" element={<Location />} />
+        <Route path="/auth/signIn" element={<SignIn />} />
+        <Route path="/auth/signUp" element={<SignUp />} />
+        <Route path="/cart" element={<Cart />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
-

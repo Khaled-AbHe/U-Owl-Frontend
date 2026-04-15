@@ -1,5 +1,6 @@
 export default function Reservations() {
   return (
-    <div></div>
+    <div>Reservations</div>
   )
 }
+

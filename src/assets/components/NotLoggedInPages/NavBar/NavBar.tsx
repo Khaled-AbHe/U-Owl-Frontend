@@ -71,7 +71,7 @@ function NavBar({imageSrcPath, navItems }: NavBarProps) {
               placeholder="Search"
               aria-label="Search"
             />
-            <button className="btn btn-outline-success" type="submit" style={{ color: "#389fff", borderColor: "#389fff" }}>
+            <button className="btn btn-outline-success" type="submit">
               Search
             </button>
           </form>

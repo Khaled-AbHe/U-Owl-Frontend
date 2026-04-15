@@ -1,5 +1,5 @@
 export default function SignIn(){
     return(
-        <div></div>
+        <div>This page will allow users to sign in</div>
     )
 }
