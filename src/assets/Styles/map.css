@@ -1,13 +1,37 @@
 .map-wrap {
   position: relative;
-  width: 60%;
-  height: 500px;
-  margin: 0 auto;
-  margin-top: 30px;
+  width: 100%;
+  height: 300px;
 }
 
 .map {
   position: absolute;
   width: 100%;
   height: 100%;
+}
+
+/* Style MapTiler markers */
+.maptiler-marker {
+  width: 30px;
+  height: 30px;
+  background-color: #FF6B6B;
+  border: 2px solid white;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.maptiler-marker:hover {
+  transform: scale(1.2);
+}
+
+/* Style popups */
+.maptiler-popup {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+  padding: 8px 12px;
+  font-size: 14px;
+  font-weight: 500;
 }
