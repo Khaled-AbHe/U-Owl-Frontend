@@ -23,25 +23,53 @@ export default function Map() {
       zoom: zoom,
     });
 
-    new Marker({ color: "RED" })
-      .setLngLat([-73, 46])
-      .setPopup(new Popup().setText("U-Owl Dealer 1 : Georges Laraque"))
-      .addTo(map.current);
+    const dealers = [
+      {
+        color: "RED",
+        lon: -73,
+        lat: 46,
+        Title: "U-Owl Dealer: ",
+        name: "Georges Laraque",
+      },
+      {
+        color: "BLUE",
+        lon: -73.6,
+        lat: 45.5,
+        Title: "U-Owl Dealer: ",
+        name: "Georges Laraque",
+      },
+      {
+        color: "RED",
+        lon: -73,
+        lat: 46.4,
+        Title: "U-Owl Dealer: ",
+        name: "Lewis Lefou",
+      },
+      {
+        color: "RED",
+        lon: -73.4,
+        lat: 45.3,
+        Title: "U-Owl Dealer: ",
+        name: "Shahin Ouest",
+      }
+  ]
 
-    new Marker({ color: "BLUE" })
-      .setLngLat([-73.6, 45.5])
-      .setPopup(new Popup().setText("My Position"))
-      .addTo(map.current);
+  dealers.map(item => {
+    new Marker({ color: item.color})
+      .setLngLat([item.lon,item.lat])
+      .setPopup(new Popup().setText(item.Title + item.name))
+      .addTo(map.current)
+  })
 
-    new Marker({ color: "RED" })
-      .setLngLat([-73, 46.4])
-      .setPopup(new Popup().setText("U-Owl Dealer 2 : Lewis Lefou"))
-      .addTo(map.current);
+  const userLon = -73.6
+  const userLat = 45.5
+  const userPos = "My Position"
 
-    new Marker({ color: "RED" })
-      .setLngLat([-73.4, 45.3])
-      .setPopup(new Popup().setText("U-Owl Dealer 3 : Shahin Ouest"))
-      .addTo(map.current);
+  new Marker({ color: "Blue"})
+      .setLngLat([userLon,userLat])
+      .setPopup(new Popup().setText(userPos))
+      .addTo(map.current)
+
   }, [quebec.lng, quebec.lat, zoom]);
 
   return (
