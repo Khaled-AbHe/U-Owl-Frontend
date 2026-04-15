@@ -9,10 +9,10 @@ import Trailers from "./assets/components/NotLoggedInPages/Trailers/Trailers.tsx
 import Reservations from "./assets/components/LoggedInPages/Reservations/Reservations.tsx";
 import BecomeAdealer from "./assets/components/NotLoggedInPages/BecomeAdealer/BecomeAdealer.tsx";
 import Location from "./assets/components/NotLoggedInPages/Location/Location.tsx";
-import SignIn from "./assets/components/NotLoggedInPages/SignIn/SignIn.tsx";
-import SignUp from "./assets/components/NotLoggedInPages/SignUp/SignUp.tsx";
 
 import Cart from "./assets/components/LoggedInPages/Cart/Cart.tsx";
+import SignIn from "./assets/components/NotLoggedInPages/Auth/SignIn.tsx";
+import SignUp from "./assets/components/NotLoggedInPages/Auth/SignUp.tsx";
 
 export function App() {
   const items = [
