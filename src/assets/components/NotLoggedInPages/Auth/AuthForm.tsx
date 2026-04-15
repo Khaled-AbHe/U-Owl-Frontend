@@ -6,32 +6,35 @@ export default function AuthForm({
   footer,
 }: any) {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-100">
+    <div className="d-flex align-items-center justify-content-center vh-100 bg-light">
       <form
         onSubmit={onSubmit}
-        className="flex w-full max-w-md flex-col gap-5 rounded-2xl bg-white p-8 shadow-xl"
+        className="w-100 rounded bg-white p-4 shadow"
+        style={{ maxWidth: "420px" }}
       >
-        <div className="flex flex-col items-center gap-2">
-          <div className="flex h-14 w-14 items-center justify-center rounded-full bg-blue-600 text-xl text-white">
+        <div className="mb-4 text-center">
+          <div
+            className="d-flex align-items-center justify-content-center rounded-circle bg-primary mx-auto mb-2 text-white"
+            style={{ width: "56px", height: "56px", fontSize: "20px" }}
+          >
             👤
           </div>
-          <h2 className="text-2xl font-bold text-gray-800">{title}</h2>
-          <p className="text-sm text-gray-500">{subtitle}</p>
+          <h2 className="h4 fw-bold text-dark">{title}</h2>
+          <p className="text-muted small">{subtitle}</p>
         </div>
 
         {children}
 
-        <button
-          type="submit"
-          className="rounded-xl bg-blue-600 py-2 font-semibold text-white transition hover:opacity-90"
-        >
+        <button type="submit" className="btn btn-primary fw-semibold w-100">
           {title}
         </button>
 
-        <div className="flex items-center gap-3 text-sm text-gray-400">
-          <div className="h-px flex-1 bg-gray-300" />
-          or
-          <div className="h-px flex-1 bg-gray-300" />
+        <div className="position-relative my-4 text-center">
+          <hr />
+
+          <span className="position-absolute translate-middle text-muted small start-50 top-50 bg-white px-2">
+            or
+          </span>
         </div>
 
         {footer}

@@ -1,54 +1,71 @@
 import { useState } from "react";
+import type { ChangeEvent } from "react";
 import AuthForm from "./AuthForm";
 import InputField from "./InputField";
 import { Link } from "react-router-dom";
 
+type FormState = {
+  name: string;
+  email: string;
+  password: string;
+};
+
 export default function SignUp() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirm, setConfirm] = useState("");
+  const [form, setForm] = useState<FormState>({
+    name: "",
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+
+    setForm((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    console.log({ email, password, confirm });
+    console.log("Submitting:", form);
   };
 
   return (
     <AuthForm
-      title="Create Account"
-      subtitle="Get started with your account"
+      title="Sign Up"
+      subtitle="Create your account to get started."
       onSubmit={handleSubmit}
       footer={
-        <p className="text-center text-sm text-gray-500">
-          Already have an account?{" "}
-          <Link to="/auth/signin" className="cursor-pointer text-blue-600">
-            Sign In
-          </Link>
+        <p className="small mb-0 text-center">
+          Already have an account? <Link to="/auth/signin">Sign in</Link>
         </p>
       }
     >
       <InputField
-        label="Email address"
+        label="Name"
+        name="name"
+        value={form.name}
+        onChange={handleChange}
+        placeholder="Enter your name"
+      />
+
+      <InputField
+        label="Email"
         type="email"
-        value={email}
-        onChange={setEmail}
-        placeholder="you@example.com"
+        name="email"
+        value={form.email}
+        onChange={handleChange}
+        placeholder="Enter email"
       />
 
       <InputField
         label="Password"
         type="password"
-        value={password}
-        onChange={setPassword}
-        placeholder="••••••••"
-      />
-
-      <InputField
-        label="Confirm Password"
-        type="password"
-        value={confirm}
-        onChange={setConfirm}
-        placeholder="••••••••"
+        name="password"
+        value={form.password}
+        onChange={handleChange}
+        placeholder="Enter password"
       />
     </AuthForm>
   );
