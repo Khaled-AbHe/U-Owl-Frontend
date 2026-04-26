@@ -1,0 +1,63 @@
+/* ── Mode toggle tabs ─────────────────────────────────────────────────────── */
+.signin-tabs {
+  display: flex;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #f8fafc;
+}
+
+.signin-tab {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.55rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border: none;
+  background: transparent;
+  color: #64748b;
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s;
+  gap: 4px;
+}
+
+.signin-tab:hover {
+  color: var(--brand-color) !important;
+}
+
+.signin-tab--active {
+  background: white;
+  color: var(--brand-color);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  border-radius: 8px;
+  margin: 3px;
+}
+
+.signin-tab--active-admin {
+  color: #dc2626;
+}
+
+.signin-tab--admin:hover {
+  color: #dc2626 !important;
+}
+
+/* ── Icon variants ────────────────────────────────────────────────────────── */
+.signin-icon--user {
+  background: var(--brand-color) !important;
+}
+
+.signin-icon--admin {
+  background: #dc2626 !important;
+}
+
+/* ── Admin extra field ────────────────────────────────────────────────────── */
+.admin-code-field {
+  animation: slideDown 0.2s ease;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
