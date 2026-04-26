@@ -1,3 +1,3 @@
 export default function BecomeAdealer() {
-  return <div>BecomeAdealer</div>;
+  return <div></div>;
 }
