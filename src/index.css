@@ -1,1 +1,62 @@
-@import "tailwindcss";
+/* ── Brand tokens ─────────────────────────────────────────────────────────── */
+:root {
+  --brand-color: #389fff;
+  --brand-color-hover: #1a7fe0;
+}
+
+/* ── Bootstrap overrides ──────────────────────────────────────────────────── */
+.text-brand       { color: var(--brand-color) !important; }
+.border-brand     { border-color: var(--brand-color) !important; }
+
+.btn-brand {
+  background-color: var(--brand-color) !important;
+  border-color: var(--brand-color) !important;
+  color: #fff !important;
+}
+.btn-brand:hover {
+  background-color: var(--brand-color-hover) !important;
+  border-color: var(--brand-color-hover) !important;
+  color: #fff !important;
+}
+
+.btn-outline-brand {
+  color: var(--brand-color);
+  border-color: var(--brand-color);
+  background-color: transparent;
+}
+.btn-outline-brand:hover {
+  background-color: var(--brand-color);
+  border-color: var(--brand-color);
+  color: #fff;
+}
+
+/* ── Home slider + search overlay ────────────────────────────────────────── */
+.slider-container {
+  position: relative;
+  width: 100%;
+  height: 520px;        /* adjust to taste */
+}
+
+/* ── Layout ───────────────────────────────────────────────────────────────── */
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+body::-webkit-scrollbar {
+  display: none;
+}
+
+main {
+  margin-bottom: clamp(2rem, 5vh, 5rem);
+}
+
+.site-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
