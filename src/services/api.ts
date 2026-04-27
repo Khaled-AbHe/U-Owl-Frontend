@@ -38,6 +38,7 @@ export const getSingleTrailer = async (id : string) => await request(`/trailers/
 export const getHostTrailers  = async (userId : string) => await request(`/users/${userId}/trailers`)
 export const getSingleHostTrailer = async (userId : string, TrailerId : string) => await request(`/users/${userId}/trailers/${TrailerId}`)
 
+
 // Requêtes AUTH
 export const loginUser = async (creds : any) => (
   await request("/auth/signin", {
@@ -77,6 +78,23 @@ export const payCartTotal = async (payment : any) =>{
         body: JSON.stringify(payment)
     })
 }
+
+// Requete Reservation (PATCH)
+export const addItem = async(reservation : any) =>{
+    return await request('/reservations/addVehicle',{
+        method: 'PATCH',
+        body: JSON.stringify(reservation)
+    })
+}
+
+export const removeItem = async(reservation : any) =>{
+    return await request('/reservations/removeOrderItem/${orderItemId}',{
+        method: 'PATCH',
+        body: JSON.stringify(reservation)
+    })
+}
+
+
 
 // Requete Location
 export const createLocation = async(location : any) => {
