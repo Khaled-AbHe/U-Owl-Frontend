@@ -3,22 +3,23 @@
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 
-## Pages
+## Pages User
 
-| Route            | Description                                    |
-|------------------|------------------------------------------------|
-| `/`              | Home — hero banner + featured products         |
-| `/auth/signUp`   | Create a new user                              |
-| `/auth/signIn`   | Allows a user to login                         |
-| `/cart`          | Shopping cart                                  |
-| `/reservations`  | Access reserved vehicles                       |
-| `/reservations/addVehicle`| Add a reservation                     |
-| `/reservations/removeOrderItem/:orderItemId`| Remove a reservation|
-| `/products`      | Product listing with search & filter           |
-| `/products/:id`  | Product detail with add-to-cart                |
+| Route                | Description                                        |
+|----------------------|------------------------------------------------|
+| `/`                  | Home — hero banner + featured products         |
+| `/auth/signIn`       | Allows a user to login                         |
+| `/auth/signUp`       | Create a new user                              |
+| `/trucks`            | Trucks listing with add-to-cart                |
+| `/trailers`          | Trailers listing with add-to-cart              |
+| `/joinDealer`        | Form to fill to become a dealer                |
+| `/location`          | Allow a user to see his location and dealers   |
+| `/cart`              | Allow a user to see his cart                   |
+| `/carts/pay`         | Allow a user to pay his cart                   |
+| `/reservations`      | Allow a user to see all of his reservations    |
+| `/reservations/addVehicle`| Add a reservation                         |
+| `/reservations/removeOrderItem/:orderItemId`| Remove a reservation    |
 ---
-
-
 
 Currently, two official plugins are available:
 
