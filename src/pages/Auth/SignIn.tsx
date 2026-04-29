@@ -1,6 +1,5 @@
 import { useState } from "react";
-import type { ChangeEvent } from "react";
-import { Link } from "react-router-dom";
+import { Link, useActionData, useNavigation } from "react-router-dom";
 import { Shield, User } from "lucide-react";
 import AuthForm from "../../components/Forms/Auth/AuthForm";
 import InputField from "../../components/Forms/Auth/InputField";
@@ -8,29 +7,15 @@ import "./SignIn.css";
 
 type Mode = "user" | "admin";
 
-type FormState = {
-  email: string;
-  password: string;
-  adminCode: string;
-};
-
 export default function SignIn() {
   const [mode, setMode] = useState<Mode>("user");
-  const [form, setForm] = useState<FormState>({ email: "", password: "", adminCode: "" });
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setForm((prev) => ({ ...prev, [name]: value }));
-  };
+  // Receives the return value from signInAction (error string or undefined)
+  const errorMessage = useActionData() as string | undefined;
 
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
-    if (mode === "admin") {
-      console.log("Admin sign in:", { email: form.email, adminCode: form.adminCode });
-    } else {
-      console.log("User sign in:", { email: form.email });
-    }
-  };
+  // Tells us when React Router is submitting — used to disable the button
+  const navigation = useNavigation();
+  const isSubmitting = navigation.state === "submitting";
 
   const isAdmin = mode === "admin";
 
@@ -44,9 +29,9 @@ export default function SignIn() {
           ? "Restricted access. Admin credentials required."
           : "Welcome back! Please login to your account."
       }
-      onSubmit={handleSubmit}
+      isSubmitting={isSubmitting}
+      error={errorMessage}
       header={
-        /* Mode toggle tabs */
         <div className="signin-tabs mb-4">
           <button
             type="button"
@@ -67,34 +52,29 @@ export default function SignIn() {
         </div>
       }
       footer={
-        isAdmin ? 
+        isAdmin ? (
           <p className="small mb-0 text-center">
             This session will be logged and monitored.
-          </p> 
-        :
-          <p className="small mb-0 text-center">
-            Don't have an account? <Link to="/auth/signup">Sign up</Link>
           </p>
+        ) : (
+          <p className="small mb-0 text-center">
+            Don't have an account? <Link to="/auth/signUp">Sign up</Link>
+          </p>
+        )
       }
     >
       <InputField
         label="Email"
         type="email"
         name="email"
-        value={form.email}
-        onChange={handleChange}
         placeholder="Enter email"
       />
-
       <InputField
         label="Password"
         type="password"
         name="password"
-        value={form.password}
-        onChange={handleChange}
         placeholder="Enter password"
       />
-
     </AuthForm>
   );
 }

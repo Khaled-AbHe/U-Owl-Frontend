@@ -1,10 +1,10 @@
 import { redirect } from "react-router-dom";
 import { getCurrentUser } from "../services/api";
 
-export default async function loginLoader(){
+export default async function signInLoader(){
     try{
-        const user = await getCurrentUser()
-        return redirect("/host")
+        await getCurrentUser()
+        return redirect("/home")
     } catch (error){
         return
     }

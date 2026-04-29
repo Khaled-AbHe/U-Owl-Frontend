@@ -1,3 +1,7 @@
+import { signInAction } from "../actions/sign-in.action";
+import signOutAction from "../actions/sign-out.action";
+import { signUpAction } from "../actions/sign-up.action";
+import signInLoader from "../loaders/login.loader";
 import {
   BecomeAdealer,
   Cart,
@@ -64,15 +68,23 @@ export const routes = [
     label: "Sign In",
     path: "/auth/signIn",
     element: SignIn,
-    action: undefined,
-    loader: undefined,
+    action: signInAction,
+    loader: signInLoader,
   },
   {
     isIndex: false,
     label: "Sign Up",
     path: "/auth/signUp",
     element: SignUp,
-    action: undefined,
+    action: signUpAction,
+    loader: undefined,
+  },
+  {
+    isIndex: false,
+    label: "Sign Out",
+    path: "/auth/signOut",
+    element: undefined,
+    action: signOutAction,
     loader: undefined,
   },
   {

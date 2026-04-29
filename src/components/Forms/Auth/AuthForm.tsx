@@ -1,23 +1,27 @@
+import { Form } from "react-router-dom";
+
 export default function AuthForm({
   title,
   subtitle,
   children,
-  onSubmit,
   footer,
   header,
   icon,
   iconClass = "",
+  isSubmitting = false,
+  error,
 }: any) {
   const isAdmin = iconClass === "signin-icon--admin";
 
   return (
     <div className="d-flex align-items-center justify-content-center" style={{ minHeight: "700px" }}>
-      <form
-        onSubmit={onSubmit}
+      {/* No onSubmit — React Router's <Form> handles submission natively */}
+      <Form
+        method="POST"
         className="rounded bg-white p-4 shadow-sm border"
         style={{ width: "460px", maxWidth: "100%" }}
+        replace
       >
-        {/* Optional slot above icon — e.g. User/Admin tabs in SignIn */}
         {header}
 
         <div className="mb-4 text-center">
@@ -35,23 +39,30 @@ export default function AuthForm({
 
         <button
           type="submit"
+          disabled={isSubmitting}
           className={`btn fw-semibold w-100 mt-1 ${isAdmin ? "btn-danger" : "btn-brand"}`}
         >
-          {title}
+          {isSubmitting ? "Loading..." : title}
         </button>
+
+        {/* Error returned by the action is displayed here */}
+        {error && (
+          <div className="alert alert-danger py-2 small mt-2 text-center" role="alert">
+            {error}
+          </div>
+        )}
 
         <div className="position-relative my-4 text-center">
           <hr />
-          {
-            !isAdmin && 
+          {!isAdmin && (
             <span className="position-absolute translate-middle text-muted small start-50 top-50 bg-white px-2">
               or
             </span>
-          }
+          )}
         </div>
 
         {footer}
-      </form>
+      </Form>
     </div>
   );
 }

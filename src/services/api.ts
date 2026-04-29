@@ -39,28 +39,29 @@ export const getHostTrailers  = async (userId : string) => await request(`/users
 export const getSingleHostTrailer = async (userId : string, TrailerId : string) => await request(`/users/${userId}/trailers/${TrailerId}`)
 
 // Requêtes AUTH
-export const loginUser = async (creds : any) => (
+export const signInUser = async (creds : any) => (
   await request("/auth/signin", {
     method: "POST",
     body: JSON.stringify(creds)
   }))
 
-export const registerUser = async (creds : any) => (
+export const signUpUser = async (creds : any) => (
   await request("/auth/signup", {
     method: "POST",
     body: JSON.stringify(creds)
   }))
 
+export const signOutUser = async () => {
+    return await request("/auth/signout", {
+          method: "POST"
+    })
+}
 
 export const getCurrentUser = async () => {
-  return await request("/auth/whoami")
+     return await request("/auth/whoami")
 }
 
-export const logoutUser = async () => {
-  return await request("/auth/signout", {
-    method: "POST"
-  })
-}
+
 
 // Requete Cart
 export const getAllCarts = async () => {
