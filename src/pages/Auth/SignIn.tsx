@@ -5,10 +5,10 @@ import AuthForm from "../../components/Forms/Auth/AuthForm";
 import InputField from "../../components/Forms/Auth/InputField";
 import "./SignIn.css";
 
-type Mode = "user" | "admin";
+type Mode = "Client" | "Admin";
 
 export default function SignIn() {
-  const [mode, setMode] = useState<Mode>("user");
+  const [mode, setMode] = useState<Mode>("Client");
 
   // Receives the return value from signInAction (error string or undefined)
   const errorMessage = useActionData() as string | undefined;
@@ -17,7 +17,7 @@ export default function SignIn() {
   const navigation = useNavigation();
   const isSubmitting = navigation.state === "submitting";
 
-  const isAdmin = mode === "admin";
+  const isAdmin = mode === "Admin";
 
   return (
     <AuthForm
@@ -36,7 +36,7 @@ export default function SignIn() {
           <button
             type="button"
             className={`signin-tab ${!isAdmin ? "signin-tab--active" : ""}`}
-            onClick={() => setMode("user")}
+            onClick={() => setMode("Client")}
           >
             <User size={15} className="me-1" />
             User
@@ -44,7 +44,7 @@ export default function SignIn() {
           <button
             type="button"
             className={`signin-tab signin-tab--admin ${isAdmin ? "signin-tab--active signin-tab--active-admin" : ""}`}
-            onClick={() => setMode("admin")}
+            onClick={() => setMode("Admin")}
           >
             <Shield size={15} className="me-1" />
             Admin
@@ -64,11 +64,19 @@ export default function SignIn() {
       }
     >
       <InputField
+        label={undefined}
+        type="hidden"
+        name="type"
+        value={mode}
+      />
+      
+      <InputField
         label="Email"
         type="email"
         name="email"
         placeholder="Enter email"
       />
+
       <InputField
         label="Password"
         type="password"

@@ -39,26 +39,28 @@ export const getHostTrailers  = async (userId : string) => await request(`/users
 export const getSingleHostTrailer = async (userId : string, TrailerId : string) => await request(`/users/${userId}/trailers/${TrailerId}`)
 
 // Requêtes AUTH
-export const signInUser = async (creds : any) => (
-  await request("/auth/signin", {
-    method: "POST",
-    body: JSON.stringify(creds)
-  }))
+export const signInUser = async (creds : any) => {
+    return await request("/auth/signin", {
+        method: "POST",
+        body: JSON.stringify(creds)
+    })
+}
 
 export const signUpUser = async (creds : any) => (
-  await request("/auth/signup", {
-    method: "POST",
-    body: JSON.stringify(creds)
-  }))
+    await request("/auth/signup", {
+        method: "POST",
+        body: JSON.stringify(creds)
+    })
+)
 
 export const signOutUser = async () => {
     return await request("/auth/signout", {
-          method: "POST"
+        method: "POST"
     })
 }
 
 export const getCurrentUser = async () => {
-     return await request("/auth/whoami")
+    return await request("/auth/whoami")
 }
 
 

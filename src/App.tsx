@@ -5,26 +5,30 @@ import {
   createRoutesFromElements,
 } from "react-router-dom";
 import { routes } from "./data/routes.data";
-import mainLayoutLoader from "./loaders/main-layout.loader";
-import MainLayout from "./layouts/MainLayout";
 
 export function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
-      <Route path="/" element={<MainLayout />} loader={mainLayoutLoader}>
+      <Route>
         {routes.map((route, index) => {
           return (
-            <Route
-              key={index}
-              index={route.isIndex}
-              path={route.path}
-              element={route.element ? <route.element /> : undefined}
-              action={route.action}
-              loader={route.loader}
-            />
-          );
+            <Route key={index} path={route.path} element={route.element ? <route.element /> : undefined} loader={route.loader} >
+              {route.subroutes && route.subroutes.map((subRoute, index) => {
+                return (
+                  <Route
+                    key={index}
+                    index={subRoute.isIndex}
+                    path={subRoute.path}
+                    element={subRoute.element ? <subRoute.element /> : undefined}
+                    action={subRoute.action}
+                    loader={subRoute.loader}
+                  />
+                )
+              })}
+            </Route>
+          )
         })}
-      </Route>,
+      </Route>
     ),
   );
 

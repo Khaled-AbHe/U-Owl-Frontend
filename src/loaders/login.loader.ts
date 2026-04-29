@@ -4,7 +4,7 @@ import { getCurrentUser } from "../services/api";
 export default async function signInLoader(){
     try{
         await getCurrentUser()
-        return redirect("/home")
+        return redirect("/")
     } catch (error){
         return
     }

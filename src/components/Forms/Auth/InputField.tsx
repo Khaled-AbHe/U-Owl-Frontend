@@ -7,7 +7,7 @@ type Props = {
 export default function InputField({ label, ...props }: Props) {
   return (
     <div className="mb-3">
-      <label className="form-label">{label}</label>
+      {label && <label className="form-label">{label}</label>}
       <input className="form-control" {...props} />
     </div>
   );
