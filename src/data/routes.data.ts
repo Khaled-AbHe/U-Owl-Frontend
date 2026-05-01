@@ -1,9 +1,14 @@
 import { signInAction } from "../actions/sign-in.action";
 import signOutAction from "../actions/sign-out.action";
 import { signUpAction } from "../actions/sign-up.action";
+import AdminLayout from "../layouts/AdminLayout";
+import AuthLayout from "../layouts/AuthLayout";
 import MainLayout from "../layouts/MainLayout";
+import clientPageLoader from "../loaders/client-page.loader";
+import locationAdminLoader from "../loaders/location-admin.loader";
 import signInLoader from "../loaders/login.loader";
 import mainLayoutLoader from "../loaders/main-layout.loader";
+import superAdminLoader from "../loaders/super-admin.loader";
 import {
   BecomeAdealer,
   Cart,
@@ -45,22 +50,6 @@ export const mainRoutes = [
   },
   {
     isIndex: false,
-    label: "Reservations",
-    path: "reservations",
-    element: Reservations,
-    action: undefined,
-    loader: undefined,
-  },
-  {
-    isIndex: false,
-    label: "Become A Dealer",
-    path: "joinDealer",
-    element: BecomeAdealer,
-    action: undefined,
-    loader: undefined,
-  },
-  {
-    isIndex: false,
     label: "Find Location",
     path: "location",
     element: Location,
@@ -69,11 +58,27 @@ export const mainRoutes = [
   },
   {
     isIndex: false,
+    label: "Reservations",
+    path: "reservations",
+    element: Reservations,
+    action: undefined,
+    loader: clientPageLoader,
+  },
+  {
+    isIndex: false,
+    label: "Become A Dealer",
+    path: "joinDealer",
+    element: BecomeAdealer,
+    action: undefined,
+    loader: clientPageLoader,
+  },
+  {
+    isIndex: false,
     label: "Cart",
     path: "cart",
     element: Cart,
     action: undefined,
-    loader: undefined,
+    loader: clientPageLoader,
   },
 ];
 
@@ -135,20 +140,20 @@ export const routes = [
   },
   {
     path: "/auth",
-    element: undefined,
+    element: AuthLayout,
     loader: undefined,
     subroutes: authRoutes
   },
   {
     path: "/superAdmin",
-    element: undefined,
-    loader: undefined,
+    element: AdminLayout,
+    loader: superAdminLoader,
     subroutes: superRoutes
   },
   {
     path: "/locationAdmin",
-    element: undefined,
-    loader: undefined,
+    element: AdminLayout,
+    loader: locationAdminLoader,
     subroutes: locationRoutes
   },
 ]

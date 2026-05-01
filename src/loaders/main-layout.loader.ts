@@ -1,10 +1,9 @@
-import { getCurrentUser } from "../services/api";
+import { getCurrentUser } from "../services/auth";
 
-export default async function mainLayoutLoader(){
-    try{
-        const user = await getCurrentUser()
-        return user
-    }catch (error){
-        return {user : null}
-    }
+export default async function mainLayoutLoader() {
+  try {
+    return await getCurrentUser()
+  } catch {
+    return { user: null }
+  }
 }

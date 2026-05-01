@@ -1,8 +1,8 @@
 export type UserType = "Client" | "Admin"
 
-export type AdminType = 'Location Admin' | 'Super Admin'
+export type AdminType = 'Location Admin' | 'Super Admin' | "Not Admin"
 
-export class User {
+export interface User {
     userId: number;
     userType: UserType;
     adminType: AdminType

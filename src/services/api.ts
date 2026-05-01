@@ -2,10 +2,8 @@
 const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000/api"
 
 // Fonction "squelette" pour faire des requêtes à l'API
-async function request(path : string, options = {}) {
-
+export async function request(path: string, options = {}) {
   const res = await fetch(`${BASE_URL}${path}`, {
-
     credentials: "include", // Inclure les cookies dans la requête (authentification)
     headers: {
       "Content-Type": "application/json",
@@ -27,149 +25,66 @@ async function request(path : string, options = {}) {
   return data
 }
 
-// Requêtes GET
+// Requêtes Trucks
 export const getTrucks = async () => await request("/trucks")
-export const getSingleTruck = async (id : string) => await request(`/trucks/${id}`)
-export const getHostTrucks = async (userId : string) => await request(`/users/${userId}/trucks`)
-export const getSingleHostTruck = async (userId : string, TruckId : string) => await request(`/users/${userId}/trucks/${TruckId}`)
+export const getSingleTruck = async (id: string) => await request(`/trucks/${id}`)
+export const getHostTrucks = async (userId: string) => await request(`/users/${userId}/trucks`)
+export const getSingleHostTruck = async (userId: string, TruckId: string) => await request(`/users/${userId}/trucks/${TruckId}`)
 
+// Requêtes Trailers
 export const getTrailers = async () => await request("/trailers")
-export const getSingleTrailer = async (id : string) => await request(`/trailers/${id}`)
-export const getHostTrailers  = async (userId : string) => await request(`/users/${userId}/trailers`)
-export const getSingleHostTrailer = async (userId : string, TrailerId : string) => await request(`/users/${userId}/trailers/${TrailerId}`)
+export const getSingleTrailer = async (id: string) => await request(`/trailers/${id}`)
+export const getHostTrailers = async (userId: string) => await request(`/users/${userId}/trailers`)
+export const getSingleHostTrailer = async (userId: string, TrailerId: string) => await request(`/users/${userId}/trailers/${TrailerId}`)
 
-// Requêtes AUTH
-export const signInUser = async (creds : any) => {
-    return await request("/auth/signin", {
-        method: "POST",
-        body: JSON.stringify(creds)
-    })
-}
+// Requêtes Cart
+export const getAllCarts = async () => await request("/carts/all")
+export const getCurrentCart = async () => await request("/carts/currentCart")
+export const payCartTotal = async (payment: any) => await request("/carts/pay", {
+  method: "POST",
+  body: JSON.stringify(payment)
+})
 
-export const signUpUser = async (creds : any) => (
-    await request("/auth/signup", {
-        method: "POST",
-        body: JSON.stringify(creds)
-    })
-)
+// Requêtes Location
+export const createLocation = async (location: any) => await request("/locations/create", {
+  method: "POST",
+  body: JSON.stringify(location)
+})
+export const getAllLocation = async () => await request("/locations/all")
+export const addVehicleToLocation = async (vehicle: any) => await request("/locations/addVehicle", {
+  method: "POST",
+  body: JSON.stringify(vehicle)
+})
+export const removeVehicleFromLocation = async (vehicle: any) => await request("/locations/removeVehicle", {
+  method: "PATCH",
+  body: JSON.stringify(vehicle)
+})
 
-export const signOutUser = async () => {
-    return await request("/auth/signout", {
-        method: "POST"
-    })
-}
+// Requêtes User
+export const getAllUsers = async () => await request("/users")
+export const getUserById = async (id: string) => await request(`/users/${id}`)
+export const updateUser = async (id: string, user: any) => await request(`/users/${id}`, {
+  method: "PATCH",
+  body: JSON.stringify(user)
+})
+export const deleteUserById = async (id: string) => await request(`/users/${id}`, {
+  method: "DELETE"
+})
 
-export const getCurrentUser = async () => {
-    return await request("/auth/whoami")
-}
-
-
-
-// Requete Cart
-export const getAllCarts = async () => {
-    return await request("/carts/all")
-}
-   
-
-export const getCurrentCart = async () =>{
-    return await request("/carts/currentCart")
-}
-export const payCartTotal = async (payment : any) =>{
-    return await request("/carts/pay",{
-        method: 'POST',
-        body: JSON.stringify(payment)
-    })
-}
-
-// Requete Location
-export const createLocation = async(location : any) => {
-    return await request("/locations/create", {
-        method : 'POST',
-        body : JSON.stringify(location)
-    })
-}
-
-export const getAllLocation = async () => {
-    return await request('/locations/all')
-}
-export const addVehicleToLocation = async (vehicle : any) => {
-    return await request('/locations/addVehicle',{
-        method : 'POST',
-        body : JSON.stringify(vehicle)
-    })
-}
-export const removeVehicleFromLocation = async (vehicle : any) => {
-    return await request('/locations/removeVehicle',{
-        method: 'PATCH',
-        body: JSON.stringify(vehicle)
-    })
-}
-
-// Requete User
-export const updateUser = async (user : any) => {
-    return await request('/users/${id}',{
-        method: 'PATCH',
-        body : JSON.stringify(user)
-    })
-}
-export const deleteUserById = async (user : any) => {
-    return await request('/users/${id}',{
-        method : 'DELETE',
-        body : JSON.stringify(user)
-    })
-}
-// Requete GET (user)
-export const getUserById = async () => {
-    return await request('/users/${id}')
-}
-
-export const getAllUsers = async () => {
-    return await request('/users')
-}
-
-// Requete Vehicle
-export const createVehicle = async (vehicle : any) => {
-    return await request('/vehicles/create',{
-        method : 'POST',
-        body : JSON.stringify(vehicle)
-    })
-}
-
-// Requete GET (vehicle)
-export const getAllVehicles = async () => {
-    return await request('/vehicles/all')
-}
-
-export const getAllTrucks = async () => {
-    return await request('/vehicles/trucks')
-}
-
-export const getAllTrailers = async () => {
-    return await request('/vehicles/trailers')
-}
-
-export const getVehicleById = async () => {
-    return await request('/vehicles/${id}')
-}
-
-export const getIsRoadSafe = async () => {
-    return await request('/vehicles/${id}/roadsafe')
-}
-
-// Requete DELETE (vehicle)
-export const deleteVehicleById = async (vehicle : any) => {
-    return await request('/vehicles/${id}',{
-        method : 'DELETE',
-        body : JSON.stringify(vehicle)
-    })
-}
-
-// Requete PATCH (vehicle)
-export const updateVehicle = async (vehicle : any) => {
-    return await request('/vehicles/${id}',{
-        method: 'PATCH',
-        body: JSON.stringify(vehicle)
-    })
-}
-        
-
+// Requêtes Vehicle
+export const getAllVehicles = async () => await request("/vehicles/all")
+export const getAllTrucks = async () => await request("/vehicles/trucks")
+export const getAllTrailers = async () => await request("/vehicles/trailers")
+export const getVehicleById = async (id: string) => await request(`/vehicles/${id}`)
+export const getIsRoadSafe = async (id: string) => await request(`/vehicles/${id}/roadsafe`)
+export const createVehicle = async (vehicle: any) => await request("/vehicles/create", {
+  method: "POST",
+  body: JSON.stringify(vehicle)
+})
+export const updateVehicle = async (id: string, vehicle: any) => await request(`/vehicles/${id}`, {
+  method: "PATCH",
+  body: JSON.stringify(vehicle)
+})
+export const deleteVehicleById = async (id: string) => await request(`/vehicles/${id}`, {
+  method: "DELETE"
+})

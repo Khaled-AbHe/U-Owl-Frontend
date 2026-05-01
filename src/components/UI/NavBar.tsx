@@ -5,7 +5,7 @@ import "./navbar.css";
 
 interface NavItem {
   label: string;
-  path: string;
+  path?: string;
 }
 
 interface NavBarProps {
@@ -14,7 +14,7 @@ interface NavBarProps {
   user: { name: string } | null;
 }
 
-const MAIN_LINKS = ["Home", "Truck", "Trailer", "Reservations", "Become A Dealer", "Find Location"];
+const MAIN_LINKS = ["Home", "Truck", "Trailer", "Find Location", "Reservations", "Become A Dealer"];
 
 const LABELS: Record<string, string> = {
   BecomeAdealer: "Become a Dealer",
@@ -30,8 +30,8 @@ function NavBar({ imageSrcPath, navItems, user }: NavBarProps) {
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
 
-  const mainItems = navItems.filter((i) => MAIN_LINKS.includes(i.label));
-  const cartItem  = navItems.find((i) => i.label === "Cart");
+  const mainItems = navItems.filter((i) => MAIN_LINKS.includes(i.label) && i.path !== undefined);
+  const cartItem  = navItems.find((i) => i.label === "Cart" && i.path !== undefined);
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-white navbar-main">
@@ -60,12 +60,12 @@ function NavBar({ imageSrcPath, navItems, user }: NavBarProps) {
           {/* Main nav links */}
           <ul className="navbar-nav me-auto gap-1">
             {mainItems.map((item) => {
-              const active = location.pathname === item.path;
+              const active = item.path !== undefined && location.pathname === item.path;
               return (
                 <li key={item.label} className="nav-item">
                   <Link
                     className={`nav-link nav-link-custom ${active ? "active" : ""}`}
-                    to={item.path}
+                    to={item.path ?? "/"}
                   >
                     {displayLabel(item.label)}
                   </Link>
@@ -114,7 +114,7 @@ function NavBar({ imageSrcPath, navItems, user }: NavBarProps) {
 
             {/* Cart */}
             {cartItem && (
-              <Link to={cartItem.path} className="btn btn-icon ms-1" aria-label="Cart">
+              <Link to={cartItem.path!} className="btn btn-icon ms-1" aria-label="Cart">
                 <ShoppingCart size={20} />
               </Link>
             )}

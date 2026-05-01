@@ -1,4 +1,3 @@
-// loaders/auth.loader.js
 import { requireAuth } from "../services/auth"
 
 export default async function authLoader({ request } : any) {
