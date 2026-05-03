@@ -1,38 +1,37 @@
 import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Form, Link, useLocation } from "react-router-dom";
 import { ShoppingCart, Search, X } from "lucide-react";
 import "./navbar.css";
 
 interface NavItem {
   label: string;
-  path: string;
+  path?: string;
 }
 
 interface NavBarProps {
   imageSrcPath: string;
   navItems: NavItem[];
+  user: { name: string } | null;
 }
 
-const MAIN_LINKS = ["Home", "Truck", "Trailer", "Reservations", "Become A Dealer", "Find Location"];
-const AUTH_LINK = ["Sign In"];
+const MAIN_LINKS = ["Home", "Truck", "Trailer", "Find Location", "Reservations", "Become A Dealer"];
 
-function NavBar({ imageSrcPath, navItems }: NavBarProps) {
+const LABELS: Record<string, string> = {
+  BecomeAdealer: "Become a Dealer",
+  FindLocation: "Find Location",
+  SignIn: "Sign In",
+  SignUp: "Sign Up",
+};
+
+const displayLabel = (label: string) => LABELS[label] ?? label;
+
+function NavBar({ imageSrcPath, navItems, user }: NavBarProps) {
   const location = useLocation();
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
 
-  const mainItems = navItems.filter((i) => MAIN_LINKS.includes(i.label));
-  const authItems  = navItems.filter((i) => AUTH_LINK.includes(i.label));
-  const cartItem   = navItems.find((i) => i.label === "Cart");
-
-  const LABELS: Record<string, string> = {
-    BecomeAdealer: "Become a Dealer",
-    FindLocation: "Find Location",
-    SignIn: "Sign In",
-    SignUp: "Sign Up",
-  };
-
-  const displayLabel = (label: string) => LABELS[label] ?? label;
+  const mainItems = navItems.filter((i) => MAIN_LINKS.includes(i.label) && i.path !== undefined);
+  const cartItem  = navItems.find((i) => i.label === "Cart" && i.path !== undefined);
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-white navbar-main">
@@ -61,12 +60,12 @@ function NavBar({ imageSrcPath, navItems }: NavBarProps) {
           {/* Main nav links */}
           <ul className="navbar-nav me-auto gap-1">
             {mainItems.map((item) => {
-              const active = location.pathname === item.path;
+              const active = item.path !== undefined && location.pathname === item.path;
               return (
                 <li key={item.label} className="nav-item">
                   <Link
                     className={`nav-link nav-link-custom ${active ? "active" : ""}`}
-                    to={item.path}
+                    to={item.path ?? "/"}
                   >
                     {displayLabel(item.label)}
                   </Link>
@@ -78,7 +77,7 @@ function NavBar({ imageSrcPath, navItems }: NavBarProps) {
           {/* Right side */}
           <div className="d-flex align-items-center gap-2 mt-2 mt-lg-0">
 
-            {/* Inline search (expands on toggle) */}
+            {/* Inline search */}
             <div className={`navbar-search ${searchOpen ? "navbar-search--open" : ""}`}>
               <input
                 type="search"
@@ -100,24 +99,22 @@ function NavBar({ imageSrcPath, navItems }: NavBarProps) {
             {/* Divider */}
             <div className="navbar-divider d-none d-lg-block" />
 
-            {/* Auth links */}
-            {authItems.map((item, i) => (
-              <Link
-                key={item.label}
-                to={item.path}
-                className={
-                  i === 0
-                    ? "btn btn-sm btn-outline-brand"
-                    : "btn btn-sm btn-brand"
-                }
-              >
-                {displayLabel(item.label)}
+            {/* Auth — Sign Out if logged in, Sign In if not */}
+            {user ? (
+              <Form method="POST" action="/auth/signOut">
+                <button type="submit" className="btn btn-sm btn-outline-brand">
+                  Sign Out
+                </button>
+              </Form>
+            ) : (
+              <Link to="/auth/signIn" className="btn btn-sm btn-outline-brand">
+                Sign In
               </Link>
-            ))}
+            )}
 
             {/* Cart */}
             {cartItem && (
-              <Link to={cartItem.path} className="btn btn-icon ms-1" aria-label="Cart">
+              <Link to={cartItem.path!} className="btn btn-icon ms-1" aria-label="Cart">
                 <ShoppingCart size={20} />
               </Link>
             )}

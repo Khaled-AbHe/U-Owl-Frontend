@@ -1,38 +1,23 @@
 import { useState } from "react";
-import type { ChangeEvent } from "react";
-import { Link } from "react-router-dom";
+import { Link, useActionData, useNavigation } from "react-router-dom";
 import { Shield, User } from "lucide-react";
 import AuthForm from "../../components/Forms/Auth/AuthForm";
 import InputField from "../../components/Forms/Auth/InputField";
 import "./SignIn.css";
 
-type Mode = "user" | "admin";
-
-type FormState = {
-  email: string;
-  password: string;
-  adminCode: string;
-};
+type Mode = "Client" | "Admin";
 
 export default function SignIn() {
-  const [mode, setMode] = useState<Mode>("user");
-  const [form, setForm] = useState<FormState>({ email: "", password: "", adminCode: "" });
+  const [mode, setMode] = useState<Mode>("Client");
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setForm((prev) => ({ ...prev, [name]: value }));
-  };
+  // Receives the return value from signInAction (error string or undefined)
+  const errorMessage = useActionData() as string | undefined;
 
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
-    if (mode === "admin") {
-      console.log("Admin sign in:", { email: form.email, adminCode: form.adminCode });
-    } else {
-      console.log("User sign in:", { email: form.email });
-    }
-  };
+  // Tells us when React Router is submitting — used to disable the button
+  const navigation = useNavigation();
+  const isSubmitting = navigation.state === "submitting";
 
-  const isAdmin = mode === "admin";
+  const isAdmin = mode === "Admin";
 
   return (
     <AuthForm
@@ -44,14 +29,14 @@ export default function SignIn() {
           ? "Restricted access. Admin credentials required."
           : "Welcome back! Please login to your account."
       }
-      onSubmit={handleSubmit}
+      isSubmitting={isSubmitting}
+      error={errorMessage}
       header={
-        /* Mode toggle tabs */
         <div className="signin-tabs mb-4">
           <button
             type="button"
             className={`signin-tab ${!isAdmin ? "signin-tab--active" : ""}`}
-            onClick={() => setMode("user")}
+            onClick={() => setMode("Client")}
           >
             <User size={15} className="me-1" />
             User
@@ -59,7 +44,7 @@ export default function SignIn() {
           <button
             type="button"
             className={`signin-tab signin-tab--admin ${isAdmin ? "signin-tab--active signin-tab--active-admin" : ""}`}
-            onClick={() => setMode("admin")}
+            onClick={() => setMode("Admin")}
           >
             <Shield size={15} className="me-1" />
             Admin
@@ -67,22 +52,28 @@ export default function SignIn() {
         </div>
       }
       footer={
-        isAdmin ? 
+        isAdmin ? (
           <p className="small mb-0 text-center">
             This session will be logged and monitored.
-          </p> 
-        :
-          <p className="small mb-0 text-center">
-            Don't have an account? <Link to="/auth/signup">Sign up</Link>
           </p>
+        ) : (
+          <p className="small mb-0 text-center">
+            Don't have an account? <Link to="/auth/signUp">Sign up</Link>
+          </p>
+        )
       }
     >
+      <InputField
+        label={undefined}
+        type="hidden"
+        name="type"
+        value={mode}
+      />
+      
       <InputField
         label="Email"
         type="email"
         name="email"
-        value={form.email}
-        onChange={handleChange}
         placeholder="Enter email"
       />
 
@@ -90,11 +81,8 @@ export default function SignIn() {
         label="Password"
         type="password"
         name="password"
-        value={form.password}
-        onChange={handleChange}
         placeholder="Enter password"
       />
-
     </AuthForm>
   );
 }
