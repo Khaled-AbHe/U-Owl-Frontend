@@ -19,12 +19,15 @@ export default function ImagesSlider({ imageUrls }: ImageSliderProps) {
 
   return (
     <div className="slider-hero">
-      {/* Full-bleed image */}
-      <img
-        src={imageUrls[imageIndex]}
-        className="slider-image"
-        alt="Slide"
-      />
+      {/* All images stacked — only the active one is opaque */}
+      {imageUrls.map((url, i) => (
+        <img
+          key={url}
+          src={url}
+          className={`slider-image ${i === imageIndex ? "slider-image--active" : ""}`}
+          alt={`Slide ${i + 1}`}
+        />
+      ))}
 
       {/* Prev / Next arrows */}
       <button
