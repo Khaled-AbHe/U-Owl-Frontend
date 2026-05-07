@@ -19,14 +19,13 @@ export default function ImagesSlider({ imageUrls }: ImageSliderProps) {
 
   return (
     <div className="slider-hero">
-      {/* Full-bleed image */}
       <img
         src={imageUrls[imageIndex]}
         className="slider-image"
         alt="Slide"
       />
 
-      {/* Prev / Next arrows */}
+      `{/* Prev / Next arrows */}`
       <button
         onClick={showPrevImage}
         className="slider-arrow slider-arrow--prev"

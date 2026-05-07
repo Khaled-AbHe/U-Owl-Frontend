@@ -21,6 +21,7 @@ import {
 } from "../pages";
 import LocationDashboard from "../pages/Admin/Location/location-dashboard.page";
 import SuperDashboard from "../pages/Admin/Super/super-dashboard.page";
+import { getAllVehicles } from "../services/api";
 
 export const mainRoutes = [
   {
@@ -37,7 +38,7 @@ export const mainRoutes = [
     path: "vehicles",
     element: Vehicles,
     action: undefined,
-    loader: undefined,
+    loader: () => getAllVehicles(),
   },
   {
     isIndex: false,
