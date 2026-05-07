@@ -1,8 +1,8 @@
 import { Outlet, useLoaderData } from "react-router-dom";
-import NavBar from "../components/UI/NavBar";
 import Footer from "../components/UI/Footer";
 import { U_OWL_LOGO } from "../assets";
 import { mainRoutes } from "../data/routes.data";
+import NavBar from "../components/UI/Nav/NavBar";
 
 type User = { name: string } | null;
 
