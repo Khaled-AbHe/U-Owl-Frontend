@@ -89,7 +89,7 @@ export const authRoutes = [
     action: signOutAction,
     loader: undefined,
   },
-]
+];
 
 export const superRoutes = [
   {
@@ -100,7 +100,7 @@ export const superRoutes = [
     action: undefined,
     loader: undefined,
   },
-]
+];
 
 export const locationRoutes = [
   {
@@ -111,31 +111,31 @@ export const locationRoutes = [
     action: undefined,
     loader: undefined,
   },
-]
+];
 
 export const routes = [
   {
     path: "/",
     element: MainLayout,
     loader: mainLayoutLoader,
-    subroutes: mainRoutes
+    subroutes: mainRoutes,
   },
   {
     path: "/auth",
     element: AuthLayout,
     loader: undefined,
-    subroutes: authRoutes
+    subroutes: authRoutes,
   },
   {
     path: "/superAdmin",
     element: AdminLayout,
     loader: superAdminLoader,
-    subroutes: superRoutes
+    subroutes: superRoutes,
   },
   {
     path: "/locationAdmin",
     element: AdminLayout,
     loader: locationAdminLoader,
-    subroutes: locationRoutes
+    subroutes: locationRoutes,
   },
-]
+];

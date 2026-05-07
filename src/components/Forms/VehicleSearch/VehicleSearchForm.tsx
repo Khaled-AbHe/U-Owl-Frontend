@@ -28,9 +28,7 @@ export default function VehicleSearch() {
         className="dateInput"
       />
 
-      <button className="btn btn-brand w-100 mt-3">
-        Search
-      </button>
+      <button className="btn btn-brand w-100 mt-3">Search</button>
     </div>
   );
 }

@@ -1,17 +1,3 @@
-/* ── Home Page Layout ──────────────────────────────────────────────────────── */
-
-.home-page {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-}
-
-.home-content {
-  width: 100%;
-  max-width: 1200px;
-  padding: 0 1rem;
-}
-
 /* ── Home Page Cards ───────────────────────────────────────────────────────── */
 
 .home-cards-section {

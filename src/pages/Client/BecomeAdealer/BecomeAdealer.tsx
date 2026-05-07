@@ -1,3 +1,7 @@
 export default function BecomeAdealer() {
-  return <div></div>;
+  return (
+    <div className="page">
+      <div className="page-content"></div>
+    </div>
+  );
 }

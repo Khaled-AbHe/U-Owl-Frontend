@@ -1,4 +1,4 @@
-import { Truck, MapPin, Handshake} from "lucide-react";
+import { Truck, MapPin, Handshake } from "lucide-react";
 
 export const navCards = [
   {

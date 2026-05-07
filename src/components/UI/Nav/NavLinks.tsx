@@ -18,7 +18,8 @@ export function NavLinks({ items, className, linkClassName }: NavLinksProps) {
   return (
     <ul className={className}>
       {items.map((item) => {
-        const active = item.path !== undefined && location.pathname === item.path;
+        const active =
+          item.path !== undefined && location.pathname === item.path;
         return (
           <li key={item.label}>
             <Link
