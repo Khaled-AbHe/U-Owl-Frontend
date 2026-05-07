@@ -5,8 +5,7 @@ import Cart from "./Client/Cart/Cart";
 import Home from "./Client/Home/Home";
 import Location from "./Client/Location/Location";
 import Reservations from "./Client/Reservations/Reservations";
-import Trailers from "./Client/Trailers/Trailers";
-import Trucks from "./Client/Trucks/Trucks";
+import Vehicles from "./Client/Vehicles/Vehicles";
 
 export {
   BecomeAdealer,
@@ -16,6 +15,5 @@ export {
   Reservations,
   SignIn,
   SignUp,
-  Trailers,
-  Trucks,
+  Vehicles,
 };

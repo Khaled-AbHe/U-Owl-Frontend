@@ -14,7 +14,7 @@ interface NavBarProps {
   user: { name: string } | null;
 }
 
-const MAIN_LINKS = ["Home", "Truck", "Trailer", "Find Location", "Reservations", "Become A Dealer"];
+const MAIN_LINKS = ["Home", "Vehicles", "Find Location", "Reservations", "Become A Dealer"];
 
 const LABELS: Record<string, string> = {
   BecomeAdealer: "Become a Dealer",

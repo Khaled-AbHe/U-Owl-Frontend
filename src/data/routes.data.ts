@@ -17,8 +17,7 @@ import {
   Reservations,
   SignIn,
   SignUp,
-  Trailers,
-  Trucks,
+  Vehicles,
 } from "../pages";
 import LocationDashboard from "../pages/Admin/Location/location-dashboard.page";
 import SuperDashboard from "../pages/Admin/Super/super-dashboard.page";
@@ -34,17 +33,9 @@ export const mainRoutes = [
   },
   {
     isIndex: false,
-    label: "Truck",
-    path: "trucks",
-    element: Trucks,
-    action: undefined,
-    loader: undefined,
-  },
-  {
-    isIndex: false,
-    label: "Trailer",
-    path: "trailers",
-    element: Trailers,
+    label: "Vehicles",
+    path: "vehicles",
+    element: Vehicles,
     action: undefined,
     loader: undefined,
   },

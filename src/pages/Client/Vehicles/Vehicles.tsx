@@ -1,4 +1,4 @@
-export default function Trucks(){
+export default function Vehicles(){
     return(
         <div></div>
     )
