@@ -14,7 +14,6 @@ import {
   Cart,
   Home,
   Location,
-  Reservations,
   SignIn,
   SignUp,
   Vehicles,
@@ -46,14 +45,6 @@ export const mainRoutes = [
     element: Location,
     action: undefined,
     loader: undefined,
-  },
-  {
-    isIndex: false,
-    label: "Reservations",
-    path: "reservations",
-    element: Reservations,
-    action: undefined,
-    loader: clientPageLoader,
   },
   {
     isIndex: false,
