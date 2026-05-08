@@ -13,13 +13,7 @@ export default function DealerForm({ isSubmitting = false, response }: DealerFor
       <Form method="POST" className="dealer-form">
         <div className="dealer-form__grid">
           <div className="dealer-form__field dealer-form__field--half">
-            <InputField
-              label="Your Name"
-              name="fullName"
-              type="text"
-              placeholder="John Doe"
-              required
-            />
+            <InputField label="Your Name" name="fullName" type="text" placeholder="John Doe" />
           </div>
 
           <div className="dealer-form__field dealer-form__field--half">
@@ -28,7 +22,6 @@ export default function DealerForm({ isSubmitting = false, response }: DealerFor
               name="businessName"
               type="text"
               placeholder="John Inc."
-              required
             />
           </div>
 
@@ -38,7 +31,6 @@ export default function DealerForm({ isSubmitting = false, response }: DealerFor
               name="yourEmail"
               type="email"
               placeholder="contact@gmail.com"
-              required
             />
           </div>
 
@@ -48,7 +40,6 @@ export default function DealerForm({ isSubmitting = false, response }: DealerFor
               name="businessEmail"
               type="email"
               placeholder="contact@yourbusiness.com"
-              required
             />
           </div>
 
@@ -58,12 +49,11 @@ export default function DealerForm({ isSubmitting = false, response }: DealerFor
               name="phoneNumber"
               type="tel"
               placeholder="(555) 000-0000"
-              required
             />
           </div>
 
           <div className="dealer-form__field dealer-form__field--half">
-            <InputField label="City" name="city" type="text" placeholder="e.g. Montreal" required />
+            <InputField label="City" name="city" type="text" placeholder="e.g. Montreal" />
           </div>
 
           <div className="dealer-form__field dealer-form__field--half">
@@ -72,14 +62,15 @@ export default function DealerForm({ isSubmitting = false, response }: DealerFor
               name="postalCode"
               type="text"
               placeholder="e.g. H1A 1A1"
-              required
             />
           </div>
 
           {/* This will only activate if its an error message */}
           {response?.message && (
-            <div className="alert alert-danger py-2 small mt-2 text-center" role="alert">
-              {response.message}
+            <div className="dealer-form__field dealer-form__field--full">
+              <div className="alert alert-danger py-2 small mt-2 text-center" role="alert">
+                {response.message}
+              </div>
             </div>
           )}
         </div>
