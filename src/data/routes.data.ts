@@ -1,11 +1,13 @@
 import { signInAction } from "../actions/Auth/sign-in.action";
 import signOutAction from "../actions/Auth/sign-out.action";
 import { signUpAction } from "../actions/Auth/sign-up.action";
+import { cartPayAction } from "../actions/Cart/cart-pay.action";
+import { removeOrderItemAction } from "../actions/Cart/remove-vehicle.action";
 import { dealerFormAction } from "../actions/DealerForm/dealer-form.action";
 import AdminLayout from "../layouts/AdminLayout";
 import AuthLayout from "../layouts/AuthLayout";
 import MainLayout from "../layouts/MainLayout";
-import clientPageLoader from "../loaders/client-page.loader";
+import cartLoader from "../loaders/cart.loader";
 import locationAdminLoader from "../loaders/location-admin.loader";
 import signInLoader from "../loaders/login.loader";
 import mainLayoutLoader from "../loaders/main-layout.loader";
@@ -54,7 +56,24 @@ export const mainRoutes = [
     path: "cart",
     element: Cart,
     action: undefined,
-    loader: clientPageLoader,
+    loader: cartLoader,
+  },
+  // useFetcher will call these routes to do some functions, so they wont have elements
+  {
+    isIndex: false,
+    label: "Cart Pay",
+    path: "cart/pay",
+    element: undefined,
+    action: cartPayAction,
+    loader: undefined,
+  },
+  {
+    isIndex: false,
+    label: "Cart Remove",
+    path: "cart/remove",
+    element: undefined,
+    action: removeOrderItemAction,
+    loader: undefined,
   },
 ];
 

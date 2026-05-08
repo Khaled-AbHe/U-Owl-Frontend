@@ -1,4 +1,4 @@
-import type ActionReturnMessage from "../../interfaces/action-return.interface";
+import type ActionReturnMessage from "../../constants/interfaces/action-return.interface";
 
 const RegExpList = {
   phone: /^(\+\d{1,2}\s?)?1?\-?\.?\s?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/, // Source https://stackoverflow.com/questions/16699007/regular-expression-to-match-standard-10-digit-phone-number

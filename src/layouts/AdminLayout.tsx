@@ -11,7 +11,7 @@ import {
   ClipboardList,
 } from "lucide-react";
 import { U_OWL_LOGO } from "../assets";
-import type { User } from "../interfaces/user.entity";
+import type { User } from "../constants/interfaces/user.entity";
 
 const SUPER_NAV_ITEMS = [
   { label: "Dashboard", path: "/superAdmin/dashboard", icon: LayoutDashboard },
@@ -49,15 +49,10 @@ export default function AdminLayout() {
     <MapPin size={28} color="#389fff" />
   );
   const roleLabel = isSuperAdmin ? "Super Admin" : "Location Admin";
-  const sidebarBg = isSuperAdmin
-    ? { background: "#212529" }
-    : { background: "#1e3a5f" };
+  const sidebarBg = isSuperAdmin ? { background: "#212529" } : { background: "#1e3a5f" };
 
   return (
-    <div
-      className="d-flex"
-      style={{ minHeight: "100vh", background: "#f1f5f9" }}
-    >
+    <div className="d-flex" style={{ minHeight: "100vh", background: "#f1f5f9" }}>
       {/* Sidebar */}
       <aside
         className="d-flex flex-column text-white"
@@ -78,9 +73,7 @@ export default function AdminLayout() {
           }}
         >
           {roleIcon}
-          <span className="fw-bold fs-6 text-white text-nowrap">
-            {roleLabel}
-          </span>
+          <span className="fw-bold fs-6 text-white text-nowrap">{roleLabel}</span>
         </div>
 
         {/* Nav links */}
