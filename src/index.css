@@ -5,8 +5,12 @@
 }
 
 /* ── Bootstrap overrides ──────────────────────────────────────────────────── */
-.text-brand       { color: var(--brand-color) !important; }
-.border-brand     { border-color: var(--brand-color) !important; }
+.text-brand {
+  color: var(--brand-color) !important;
+}
+.border-brand {
+  border-color: var(--brand-color) !important;
+}
 
 .btn-brand {
   background-color: var(--brand-color) !important;
@@ -34,11 +38,15 @@
 .slider-container {
   position: relative;
   width: 100%;
-  height: 520px;        /* adjust to taste */
+  height: 420px;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-top: 1.25rem;
 }
 
 /* ── Layout ───────────────────────────────────────────────────────────────── */
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
 }
@@ -59,4 +67,18 @@ main {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+}
+
+/* ── Page Layout ───────────────────────────────────────────────────────────────── */
+
+.page {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.page-content {
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 1rem;
 }
