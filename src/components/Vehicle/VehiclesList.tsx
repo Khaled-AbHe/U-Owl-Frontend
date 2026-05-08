@@ -9,11 +9,12 @@ import  PICK_UP from "../../assets/vehicles/Trucks/PICKUP_IMG.png"
 // import  XLARGE_BOX  from "../../assets/vehicles/Trucks/PICKUP_IMG.png"
 
 const vehicleImg = PICK_UP
-const cargoVanImg = CARGO_VAN
-const smallBox = SMALL_BOX
-const mediumBox = MEDIUM_BOX
-const largeBox = LARGE_BOX
-const xlarge
+// const cargoVanImg = CARGO_VAN
+// const smallBox = SMALL_BOX
+// const mediumBox = MEDIUM_BOX
+// const largeBox = LARGE_BOX
+// const xlargeBox = XLARGE_BOX
+
 
 export interface Vehicle{
     vehicleId : number,
