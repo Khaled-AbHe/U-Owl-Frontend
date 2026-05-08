@@ -1,5 +1,6 @@
 import {Link, type SetURLSearchParams} from "react-router-dom";
 import "./VehiclesList.css"
+import  { type VehicleType, type TruckType, type TrailerType}  from "./VehiclesType";
 import  PICK_UP from "../../assets/vehicles/Trucks/PICKUP_IMG.png" 
 // import  CARGO_VAN from "../../assets/vehicles/Trucks/PICKUP_IMG.png"
 // import  SMALL_BOX  from "../../assets/vehicles/Trucks/PICKUP_IMG.png"
@@ -9,10 +10,6 @@ import  PICK_UP from "../../assets/vehicles/Trucks/PICKUP_IMG.png"
 
 const vehicleImg = PICK_UP
 
-type VehicleType = 'truck' | 'trailer'
-
-type TruckType = 'Pickup' |'Cargo Van' | 'Small Box' | 'Medium Box' | 'Large Box' | 'XLarge Box';
-type TrailerType = 'Small' | 'Medium' | 'Large';
 
 
 export interface Vehicle{
