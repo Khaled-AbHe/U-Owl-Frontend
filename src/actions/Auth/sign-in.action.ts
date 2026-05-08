@@ -1,6 +1,6 @@
 // actions/signIn.action.js
 import { redirect } from "react-router-dom";
-import type { User } from "../../interfaces/user.entity";
+import type { User } from "../../constants/interfaces/user.entity";
 import { signInUser } from "../../services/auth";
 
 export async function signInAction({ request }: any) {

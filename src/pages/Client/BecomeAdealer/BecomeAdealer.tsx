@@ -1,7 +1,7 @@
 import { useActionData, useNavigation } from "react-router-dom";
 import DealerForm from "../../../components/Forms/DealerForm/DealerForm";
 import "../../../components/Forms/DealerForm/DealerForm.css";
-import type ActionReturnMessage from "../../../interfaces/action-return.interface";
+import type ActionReturnMessage from "../../../constants/interfaces/action-return.interface";
 
 export default function BecomeAdealer() {
   const message = useActionData() as ActionReturnMessage;

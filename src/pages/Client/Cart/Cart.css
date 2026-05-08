@@ -56,16 +56,6 @@
   margin: 0;
 }
 
-.cart-count {
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: var(--brand-color);
-  background: #eaf5ff;
-  border: 1px solid #c5e2ff;
-  border-radius: 20px;
-  padding: 2px 12px;
-}
-
 /* ── Empty state ─────────────────────────────────────────────────────────── */
 .cart-empty {
   display: flex;

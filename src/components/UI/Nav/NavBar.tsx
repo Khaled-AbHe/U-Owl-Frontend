@@ -1,7 +1,7 @@
 import { Menu, X } from "lucide-react";
 import { Link } from "react-router-dom";
 import styles from "./NavBar.module.css";
-import { useNavBar } from "../../../hooks/useNaveBar.hook";
+import { useNavBar } from "../../../hooks/useNavBar.hook";
 import { MobileDrawer } from "./MobileDrawer";
 import { NavActions } from "./NavActions";
 import { type NavItem, NavLinks } from "./NavLinks";

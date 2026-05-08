@@ -1,5 +1,5 @@
 import { removeOrderItem } from "../../services/api";
-import type ActionReturnMessage from "../../interfaces/action-return.interface";
+import type ActionReturnMessage from "../../constants/interfaces/action-return.interface";
 
 export async function removeOrderItemAction({ request }: any): Promise<ActionReturnMessage> {
   const formData = await request.formData();
