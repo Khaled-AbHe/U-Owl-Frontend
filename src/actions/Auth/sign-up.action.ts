@@ -1,5 +1,5 @@
 import { redirect } from "react-router-dom";
-import { signUpUser } from "../services/auth";
+import { signUpUser } from "../../services/auth";
 
 export async function signUpAction({ request }: any) {
   const formData = await request.formData();
@@ -13,7 +13,6 @@ export async function signUpAction({ request }: any) {
   try {
     await signUpUser(userInfo);
     return redirect(`/auth/signIn`);
-
   } catch (error: any) {
     return error.message
       ? `Registration failed (${error.message}).`

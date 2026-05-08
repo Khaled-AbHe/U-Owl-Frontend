@@ -10,12 +10,11 @@ interface MobileDrawerProps {
   onSearchQueryChange: (value: string) => void;
 }
 
-export function MobileDrawer({
-  isOpen,
-  items,
-}: MobileDrawerProps) {
+export function MobileDrawer({ isOpen, items }: MobileDrawerProps) {
   return (
-    <div className={`${styles.mobileDrawer} ${isOpen ? styles.mobileDrawerOpen : ""}`}>
+    <div
+      className={`${styles.mobileDrawer} ${isOpen ? styles.mobileDrawerOpen : ""}`}
+    >
       <div className={`${styles.mobileDrawerInner} container-xl`}>
         <NavLinks
           items={items}

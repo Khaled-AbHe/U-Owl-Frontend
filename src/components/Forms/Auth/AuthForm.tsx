@@ -14,7 +14,10 @@ export default function AuthForm({
   const isAdmin = iconClass === "signin-icon--admin";
 
   return (
-    <div className="d-flex align-items-center justify-content-center" style={{ minHeight: "700px" }}>
+    <div
+      className="d-flex align-items-center justify-content-center"
+      style={{ minHeight: "700px" }}
+    >
       {/* No onSubmit — React Router's <Form> handles submission natively */}
       <Form
         method="POST"
@@ -47,7 +50,10 @@ export default function AuthForm({
 
         {/* Error returned by the action is displayed here */}
         {error && (
-          <div className="alert alert-danger py-2 small mt-2 text-center" role="alert">
+          <div
+            className="alert alert-danger py-2 small mt-2 text-center"
+            role="alert"
+          >
             {error}
           </div>
         )}

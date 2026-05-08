@@ -1,6 +1,7 @@
-import { signInAction } from "../actions/sign-in.action";
-import signOutAction from "../actions/sign-out.action";
-import { signUpAction } from "../actions/sign-up.action";
+import { signInAction } from "../actions/Auth/sign-in.action";
+import signOutAction from "../actions/Auth/sign-out.action";
+import { signUpAction } from "../actions/Auth/sign-up.action";
+import { dealerFormAction } from "../actions/DealerForm/dealer-form.action";
 import AdminLayout from "../layouts/AdminLayout";
 import AuthLayout from "../layouts/AuthLayout";
 import MainLayout from "../layouts/MainLayout";
@@ -9,15 +10,7 @@ import locationAdminLoader from "../loaders/location-admin.loader";
 import signInLoader from "../loaders/login.loader";
 import mainLayoutLoader from "../loaders/main-layout.loader";
 import superAdminLoader from "../loaders/super-admin.loader";
-import {
-  BecomeAdealer,
-  Cart,
-  Home,
-  Location,
-  SignIn,
-  SignUp,
-  Vehicles,
-} from "../pages";
+import { BecomeAdealer, Cart, Home, Location, SignIn, SignUp, Vehicles } from "../pages";
 import LocationDashboard from "../pages/Admin/Location/location-dashboard.page";
 import SuperDashboard from "../pages/Admin/Super/super-dashboard.page";
 
@@ -51,7 +44,7 @@ export const mainRoutes = [
     label: "Become A Dealer",
     path: "joinDealer",
     element: BecomeAdealer,
-    action: undefined,
+    action: dealerFormAction,
     loader: clientPageLoader,
   },
   {
@@ -89,7 +82,7 @@ export const authRoutes = [
     action: signOutAction,
     loader: undefined,
   },
-]
+];
 
 export const superRoutes = [
   {
@@ -100,7 +93,7 @@ export const superRoutes = [
     action: undefined,
     loader: undefined,
   },
-]
+];
 
 export const locationRoutes = [
   {
@@ -111,31 +104,31 @@ export const locationRoutes = [
     action: undefined,
     loader: undefined,
   },
-]
+];
 
 export const routes = [
   {
     path: "/",
     element: MainLayout,
     loader: mainLayoutLoader,
-    subroutes: mainRoutes
+    subroutes: mainRoutes,
   },
   {
     path: "/auth",
     element: AuthLayout,
     loader: undefined,
-    subroutes: authRoutes
+    subroutes: authRoutes,
   },
   {
     path: "/superAdmin",
     element: AdminLayout,
     loader: superAdminLoader,
-    subroutes: superRoutes
+    subroutes: superRoutes,
   },
   {
     path: "/locationAdmin",
     element: AdminLayout,
     loader: locationAdminLoader,
-    subroutes: locationRoutes
+    subroutes: locationRoutes,
   },
-]
+];

@@ -15,10 +15,11 @@ export function NavSearch({
   onToggle,
   onQueryChange,
 }: NavSearchProps) {
-
   return (
     <>
-      <div className={`${styles.navbarSearch} ${isOpen ? styles.navbarSearchOpen : ""}`}>
+      <div
+        className={`${styles.navbarSearch} ${isOpen ? styles.navbarSearchOpen : ""}`}
+      >
         <input
           type="search"
           className={styles.navbarSearchInput}
@@ -26,9 +27,13 @@ export function NavSearch({
           value={query}
           onChange={(e) => onQueryChange(e.target.value)}
           aria-label="Search"
-          />
+        />
       </div>
-      <button className={styles.btnIcon} onClick={onToggle} aria-label="Toggle search">
+      <button
+        className={styles.btnIcon}
+        onClick={onToggle}
+        aria-label="Toggle search"
+      >
         {isOpen ? <X size={18} /> : <Search size={18} />}
       </button>
     </>

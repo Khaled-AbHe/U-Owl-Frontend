@@ -107,7 +107,9 @@
   color: #555;
   cursor: pointer;
   flex-shrink: 0;
-  transition: background 0.15s, color 0.15s;
+  transition:
+    background 0.15s,
+    color 0.15s;
   text-decoration: none;
 }
 .btnIcon:hover {
@@ -127,7 +129,9 @@
   padding: 0.35rem 0.85rem;
   white-space: nowrap;
   text-decoration: none;
-  transition: background 0.15s, color 0.15s;
+  transition:
+    background 0.15s,
+    color 0.15s;
   cursor: pointer;
 }
 .btnOutlineBrand:hover {
@@ -140,7 +144,9 @@
   overflow: hidden;
   width: 0;
   opacity: 0;
-  transition: width 0.25s ease, opacity 0.2s ease;
+  transition:
+    width 0.25s ease,
+    opacity 0.2s ease;
 }
 .navbarSearchOpen {
   width: 180px;
@@ -205,7 +211,9 @@
   color: #444;
   text-decoration: none;
   border-radius: 6px;
-  transition: background 0.15s, color 0.15s;
+  transition:
+    background 0.15s,
+    color 0.15s;
   white-space: nowrap;
 }
 .mobileNavLink:hover {

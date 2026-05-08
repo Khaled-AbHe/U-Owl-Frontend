@@ -53,9 +53,7 @@ export default function SignIn() {
       }
       footer={
         isAdmin ? (
-          <p className="small mb-0 text-center">
-            This session will be logged and monitored.
-          </p>
+          <p className="small mb-0 text-center">This session will be logged and monitored.</p>
         ) : (
           <p className="small mb-0 text-center">
             Don't have an account? <Link to="/auth/signUp">Sign up</Link>
@@ -63,26 +61,11 @@ export default function SignIn() {
         )
       }
     >
-      <InputField
-        label={undefined}
-        type="hidden"
-        name="type"
-        value={mode}
-      />
-      
-      <InputField
-        label="Email"
-        type="email"
-        name="email"
-        placeholder="Enter email"
-      />
+      <InputField label={undefined} type="hidden" name="type" value={mode} />
 
-      <InputField
-        label="Password"
-        type="password"
-        name="password"
-        placeholder="Enter password"
-      />
+      <InputField label="Email" type="email" name="email" placeholder="Enter email" />
+
+      <InputField label="Password" type="password" name="password" placeholder="Enter password" />
     </AuthForm>
   );
 }
