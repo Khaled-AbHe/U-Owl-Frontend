@@ -1,5 +1,5 @@
-import { getSingleTruck } from "../services/api";
+import { getSingleTrailer} from "../services/api";
 
-export default async function truckDetailLoader({ params } : any) {
-    return await getSingleTruck(params.id)
+export default async function trailerDetailsLoader({ params } : any) {
+    return await getSingleTrailer(params.id)
   }
