@@ -29,7 +29,7 @@ export default function ImagesSlider({ imageUrls }: ImageSliderProps) {
         />
       ))}
 
-      {/* Prev / Next arrows */}
+      `{/* Prev / Next arrows */}`
       <button
         onClick={showPrevImage}
         className="slider-arrow slider-arrow--prev"

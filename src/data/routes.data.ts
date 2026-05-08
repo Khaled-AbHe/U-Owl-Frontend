@@ -10,6 +10,7 @@ import locationAdminLoader from "../loaders/location-admin.loader";
 import signInLoader from "../loaders/login.loader";
 import mainLayoutLoader from "../loaders/main-layout.loader";
 import superAdminLoader from "../loaders/super-admin.loader";
+import vehiclesLoader from "../loaders/vehicles.loader";
 import { BecomeAdealer, Cart, Home, Location, SignIn, SignUp, Vehicles } from "../pages";
 import LocationDashboard from "../pages/Admin/Location/location-dashboard.page";
 import SuperDashboard from "../pages/Admin/Super/super-dashboard.page";
@@ -29,7 +30,7 @@ export const mainRoutes = [
     path: "vehicles",
     element: Vehicles,
     action: undefined,
-    loader: undefined,
+    loader: vehiclesLoader,
   },
   {
     isIndex: false,
