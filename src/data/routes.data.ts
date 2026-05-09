@@ -21,6 +21,11 @@ import vehiclesLoader from "./loaders/vehicles/vehicles.loader";
 import AdminLayout from "../layouts/admin.layout";
 import MainLayout from "../layouts/main.layout";
 import AuthLayout from "../layouts/auth.layout";
+import VehicleManager from "../pages/Admin/Super/VehicleManager/vehicle-manager.page";
+import { createVehicleAction } from "./actions/VehicleManager/create-vehicle.action";
+import { deleteVehicleAction } from "./actions/VehicleManager/delete-vehicle.action";
+import { updateVehicleAction } from "./actions/VehicleManager/update-vehicle.action";
+import vehicleManagerLoader from "./loaders/admin/super/vehicle-manager.loader";
 
 export const mainRoutes = [
   {
@@ -147,6 +152,38 @@ export const superRoutes = [
     path: "users/delete",
     element: undefined,
     action: deleteUserAction,
+    loader: undefined,
+  },
+  {
+    isIndex: false,
+    label: "Vehicles",
+    path: "vehicles",
+    element: VehicleManager,
+    action: undefined,
+    loader: vehicleManagerLoader,
+  },
+  {
+    isIndex: false,
+    label: "Create Vehicle",
+    path: "vehicles/create",
+    element: undefined,
+    action: createVehicleAction,
+    loader: undefined,
+  },
+  {
+    isIndex: false,
+    label: "Update Vehicle",
+    path: "vehicles/update",
+    element: undefined,
+    action: updateVehicleAction,
+    loader: undefined,
+  },
+  {
+    isIndex: false,
+    label: "Delete Vehicle",
+    path: "vehicles/delete",
+    element: undefined,
+    action: deleteVehicleAction,
     loader: undefined,
   },
 ];
