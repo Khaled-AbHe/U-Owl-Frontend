@@ -1,6 +1,7 @@
 import { signInAction } from "../actions/Auth/sign-in.action";
 import signOutAction from "../actions/Auth/sign-out.action";
 import { signUpAction } from "../actions/Auth/sign-up.action";
+import { createUserAction } from "../actions/UserManager/create-user.action";
 import { cartPayAction } from "../actions/Cart/cart-pay.action";
 import { removeOrderItemAction } from "../actions/Cart/remove-vehicle.action";
 import { dealerFormAction } from "../actions/DealerForm/dealer-form.action";
@@ -12,10 +13,12 @@ import locationAdminLoader from "../loaders/location-admin.loader";
 import signInLoader from "../loaders/login.loader";
 import mainLayoutLoader from "../loaders/main-layout.loader";
 import superAdminLoader from "../loaders/super-admin.loader";
+import userManagerLoader from "../loaders/user-manager.loader";
 import vehiclesLoader from "../loaders/vehicles.loader";
 import { BecomeAdealer, Cart, Home, Location, SignIn, SignUp, Vehicles } from "../pages";
 import LocationDashboard from "../pages/Admin/Location/location-dashboard.page";
-import SuperDashboard from "../pages/Admin/Super/super-dashboard.page";
+import SuperDashboard from "../pages/Admin/Super/Dashboard/super-dashboard.page";
+import UserManager from "../pages/Admin/Super/UserManager/user-manager.page";
 
 export const mainRoutes = [
   {
@@ -58,7 +61,6 @@ export const mainRoutes = [
     action: undefined,
     loader: cartLoader,
   },
-  // useFetcher will call these routes to do some functions, so they wont have elements
   {
     isIndex: false,
     label: "Cart Pay",
@@ -112,6 +114,14 @@ export const superRoutes = [
     element: SuperDashboard,
     action: undefined,
     loader: undefined,
+  },
+  {
+    isIndex: false,
+    label: "Users",
+    path: "users",
+    element: UserManager,
+    action: createUserAction,
+    loader: userManagerLoader,
   },
 ];
 
