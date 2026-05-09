@@ -1,19 +1,9 @@
 import {Link, type SetURLSearchParams} from "react-router-dom";
 import "./VehiclesList.css"
 import  { type VehicleType, type TruckType, type TrailerType}  from "./VehiclesType";
-import  PICK_UP from "../../assets/vehicles/Trucks/PICKUP_IMG.png" 
-// import  CARGO_VAN from "../../assets/vehicles/Trucks/PICKUP_IMG.png"
-// import  SMALL_BOX  from "../../assets/vehicles/Trucks/PICKUP_IMG.png"
-// import  MEDIUM_BOX  from "../../assets/vehicles/Trucks/PICKUP_IMG.png"
-// import  LARGE_BOX  from "../../assets/vehicles/Trucks/PICKUP_IMG.png"
-// import  XLARGE_BOX  from "../../assets/vehicles/Trucks/PICKUP_IMG.png"
+import { getSubtypeImg } from "./VehiclesSubtypeImg";
 
-const vehicleImg = PICK_UP
-// const cargoVanImg = CARGO_VAN
-// const smallBox = SMALL_BOX
-// const mediumBox = MEDIUM_BOX
-// const largeBox = LARGE_BOX
-// const xlargeBox = XLARGE_BOX
+
 
 
 export interface Vehicle{
@@ -49,7 +39,7 @@ export default function VehiclesList({vehicles  ,searchParams , setSearchParams}
     const vehicleElements = displayedVehicles?.map(vehicle => (
         <Link to={`${vehicle.vehicleId}`} key={vehicle.vehicleId} className="nav-button">
             <div className = "vehicle-tile">
-                <img src={vehicleImg} alt="Image is not available" />
+                <img src={getSubtypeImg(vehicle.vehicleSubtype)} alt="Image is not available" />
                 <div className="vehicle-info">
                     <h3>{vehicle.vehicleSubtype}</h3>
                     <p>${vehicle.price}<span>/day</span></p>
