@@ -1,9 +1,4 @@
-import {
-  SLIDER_IMG_1,
-  SLIDER_IMG_2,
-  SLIDER_IMG_3,
-  SLIDER_IMG_4,
-} from "../../../assets/index.ts";
+import { SLIDER_IMG_1, SLIDER_IMG_2, SLIDER_IMG_3, SLIDER_IMG_4 } from "../../../assets/index.ts";
 import ImagesSlider from "../../../components/ImageSlider/ImageSlider.tsx";
 import VehicleSearch from "../../../components/Forms/VehicleSearch/VehicleSearchForm.tsx";
 import "./Home.css";

@@ -1,19 +1,31 @@
 import { Edit2, Trash2 } from "lucide-react";
-import { AvatarBadge } from "./avatar-badge.component";
-import { RoleBadge } from "./role-badge.component";
 import type { User } from "../../../constants/interfaces/user.entity";
+import { AvatarBadge } from "./Badge/avatar-badge.component";
+import { RoleBadge } from "./Badge/role-badge.component";
 
 interface UserRowProps {
   user: User;
   index: number;
   pageSize: number;
   safePage: number;
-  handleDelete: (user: User) => void;
+  currentUserId: number;
+  onEdit: (user: User) => void;
+  onDelete: (user: User) => void;
 }
 
-export default function UserRow({ user, index, pageSize, safePage, handleDelete }: UserRowProps) {
+export default function UserRow({
+  user,
+  index,
+  pageSize,
+  safePage,
+  currentUserId,
+  onEdit,
+  onDelete,
+}: UserRowProps) {
+  const isSelf = user.userId === currentUserId;
+
   return (
-    <tr key={user.userId}>
+    <tr>
       <td className="text-secondary small ps-3" style={{ verticalAlign: "middle" }}>
         {(safePage - 1) * pageSize + index + 1}
       </td>
@@ -23,7 +35,7 @@ export default function UserRow({ user, index, pageSize, safePage, handleDelete 
           <AvatarBadge user={user} />
           <div style={{ minWidth: 0 }}>
             <div className="fw-medium small text-truncate">
-              {user.name} {user.surname}
+              {user.name} {user.surname} {isSelf && "(You)"}
             </div>
             <div className="text-secondary text-truncate" style={{ fontSize: 12 }}>
               {user.email}
@@ -31,12 +43,15 @@ export default function UserRow({ user, index, pageSize, safePage, handleDelete 
           </div>
         </div>
       </td>
+
       <td style={{ verticalAlign: "middle" }}>
         <RoleBadge user={user} />
       </td>
+
       <td className="text-secondary small" style={{ verticalAlign: "middle" }}>
         #{user.userId}
       </td>
+
       <td style={{ verticalAlign: "middle" }}>
         <div className="d-flex gap-1">
           <button
@@ -44,15 +59,17 @@ export default function UserRow({ user, index, pageSize, safePage, handleDelete 
             style={{ lineHeight: 1 }}
             title={`Edit ${user.name}`}
             aria-label={`Edit ${user.name}`}
+            onClick={() => onEdit(user)}
           >
             <Edit2 size={13} />
           </button>
           <button
             className="btn btn-sm btn-light p-1 text-danger"
             style={{ lineHeight: 1 }}
-            title={`Delete ${user.name}`}
+            title={isSelf ? "You cannot delete your own account" : `Delete ${user.name}`}
             aria-label={`Delete ${user.name}`}
-            onClick={() => handleDelete(user)}
+            onClick={() => onDelete(user)}
+            disabled={isSelf}
           >
             <Trash2 size={13} />
           </button>

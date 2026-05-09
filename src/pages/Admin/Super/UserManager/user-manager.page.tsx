@@ -1,18 +1,17 @@
-import { Search, UserPlus } from "lucide-react";
-import { CreateUserModal } from "../../../../components/SuperAdmin/UserManager/create-user-modal.component";
-import Pagination from "../../../../components/SuperAdmin/UserManager/pagination.component";
+import { useUserManager, PAGE_SIZE } from "../../../../hooks/useUserManager.hook";
+import { UserPlus, Search } from "lucide-react";
+import { CreateUserModal } from "../../../../components/SuperAdmin/UserManager/Forms/create-user-modal.component";
+import { EditUserModal } from "../../../../components/SuperAdmin/UserManager/Forms/edit-user-modal.component";
 import UserRow from "../../../../components/SuperAdmin/UserManager/user-row.component";
-import {
-  useUserManager,
-  type RoleFilter,
-  type SortKey,
-} from "../../../../hooks/useUserManager.hook";
-import { PAGE_SIZE } from "./user-manager.utils";
+import Pagination from "../../../../components/SuperAdmin/UserManager/pagination.component";
+import type { RoleFilter, SortKey } from "../../../../hooks/useUserManager.hook";
 
 export default function UserManager() {
   const {
-    showModal,
-    setShowModal,
+    showCreateModal,
+    setShowCreateModal,
+    editingUser,
+    setEditingUser,
     search,
     setSearch,
     roleFilter,
@@ -25,15 +24,24 @@ export default function UserManager() {
     slice,
     filtered,
     stats,
+    currentUserId,
     handleDelete,
   } = useUserManager();
 
   return (
     <>
-      {showModal && (
+      {showCreateModal && (
         <CreateUserModal
-          onClose={() => setShowModal(false)}
-          onSuccess={() => setShowModal(false)}
+          onClose={() => setShowCreateModal(false)}
+          onSuccess={() => setShowCreateModal(false)}
+        />
+      )}
+
+      {editingUser && (
+        <EditUserModal
+          user={editingUser}
+          onClose={() => setEditingUser(null)}
+          onSuccess={() => setEditingUser(null)}
         />
       )}
 
@@ -47,7 +55,7 @@ export default function UserManager() {
             </div>
             <button
               className="btn btn-sm btn-brand d-flex align-items-center gap-2"
-              onClick={() => setShowModal(true)}
+              onClick={() => setShowCreateModal(true)}
             >
               <UserPlus size={15} />
               Create user
@@ -164,7 +172,9 @@ export default function UserManager() {
                       index={i}
                       pageSize={PAGE_SIZE}
                       safePage={safePage}
-                      handleDelete={handleDelete}
+                      currentUserId={currentUserId}
+                      onEdit={setEditingUser}
+                      onDelete={handleDelete}
                     />
                   ))
                 )}
