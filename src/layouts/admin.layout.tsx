@@ -9,16 +9,16 @@ import {
   Shield,
   CalendarCheck,
   ClipboardList,
+  FormIcon,
 } from "lucide-react";
 import { U_OWL_LOGO } from "../assets";
 import type { User } from "../constants/interfaces/user.entity";
 
 const SUPER_NAV_ITEMS = [
-  { label: "Dashboard", path: "/superAdmin/dashboard", icon: LayoutDashboard },
   { label: "Users", path: "/superAdmin/users", icon: Users },
   { label: "Locations", path: "/superAdmin/locations", icon: MapPin },
   { label: "Vehicles", path: "/superAdmin/vehicles", icon: Truck },
-  { label: "Settings", path: "/superAdmin/settings", icon: Settings },
+  { label: "Forms", path: "/superAdmin/forms", icon: FormIcon },
 ];
 
 const LOCATION_NAV_ITEMS = [

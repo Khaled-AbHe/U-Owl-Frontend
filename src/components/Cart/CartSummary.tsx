@@ -31,7 +31,7 @@ export default function CartSummary({
         {visibleItems.map((item) => (
           <div key={item.orderItemId} className="cart-summary__row">
             <span className="cart-summary__row-label">
-              {item.vehicle.vehicleSubtype} · {item.vehicle.licencePlate}
+              {item.vehicle.vehicleSubtype} · {item.vehicle.licensePlate}
             </span>
             <span>{fmt(item.itemPrice)}</span>
           </div>

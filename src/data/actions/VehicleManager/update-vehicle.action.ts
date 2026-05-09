@@ -1,27 +1,35 @@
-import { updateVehicle } from "../../requests/api";
+import { getIsRoadSafe, updateVehicle } from "../../requests/api";
 import type ActionReturnMessage from "../../../constants/interfaces/action-return.interface";
+import { isFieldValid, isPresent, RegExpList } from "../actions.helpers";
 
 export async function updateVehicleAction({ request }: any): Promise<ActionReturnMessage> {
   const formData = await request.formData();
   const vehicleId = formData.get("vehicleId") as string;
 
-  const numericFields = ["kilometrage", "height", "width", "depth", "maxWeight", "costPerKm"];
-  const stringFields = ["licensePlate", "vehicleType", "vehicleSubtype"];
+  const data = {
+    licensePlate: formData.get("licensePlate"),
+    vehicleType: formData.get("vehicleType"),
+    vehicleSubtype: formData.get("vehicleSubtype"),
+    kilometrage: formData.get("kilometrage"),
+  };
 
   const patch: Record<string, string | number> = {};
 
-  for (const field of stringFields) {
-    const val = formData.get(field) as string | null;
-    if (val !== null && val.trim() !== "") patch[field] = val.trim();
+  if (isPresent(data.licensePlate)) {
+    if (!isFieldValid(RegExpList.lp, data.licensePlate)) {
+      return { type: "error", message: "Please enter a valid license plate." };
+    }
+    patch.licensePlate = data.licensePlate;
   }
 
-  for (const field of numericFields) {
-    const val = formData.get(field) as string | null;
-    if (val !== null && val.trim() !== "") patch[field] = Number(val);
-  }
+  if (isPresent(data.vehicleType)) patch.vehicleType = data.vehicleType;
+  if (isPresent(data.vehicleSubtype)) patch.vehicleSubtype = data.vehicleSubtype;
+  if (isPresent(data.kilometrage)) patch.kilometrage = Number(data.kilometrage);
 
   try {
     await updateVehicle(vehicleId, patch);
+    if (isPresent(data.kilometrage)) await getIsRoadSafe(vehicleId);
+
     return { type: "success", message: "Vehicle updated." };
   } catch (error: any) {
     return {

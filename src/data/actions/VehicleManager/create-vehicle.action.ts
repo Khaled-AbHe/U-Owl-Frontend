@@ -1,24 +1,32 @@
 import { createVehicle } from "../../requests/api";
 import type ActionReturnMessage from "../../../constants/interfaces/action-return.interface";
+import { isFieldValid, isPresent, RegExpList } from "../actions.helpers";
 
 export async function createVehicleAction({ request }: any): Promise<ActionReturnMessage> {
   const formData = await request.formData();
 
-  const vehicle: Record<string, string | number | boolean> = {
-    licensePlate: formData.get("licensePlate") as string,
-    vehicleType: formData.get("vehicleType") as string,
-    vehicleSubtype: formData.get("vehicleSubtype") as string,
-    kilometrage: Number(formData.get("kilometrage")),
-    height: Number(formData.get("height")),
-    width: Number(formData.get("width")),
-    depth: Number(formData.get("depth")),
-    maxWeight: Number(formData.get("maxWeight")),
-    costPerKm: Number(formData.get("costPerKm")),
-    isReserved: false,
+  const data = {
+    licensePlate: formData.get("licensePlate"),
+    vehicleSubtype: formData.get("vehicleSubtype"),
   };
 
+  if (!isPresent(data.licensePlate)) {
+    return { type: "error", message: "License plate is required." };
+  }
+
+  if (!isPresent(data.vehicleSubtype)) {
+    return { type: "error", message: "Subtype is required." };
+  }
+
+  if (!isFieldValid(RegExpList.lp, data.licensePlate)) {
+    return {
+      type: "error",
+      message: "Please enter a valid license plate.",
+    };
+  }
+
   try {
-    await createVehicle(vehicle);
+    await createVehicle(data);
     return { type: "success", message: "Vehicle created." };
   } catch (error: any) {
     return {

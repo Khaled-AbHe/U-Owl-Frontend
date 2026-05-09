@@ -14,12 +14,13 @@ export type VehicleSubtype = TruckSubtype | TrailerSubtype;
 
 export interface Vehicle {
   vehicleId: number;
-  licencePlate: string;
+  licensePlate: string;
   vehicleType: VehicleType;
   vehicleSubtype: VehicleSubtype;
   kilometrage: number;
   costPerKm: number;
   isReserved: boolean;
+  isSafe: boolean;
   height: number;
   width: number;
   depth: number;

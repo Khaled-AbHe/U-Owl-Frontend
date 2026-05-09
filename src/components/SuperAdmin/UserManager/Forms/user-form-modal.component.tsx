@@ -1,5 +1,5 @@
 import { X, AlertCircle, Check } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useFetcher } from "react-router-dom";
 import type { User } from "../../../../constants/interfaces/user.entity";
 
@@ -51,10 +51,11 @@ export function UserFormModal({ user, onClose, onSuccess }: UserFormModalProps) 
   const result = fetcher.data as { type: string; message: string } | undefined;
   const actionError = result?.type === "error" ? result.message : null;
 
-  if (result?.type === "success") {
-    onSuccess();
-    return null;
-  }
+  useEffect(() => {
+    if (result?.type === "success") {
+      onSuccess();
+    }
+  }, [result]);
 
   function validate(): boolean {
     const e: Partial<UserFormState> = {};
@@ -71,10 +72,12 @@ export function UserFormModal({ user, onClose, onSuccess }: UserFormModalProps) 
     if (!validate()) return;
     const fd = new FormData();
     if (isEditing) fd.append("userId", String(user.userId));
+    
     fd.append("name", form.name.trim());
     fd.append("surname", form.surname.trim());
     fd.append("email", form.email.trim());
     fd.append("userType", form.userType);
+    
     if (form.userType === "Admin") fd.append("adminType", form.adminType);
     if (!isEditing || form.password) fd.append("password", form.password);
     fetcher.submit(fd, {

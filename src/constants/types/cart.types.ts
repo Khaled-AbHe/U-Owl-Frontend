@@ -1,6 +1,6 @@
 export interface Vehicle {
   vehicleId: number;
-  licencePlate: string;
+  licensePlate: string;
   vehicleType: "Truck" | "Trailer";
   vehicleSubtype: string;
   costPerKm: number;

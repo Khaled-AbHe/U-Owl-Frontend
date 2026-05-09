@@ -1,6 +1,11 @@
 import { Edit2, Trash2 } from "lucide-react";
 import type { Vehicle } from "../../../constants/interfaces/vehicle.entity";
-import { VehicleTypeBadge, ReservedBadge } from "./Badge/vehicle-type-badge.component";
+import {
+  VehicleTypeBadge,
+  ReservedBadge,
+  VehicleSubtypeBadge,
+  SafetyBadge,
+} from "./Badge/vehicle-type-badge.component";
 
 interface VehicleRowProps {
   vehicle: Vehicle;
@@ -25,11 +30,12 @@ export default function VehicleRow({
         {(safePage - 1) * pageSize + index + 1}
       </td>
 
-      <td style={{ verticalAlign: "middle" }}>
-        <div className="fw-medium small">{vehicle.licencePlate}</div>
-        <div className="text-secondary" style={{ fontSize: 12 }}>
-          {vehicle.vehicleSubtype}
-        </div>
+      <td className="text-secondary small" style={{ verticalAlign: "middle" }}>
+        #{vehicle.vehicleId}
+      </td>
+
+      <td className="text-secondary small" style={{ verticalAlign: "middle" }}>
+        {vehicle.licensePlate}
       </td>
 
       <td style={{ verticalAlign: "middle" }}>
@@ -37,15 +43,19 @@ export default function VehicleRow({
       </td>
 
       <td style={{ verticalAlign: "middle" }}>
+        <VehicleSubtypeBadge vehicle={vehicle} />
+      </td>
+
+      <td style={{ verticalAlign: "middle" }}>
         <ReservedBadge vehicle={vehicle} />
       </td>
 
       <td className="text-secondary small" style={{ verticalAlign: "middle" }}>
-        ${vehicle.costPerKm.toFixed(2)}/km
+        <SafetyBadge vehicle={vehicle} />
       </td>
 
       <td className="text-secondary small" style={{ verticalAlign: "middle" }}>
-        #{vehicle.vehicleId}
+        ${vehicle.costPerKm.toFixed(2)}/km
       </td>
 
       <td style={{ verticalAlign: "middle" }}>

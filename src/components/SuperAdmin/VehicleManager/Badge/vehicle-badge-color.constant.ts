@@ -4,6 +4,6 @@ export const vehicleTypeStyles: Record<string, React.CSSProperties> = {
 };
 
 export const reservedStyles: Record<string, React.CSSProperties> = {
-  reserved: { background: "#FEE2E2", color: "#B91C1C" },
-  available: { background: "#E1F5EE", color: "#0F6E56" },
+  no: { background: "#FEE2E2", color: "#B91C1C" },
+  yes: { background: "#E1F5EE", color: "#0F6E56" },
 };

@@ -135,16 +135,28 @@ export default function VehicleManager() {
             <table className="table table-hover mb-0" style={{ tableLayout: "fixed" }}>
               <colgroup>
                 <col style={{ width: 40 }} />
+                <col style={{ width: 40 }} />
                 <col />
                 <col style={{ width: 100 }} />
+                <col />
                 <col style={{ width: 110 }} />
                 <col style={{ width: 110 }} />
-                <col style={{ width: 70 }} />
-                <col style={{ width: 90 }} />
+                <col style={{ width: 110 }} />
+                <col style={{ width: 110 }} />
               </colgroup>
               <thead className="table-light border-bottom">
                 <tr>
-                  {["#", "Vehicle", "Type", "Status", "Cost/km", "ID", "Actions"].map((h) => (
+                  {[
+                    "#",
+                    "ID",
+                    "Vehicle",
+                    "Type",
+                    "Subtype",
+                    "Status",
+                    "Safe",
+                    "Cost/km",
+                    "Actions",
+                  ].map((h) => (
                     <th
                       key={h}
                       className="text-secondary fw-medium small py-2 ps-3"

@@ -1,5 +1,5 @@
 import { X, AlertCircle, Check } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useFetcher } from "react-router-dom";
 import type {
   Vehicle,
@@ -24,11 +24,6 @@ interface VehicleFormState {
   vehicleType: VehicleType;
   vehicleSubtype: VehicleSubtype;
   kilometrage: string;
-  height: string;
-  width: string;
-  depth: string;
-  maxWeight: string;
-  costPerKm: string;
 }
 
 const EMPTY_FORM: VehicleFormState = {
@@ -36,24 +31,14 @@ const EMPTY_FORM: VehicleFormState = {
   vehicleType: "Truck",
   vehicleSubtype: "Pickup",
   kilometrage: "",
-  height: "",
-  width: "",
-  depth: "",
-  maxWeight: "",
-  costPerKm: "",
 };
 
 function toFormState(v: Vehicle): VehicleFormState {
   return {
-    licensePlate: v.licensePlate,
+    licensePlate: "",
     vehicleType: v.vehicleType,
     vehicleSubtype: v.vehicleSubtype,
     kilometrage: String(v.kilometrage),
-    height: String(v.height),
-    width: String(v.width),
-    depth: String(v.depth),
-    maxWeight: String(v.maxWeight),
-    costPerKm: String(v.costPerKm),
   };
 }
 
@@ -68,7 +53,7 @@ export function VehicleFormModal({ vehicle, onClose, onSuccess }: VehicleFormMod
   const fetcher = useFetcher();
 
   const [form, setForm] = useState<VehicleFormState>(() =>
-    vehicle ? toFormState(vehicle) : EMPTY_FORM
+    vehicle ? toFormState(vehicle) : EMPTY_FORM,
   );
   const [errors, setErrors] = useState<Partial<Record<keyof VehicleFormState, string>>>({});
 
@@ -76,28 +61,26 @@ export function VehicleFormModal({ vehicle, onClose, onSuccess }: VehicleFormMod
   const result = fetcher.data as { type: string; message: string } | undefined;
   const actionError = result?.type === "error" ? result.message : null;
 
-  if (result?.type === "success") {
-    onSuccess();
-    return null;
-  }
+  useEffect(() => {
+    if (result?.type === "success") {
+      onSuccess();
+    }
+  }, [result]);
 
-  const subtypeOptions =
-    form.vehicleType === "Truck" ? TRUCK_SUBTYPES : TRAILER_SUBTYPES;
+  const subtypeOptions = form.vehicleType === "Truck" ? TRUCK_SUBTYPES : TRAILER_SUBTYPES;
 
   function validate(): boolean {
     const e: Partial<Record<keyof VehicleFormState, string>> = {};
-    if (!form.licensePlate.trim()) e.licensePlate = "Required";
-    const numFields: (keyof VehicleFormState)[] = [
-      "kilometrage",
-      "height",
-      "width",
-      "depth",
-      "maxWeight",
-      "costPerKm",
-    ];
-    for (const f of numFields) {
-      if (!form[f].trim() || isNaN(Number(form[f])) || Number(form[f]) < 0) {
-        e[f] = "Valid positive number required";
+
+    if (!isEditing && !form.licensePlate.trim()) e.licensePlate = "Required";
+
+    if (isEditing) {
+      if (
+        !form["kilometrage"].trim() ||
+        isNaN(Number(form["kilometrage"])) ||
+        Number(form["kilometrage"]) < 0
+      ) {
+        e["kilometrage"] = "Valid positive number required";
       }
     }
     setErrors(e);
@@ -107,15 +90,17 @@ export function VehicleFormModal({ vehicle, onClose, onSuccess }: VehicleFormMod
   function handleSubmit() {
     if (!validate()) return;
     const fd = new FormData();
+
     if (isEditing) fd.append("vehicleId", String(vehicle.vehicleId));
-    (Object.keys(form) as (keyof VehicleFormState)[]).forEach((k) =>
-      fd.append(k, form[k])
-    );
+    if (!isEditing || form.licensePlate) fd.append("licensePlate", form.licensePlate.trim());
+    fd.append("vehicleType", form.vehicleType.trim());
+    fd.append("vehicleSubtype", form.vehicleSubtype.trim());
+    fd.append("kilometrage", form.kilometrage);
+
+    console.log(fd);
     fetcher.submit(fd, {
       method: "POST",
-      action: isEditing
-        ? "/superAdmin/vehicles/update"
-        : "/superAdmin/vehicles/create",
+      action: isEditing ? "/superAdmin/vehicles/update" : "/superAdmin/vehicles/create",
     });
   }
 
@@ -124,8 +109,7 @@ export function VehicleFormModal({ vehicle, onClose, onSuccess }: VehicleFormMod
       const next = { ...form, [key]: e.target.value };
       // When vehicle type changes, reset subtype to a valid value for the new type
       if (key === "vehicleType") {
-        next.vehicleSubtype =
-          e.target.value === "Truck" ? "Pickup" : "Small";
+        next.vehicleSubtype = e.target.value === "Truck" ? "Pickup" : "Small";
       }
       setForm(next);
     };
@@ -184,11 +168,14 @@ export function VehicleFormModal({ vehicle, onClose, onSuccess }: VehicleFormMod
 
         {/* License plate */}
         <div className="mb-3">
-          <label className="form-label small fw-medium text-secondary mb-1">License plate</label>
+          <label className="form-label small fw-medium text-secondary mb-1">
+            License plate
+            {isEditing}
+          </label>
           <input
             type="text"
             className={`form-control form-control-sm${errors.licensePlate ? " is-invalid" : ""}`}
-            placeholder="ABC-1234"
+            placeholder={isEditing ? vehicle.licensePlate : "ABC 123"}
             value={form.licensePlate}
             onChange={field("licensePlate")}
           />
@@ -224,66 +211,22 @@ export function VehicleFormModal({ vehicle, onClose, onSuccess }: VehicleFormMod
           </div>
         </div>
 
-        {/* Dimensions */}
-        <p className="text-secondary small fw-medium mb-2" style={{ fontSize: 11, textTransform: "uppercase", letterSpacing: ".05em" }}>
-          Dimensions (cm) & weight (kg)
-        </p>
-        <div className="row g-2 mb-3">
-          {(["height", "width", "depth"] as const).map((dim) => (
-            <div className="col" key={dim}>
-              <label className="form-label small fw-medium text-secondary mb-1 text-capitalize">
-                {dim}
-              </label>
+        {isEditing && (
+          <>
+            {/* Kilometrage */}
+            <div className="row g-2 mb-4">
+              <label className="form-label small fw-medium text-secondary mb-1">Kilometrage</label>
               <input
                 type="number"
                 min="0"
-                className={`form-control form-control-sm${errors[dim] ? " is-invalid" : ""}`}
-                value={form[dim]}
-                onChange={field(dim)}
+                className={`form-control form-control-sm${errors.kilometrage ? " is-invalid" : ""}`}
+                value={form.kilometrage}
+                onChange={field("kilometrage")}
               />
-              {errors[dim] && <div className="invalid-feedback">{errors[dim]}</div>}
+              {errors.kilometrage && <div className="invalid-feedback">{errors.kilometrage}</div>}
             </div>
-          ))}
-          <div className="col">
-            <label className="form-label small fw-medium text-secondary mb-1">Max weight</label>
-            <input
-              type="number"
-              min="0"
-              className={`form-control form-control-sm${errors.maxWeight ? " is-invalid" : ""}`}
-              value={form.maxWeight}
-              onChange={field("maxWeight")}
-            />
-            {errors.maxWeight && <div className="invalid-feedback">{errors.maxWeight}</div>}
-          </div>
-        </div>
-
-        {/* Kilometrage + Cost */}
-        <div className="row g-2 mb-4">
-          <div className="col">
-            <label className="form-label small fw-medium text-secondary mb-1">Kilometrage</label>
-            <input
-              type="number"
-              min="0"
-              className={`form-control form-control-sm${errors.kilometrage ? " is-invalid" : ""}`}
-              value={form.kilometrage}
-              onChange={field("kilometrage")}
-            />
-            {errors.kilometrage && <div className="invalid-feedback">{errors.kilometrage}</div>}
-          </div>
-          <div className="col">
-            <label className="form-label small fw-medium text-secondary mb-1">Cost per km ($)</label>
-            <input
-              type="number"
-              min="0"
-              step="0.01"
-              className={`form-control form-control-sm${errors.costPerKm ? " is-invalid" : ""}`}
-              value={form.costPerKm}
-              onChange={field("costPerKm")}
-            />
-            {errors.costPerKm && <div className="invalid-feedback">{errors.costPerKm}</div>}
-          </div>
-        </div>
-
+          </>
+        )}
         {/* Footer */}
         <div
           className="d-flex justify-content-end gap-2 pt-3 mt-1"
