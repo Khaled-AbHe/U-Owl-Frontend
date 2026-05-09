@@ -1,7 +1,7 @@
 import { X, AlertCircle, Check } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useFetcher } from "react-router-dom";
-import type { User } from "../../../../constants/interfaces/user.entity";
+import type { User } from "../../../../types/user.entity";
 
 interface UserFormState {
   name: string;
@@ -46,29 +46,17 @@ export function UserFormModal({ user, onClose, onSuccess }: UserFormModalProps) 
     };
   });
 
-  const [errors, setErrors] = useState<Partial<UserFormState>>({});
   const isSubmitting = fetcher.state === "submitting";
   const result = fetcher.data as { type: string; message: string } | undefined;
   const actionError = result?.type === "error" ? result.message : null;
 
-  if (result?.type === "success") {
-    onSuccess();
-    return null;
-  }
-
-  function validate(): boolean {
-    const e: Partial<UserFormState> = {};
-    if (!form.name.trim()) e.name = "Required";
-    if (!form.email.trim() || !/^[^@]+@[^@]+\.[^@]+$/.test(form.email))
-      e.email = "Valid email required";
-    if (!isEditing && (!form.password || form.password.length < 6)) e.password = "Min 6 characters";
-    if (isEditing && form.password && form.password.length < 6) e.password = "Min 6 characters";
-    setErrors(e);
-    return Object.keys(e).length === 0;
-  }
+  useEffect(() => {
+    if (result?.type === "success") {
+      onSuccess();
+    }
+  }, [result]);
 
   function handleSubmit() {
-    if (!validate()) return;
     const fd = new FormData();
     if (isEditing) fd.append("userId", String(user.userId));
     fd.append("name", form.name.trim());
@@ -137,12 +125,11 @@ export function UserFormModal({ user, onClose, onSuccess }: UserFormModalProps) 
             <label className="form-label small fw-medium text-secondary mb-1">First name</label>
             <input
               type="text"
-              className={`form-control form-control-sm${errors.name ? " is-invalid" : ""}`}
+              className="form-control form-control-sm"
               placeholder={isEditing ? undefined : "Jane"}
               value={form.name}
               onChange={field("name")}
             />
-            {errors.name && <div className="invalid-feedback">{errors.name}</div>}
           </div>
           <div className="col">
             <label className="form-label small fw-medium text-secondary mb-1">Last name</label>
@@ -160,19 +147,17 @@ export function UserFormModal({ user, onClose, onSuccess }: UserFormModalProps) 
           <label className="form-label small fw-medium text-secondary mb-1">Email</label>
           <input
             type="email"
-            className={`form-control form-control-sm${errors.email ? " is-invalid" : ""}`}
+            className="form-control form-control-sm"
             placeholder={isEditing ? undefined : "jane@example.com"}
             value={form.email}
             onChange={field("email")}
           />
-          {errors.email && <div className="invalid-feedback">{errors.email}</div>}
         </div>
 
         <div className="mb-3">
           <label className="form-label small fw-medium text-secondary mb-1">
             {isEditing ? (
               <>
-                {" "}
                 New password{" "}
                 <span className="text-secondary fw-normal" style={{ fontSize: 11 }}>
                   (leave blank to keep current)
@@ -184,12 +169,11 @@ export function UserFormModal({ user, onClose, onSuccess }: UserFormModalProps) 
           </label>
           <input
             type="password"
-            className={`form-control form-control-sm${errors.password ? " is-invalid" : ""}`}
+            className="form-control form-control-sm"
             placeholder="••••••••"
             value={form.password}
             onChange={field("password")}
           />
-          {errors.password && <div className="invalid-feedback">{errors.password}</div>}
         </div>
 
         <div className="mb-3">

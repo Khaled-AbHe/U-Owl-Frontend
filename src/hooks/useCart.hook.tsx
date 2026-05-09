@@ -1,5 +1,6 @@
 import { useLoaderData, useFetcher } from "react-router-dom";
-import type { Cart, OrderItem } from "../constants/types/cart.types";
+import type { Cart } from "../types/cart.entity";
+import type { OrderItem } from "../types/order-item.entity";
 
 export function useCart() {
   const cart = useLoaderData() as Cart | null;

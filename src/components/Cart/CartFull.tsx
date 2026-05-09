@@ -1,8 +1,9 @@
 import type { FetcherWithComponents } from "react-router-dom";
 import "../../pages/Client/Cart/Cart.css";
 import CartSummary from "./CartSummary";
-import type { OrderItem, PaymentMethod } from "../../constants/types/cart.types";
 import CartItemCard from "../Cards/CartItemCard";
+import type { OrderItem } from "../../types/order-item.entity";
+import type { PaymentMethod } from "../../types/payment-method.types";
 
 interface CartSummaryProps {
   visibleItems: OrderItem[];

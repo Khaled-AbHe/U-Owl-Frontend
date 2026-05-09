@@ -1,10 +1,9 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import type { User } from "../../../constants/interfaces/user.entity";
 
 interface PaginationProps {
   pageSize: number;
   safePage: number;
-  filtered: User[];
+  filtered: any[];
   totalPages: number;
   setPage: (value: React.SetStateAction<number>) => void;
 }

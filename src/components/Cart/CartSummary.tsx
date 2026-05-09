@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
 import { CreditCard, ArrowRight, Loader } from "lucide-react";
 import type { FetcherWithComponents } from "react-router-dom";
-import type { OrderItem, PaymentMethod } from "../../constants/types/cart.types";
 import { fmt } from "../../pages/Client/Cart/cart.utils";
+import type { PaymentMethod } from "../../types/payment-method.types";
+import type { OrderItem } from "../../types/order-item.entity";
 
 interface CartSummaryProps {
   visibleItems: OrderItem[];
@@ -31,7 +32,7 @@ export default function CartSummary({
         {visibleItems.map((item) => (
           <div key={item.orderItemId} className="cart-summary__row">
             <span className="cart-summary__row-label">
-              {item.vehicle.vehicleSubtype} · {item.vehicle.licencePlate}
+              {item.vehicle.vehicleSubtype} · {item.vehicle.licensePlate}
             </span>
             <span>{fmt(item.itemPrice)}</span>
           </div>

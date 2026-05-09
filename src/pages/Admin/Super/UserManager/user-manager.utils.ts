@@ -1,4 +1,4 @@
-import type { User } from "../../../../constants/interfaces/user.entity";
+import type { User } from "../../../../types/user.entity";
 
 export const PAGE_SIZE = 8;
 

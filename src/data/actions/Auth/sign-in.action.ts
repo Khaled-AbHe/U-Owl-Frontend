@@ -1,7 +1,7 @@
 // actions/signIn.action.js
 import { redirect } from "react-router-dom";
-import type { User } from "../../../constants/interfaces/user.entity";
 import { signInUser } from "../../requests/auth";
+import type { User } from "../../../types/user.entity";
 
 export async function signInAction({ request }: any) {
   // 1. On extrait les données du formulaire envoyé par le composant <Form>

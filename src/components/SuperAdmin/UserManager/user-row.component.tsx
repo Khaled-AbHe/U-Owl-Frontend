@@ -1,5 +1,5 @@
 import { Edit2, Trash2 } from "lucide-react";
-import type { User } from "../../../constants/interfaces/user.entity";
+import type { User } from "../../../types/user.entity";
 import { AvatarBadge } from "./Badge/avatar-badge.component";
 import { RoleBadge } from "./Badge/role-badge.component";
 
