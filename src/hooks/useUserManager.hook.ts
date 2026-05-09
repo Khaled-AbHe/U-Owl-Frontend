@@ -1,6 +1,6 @@
 import { useState, useMemo } from "react";
 import { useLoaderData, useFetcher } from "react-router-dom";
-import type { User } from "../constants/interfaces/user.entity";
+import type { User } from "../types/user.entity";
 import { getRole } from "../pages/Admin/Super/UserManager/user-manager.utils";
 
 export type RoleFilter = "" | "Client" | "Location Admin" | "Super Admin";

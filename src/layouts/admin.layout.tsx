@@ -12,7 +12,7 @@ import {
   FormIcon,
 } from "lucide-react";
 import { U_OWL_LOGO } from "../assets";
-import type { User } from "../constants/interfaces/user.entity";
+import type { User } from "../types/user.entity";
 
 const SUPER_NAV_ITEMS = [
   { label: "Users", path: "/superAdmin/users", icon: Users },

@@ -1,6 +1,6 @@
 import { Trash2, Loader } from "lucide-react";
 import type { FetcherWithComponents } from "react-router-dom";
-import type { OrderItem } from "../../constants/types/cart.types";
+import type { OrderItem } from "../../types/interfaces/payment-method.types";
 import { fmt } from "../../pages/Client/Cart/cart.utils";
 
 interface CartItemCardProps {

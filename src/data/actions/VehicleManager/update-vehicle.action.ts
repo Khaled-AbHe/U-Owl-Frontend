@@ -1,5 +1,5 @@
 import { getIsRoadSafe, updateVehicle } from "../../requests/api";
-import type ActionReturnMessage from "../../../constants/interfaces/action-return.interface";
+import type ActionReturnMessage from "../../../types/action-return.interface";
 import { isFieldValid, isPresent, RegExpList } from "../actions.helpers";
 
 export async function updateVehicleAction({ request }: any): Promise<ActionReturnMessage> {
@@ -24,12 +24,18 @@ export async function updateVehicleAction({ request }: any): Promise<ActionRetur
 
   if (isPresent(data.vehicleType)) patch.vehicleType = data.vehicleType;
   if (isPresent(data.vehicleSubtype)) patch.vehicleSubtype = data.vehicleSubtype;
-  if (isPresent(data.kilometrage)) patch.kilometrage = Number(data.kilometrage);
+
+  if (isPresent(data.kilometrage)) {
+    const km = Number(data.kilometrage);
+    if (isNaN(km) || km < 0) {
+      return { type: "error", message: "Kilometrage must be a positive number." };
+    }
+    patch.kilometrage = km;
+  }
 
   try {
     await updateVehicle(vehicleId, patch);
     if (isPresent(data.kilometrage)) await getIsRoadSafe(vehicleId);
-
     return { type: "success", message: "Vehicle updated." };
   } catch (error: any) {
     return {

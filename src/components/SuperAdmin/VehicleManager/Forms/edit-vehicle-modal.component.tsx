@@ -1,4 +1,4 @@
-import type { Vehicle } from "../../../../constants/interfaces/vehicle.entity";
+import type { Vehicle } from "../../../../types/vehicle.entity";
 import { VehicleFormModal } from "./vehicle-form-modal.component";
 
 export function EditVehicleModal(props: {

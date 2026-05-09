@@ -1,6 +1,6 @@
 import { useState, useMemo } from "react";
 import { useLoaderData, useFetcher } from "react-router-dom";
-import type { Vehicle } from "../constants/interfaces/vehicle.entity";
+import type { Vehicle } from "../types/vehicle.entity";
 
 export type TypeFilter = "" | "Truck" | "Trailer";
 export type SortKey = "id" | "plate" | "type" | "subtype" | "cost";

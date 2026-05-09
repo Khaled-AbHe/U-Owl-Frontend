@@ -1,5 +1,5 @@
 import { createVehicle } from "../../requests/api";
-import type ActionReturnMessage from "../../../constants/interfaces/action-return.interface";
+import type ActionReturnMessage from "../../../types/action-return.interface";
 import { isFieldValid, isPresent, RegExpList } from "../actions.helpers";
 
 export async function createVehicleAction({ request }: any): Promise<ActionReturnMessage> {

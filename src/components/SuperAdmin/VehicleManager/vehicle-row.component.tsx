@@ -1,5 +1,5 @@
 import { Edit2, Trash2 } from "lucide-react";
-import type { Vehicle } from "../../../constants/interfaces/vehicle.entity";
+import type { Vehicle } from "../../../types/vehicle.entity";
 import {
   VehicleTypeBadge,
   ReservedBadge,

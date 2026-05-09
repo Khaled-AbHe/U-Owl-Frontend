@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ShoppingCart } from "lucide-react";
 import { useCart } from "../../../hooks/useCart.hook";
-import type { PaymentMethod } from "../../../constants/types/cart.types";
+import type { PaymentMethod } from "../../../types/interfaces/payment-method.types";
 import "./Cart.css";
 import CartEmpty from "../../../components/Cart/CartEmpty";
 import CartFull from "../../../components/Cart/CartFull";

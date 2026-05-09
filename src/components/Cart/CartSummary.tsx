@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
 import { CreditCard, ArrowRight, Loader } from "lucide-react";
 import type { FetcherWithComponents } from "react-router-dom";
-import type { OrderItem, PaymentMethod } from "../../constants/types/cart.types";
 import { fmt } from "../../pages/Client/Cart/cart.utils";
+import type { PaymentMethod } from "../../types/payment-method.types";
+import type { OrderItem } from "../../types/order-item.entity";
 
 interface CartSummaryProps {
   visibleItems: OrderItem[];

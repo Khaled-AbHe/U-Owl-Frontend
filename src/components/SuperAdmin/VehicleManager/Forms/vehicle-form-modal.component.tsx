@@ -7,7 +7,7 @@ import type {
   VehicleSubtype,
   TruckSubtype,
   TrailerSubtype,
-} from "../../../../constants/interfaces/vehicle.entity";
+} from "../../../../types/vehicle.entity";
 
 const TRUCK_SUBTYPES: TruckSubtype[] = [
   "Pickup",
@@ -55,7 +55,6 @@ export function VehicleFormModal({ vehicle, onClose, onSuccess }: VehicleFormMod
   const [form, setForm] = useState<VehicleFormState>(() =>
     vehicle ? toFormState(vehicle) : EMPTY_FORM,
   );
-  const [errors, setErrors] = useState<Partial<Record<keyof VehicleFormState, string>>>({});
 
   const isSubmitting = fetcher.state === "submitting";
   const result = fetcher.data as { type: string; message: string } | undefined;
@@ -69,26 +68,7 @@ export function VehicleFormModal({ vehicle, onClose, onSuccess }: VehicleFormMod
 
   const subtypeOptions = form.vehicleType === "Truck" ? TRUCK_SUBTYPES : TRAILER_SUBTYPES;
 
-  function validate(): boolean {
-    const e: Partial<Record<keyof VehicleFormState, string>> = {};
-
-    if (!isEditing && !form.licensePlate.trim()) e.licensePlate = "Required";
-
-    if (isEditing) {
-      if (
-        !form["kilometrage"].trim() ||
-        isNaN(Number(form["kilometrage"])) ||
-        Number(form["kilometrage"]) < 0
-      ) {
-        e["kilometrage"] = "Valid positive number required";
-      }
-    }
-    setErrors(e);
-    return Object.keys(e).length === 0;
-  }
-
   function handleSubmit() {
-    if (!validate()) return;
     const fd = new FormData();
 
     if (isEditing) fd.append("vehicleId", String(vehicle.vehicleId));
@@ -97,7 +77,6 @@ export function VehicleFormModal({ vehicle, onClose, onSuccess }: VehicleFormMod
     fd.append("vehicleSubtype", form.vehicleSubtype.trim());
     fd.append("kilometrage", form.kilometrage);
 
-    console.log(fd);
     fetcher.submit(fd, {
       method: "POST",
       action: isEditing ? "/superAdmin/vehicles/update" : "/superAdmin/vehicles/create",
@@ -168,18 +147,14 @@ export function VehicleFormModal({ vehicle, onClose, onSuccess }: VehicleFormMod
 
         {/* License plate */}
         <div className="mb-3">
-          <label className="form-label small fw-medium text-secondary mb-1">
-            License plate
-            {isEditing}
-          </label>
+          <label className="form-label small fw-medium text-secondary mb-1">License plate</label>
           <input
             type="text"
-            className={`form-control form-control-sm${errors.licensePlate ? " is-invalid" : ""}`}
+            className="form-control form-control-sm"
             placeholder={isEditing ? vehicle.licensePlate : "ABC 123"}
             value={form.licensePlate}
             onChange={field("licensePlate")}
           />
-          {errors.licensePlate && <div className="invalid-feedback">{errors.licensePlate}</div>}
         </div>
 
         {/* Type + Subtype */}
@@ -212,21 +187,18 @@ export function VehicleFormModal({ vehicle, onClose, onSuccess }: VehicleFormMod
         </div>
 
         {isEditing && (
-          <>
-            {/* Kilometrage */}
-            <div className="row g-2 mb-4">
-              <label className="form-label small fw-medium text-secondary mb-1">Kilometrage</label>
-              <input
-                type="number"
-                min="0"
-                className={`form-control form-control-sm${errors.kilometrage ? " is-invalid" : ""}`}
-                value={form.kilometrage}
-                onChange={field("kilometrage")}
-              />
-              {errors.kilometrage && <div className="invalid-feedback">{errors.kilometrage}</div>}
-            </div>
-          </>
+          <div className="mb-4">
+            <label className="form-label small fw-medium text-secondary mb-1">Kilometrage</label>
+            <input
+              type="number"
+              min="0"
+              className="form-control form-control-sm"
+              value={form.kilometrage}
+              onChange={field("kilometrage")}
+            />
+          </div>
         )}
+
         {/* Footer */}
         <div
           className="d-flex justify-content-end gap-2 pt-3 mt-1"

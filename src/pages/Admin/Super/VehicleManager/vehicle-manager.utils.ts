@@ -1,4 +1,4 @@
-import type { Vehicle } from "../../../../constants/interfaces/vehicle.entity";
+import type { Vehicle } from "../../../../types/vehicle.entity";
 
 export const PAGE_SIZE = 8;
 

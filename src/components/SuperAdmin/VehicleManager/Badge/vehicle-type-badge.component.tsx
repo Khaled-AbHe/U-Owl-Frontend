@@ -1,5 +1,5 @@
 import { Truck, Package } from "lucide-react";
-import type { Vehicle } from "../../../../constants/interfaces/vehicle.entity";
+import type { Vehicle } from "../../../../types/vehicle.entity";
 import { vehicleTypeStyles, reservedStyles } from "./vehicle-badge-color.constant";
 
 interface Props {
