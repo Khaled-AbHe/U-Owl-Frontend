@@ -1,21 +1,26 @@
-import { signInAction } from "../actions/Auth/sign-in.action";
-import signOutAction from "../actions/Auth/sign-out.action";
-import { signUpAction } from "../actions/Auth/sign-up.action";
-import { cartPayAction } from "../actions/Cart/cart-pay.action";
-import { removeOrderItemAction } from "../actions/Cart/remove-vehicle.action";
-import { dealerFormAction } from "../actions/DealerForm/dealer-form.action";
-import AdminLayout from "../layouts/AdminLayout";
-import AuthLayout from "../layouts/AuthLayout";
-import MainLayout from "../layouts/MainLayout";
-import cartLoader from "../loaders/cart.loader";
-import locationAdminLoader from "../loaders/location-admin.loader";
-import signInLoader from "../loaders/login.loader";
-import mainLayoutLoader from "../loaders/main-layout.loader";
-import superAdminLoader from "../loaders/super-admin.loader";
-import vehiclesLoader from "../loaders/vehicles.loader";
+import { signInAction } from "../data/actions/Auth/sign-in.action";
+import signOutAction from "../data/actions/Auth/sign-out.action";
+import { signUpAction } from "../data/actions/Auth/sign-up.action";
+import { createUserAction } from "../data/actions/UserManager/create-user.action";
+import { updateUserAction } from "../data/actions/UserManager/update-user.action";
+import { deleteUserAction } from "../data/actions/UserManager/delete-user.action";
+import { cartPayAction } from "../data/actions/Cart/cart-pay.action";
+import { removeOrderItemAction } from "../data/actions/Cart/remove-vehicle.action";
+import { dealerFormAction } from "../data/actions/DealerForm/dealer-form.action";
 import { BecomeAdealer, Cart, Home, Location, SignIn, SignUp, Vehicles } from "../pages";
 import LocationDashboard from "../pages/Admin/Location/location-dashboard.page";
-import SuperDashboard from "../pages/Admin/Super/super-dashboard.page";
+import SuperDashboard from "../pages/Admin/Super/Dashboard/super-dashboard.page";
+import UserManager from "../pages/Admin/Super/UserManager/user-manager.page";
+import cartLoader from "./loaders/client/cart.loader";
+import locationAdminLoader from "./loaders/admin/location/location-admin.loader";
+import signInLoader from "./loaders/auth/login.loader";
+import mainLayoutLoader from "./loaders/client/main-layout.loader";
+import superAdminLoader from "./loaders/admin/super/super-admin.loader";
+import userManagerLoader from "./loaders/admin/super/user-manager.loader";
+import vehiclesLoader from "./loaders/vehicles/vehicles.loader";
+import AdminLayout from "../layouts/admin.layout";
+import MainLayout from "../layouts/main.layout";
+import AuthLayout from "../layouts/auth.layout";
 
 export const mainRoutes = [
   {
@@ -58,7 +63,6 @@ export const mainRoutes = [
     action: undefined,
     loader: cartLoader,
   },
-  // useFetcher will call these routes to do some functions, so they wont have elements
   {
     isIndex: false,
     label: "Cart Pay",
@@ -111,6 +115,38 @@ export const superRoutes = [
     path: "dashboard",
     element: SuperDashboard,
     action: undefined,
+    loader: undefined,
+  },
+  {
+    isIndex: false,
+    label: "Users",
+    path: "users",
+    element: UserManager,
+    action: undefined,
+    loader: userManagerLoader,
+  },
+  {
+    isIndex: false,
+    label: "Create User",
+    path: "users/create",
+    element: undefined,
+    action: createUserAction,
+    loader: undefined,
+  },
+  {
+    isIndex: false,
+    label: "Update User",
+    path: "users/update",
+    element: undefined,
+    action: updateUserAction,
+    loader: undefined,
+  },
+  {
+    isIndex: false,
+    label: "Delete User",
+    path: "users/delete",
+    element: undefined,
+    action: deleteUserAction,
     loader: undefined,
   },
 ];
