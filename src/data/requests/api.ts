@@ -63,6 +63,11 @@ export const createLocation = async (location: any) =>
     method: "POST",
     body: JSON.stringify(location),
   });
+export const updateLocation = async (id: string, location: any) =>
+  await request(`/locations/${id}`, {
+    method: "PATCH",
+    body: JSON.stringify(location),
+  });
 export const getAllLocations = async () => await request("/locations/all");
 export const addVehicleToLocation = async (vehicle: any) =>
   await request("/locations/addVehicle", {

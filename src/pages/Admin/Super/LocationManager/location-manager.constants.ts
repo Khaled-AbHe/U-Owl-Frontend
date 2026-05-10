@@ -17,7 +17,7 @@ export const LOCATION_COLUMNS = [
   { label: "#", width: 40 },
   { label: "ID", width: 70 },
   { label: "Depot" },
-  { label: "Coordinates" },
+  { label: "Address" },
   { label: "Inventory" },
   { label: "Actions", width: 110 },
 ];

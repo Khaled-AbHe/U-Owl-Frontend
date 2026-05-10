@@ -32,7 +32,8 @@ export default function ManagerTable({ columns, children }: ManagerTableProps) {
             ))}
           </tr>
         </thead>
-        {children} {/* Body of the table is here */}
+        {/* Body of the table is here */}
+        {children}
       </table>
     </div>
   );

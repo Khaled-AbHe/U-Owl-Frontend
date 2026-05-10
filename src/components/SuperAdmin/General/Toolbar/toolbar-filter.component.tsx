@@ -26,8 +26,10 @@ export default function ToolbarFilter({
         if (setPage) setPage(1);
       }}
     >
-      {options.map((option) => (
-        <option value={option.value}>{option.display}</option>
+      {options.map((option, i) => (
+        <option key={i} value={option.value}>
+          {option.display}
+        </option>
       ))}
     </select>
   );

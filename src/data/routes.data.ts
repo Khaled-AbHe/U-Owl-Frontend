@@ -20,6 +20,7 @@ import { addVehicleToLocationAction } from "./actions/LocationManager/add-vehicl
 import { createLocationAction } from "./actions/LocationManager/create-location.action";
 import { deleteLocationAction } from "./actions/LocationManager/delete-location.action";
 import { removeVehicleFromLocationAction } from "./actions/LocationManager/remove-vehicle.action";
+import { updateLocationAction } from "./actions/LocationManager/update-location.action";
 import { createVehicleAction } from "./actions/VehicleManager/create-vehicle.action";
 import { deleteVehicleAction } from "./actions/VehicleManager/delete-vehicle.action";
 import { updateVehicleAction } from "./actions/VehicleManager/update-vehicle.action";
@@ -206,6 +207,13 @@ export const superRoutes = [
     path: "locations/create",
     element: undefined,
     action: createLocationAction,
+  },
+  {
+    isIndex: false,
+    label: "Update Location",
+    path: "locations/update",
+    element: undefined,
+    action: updateLocationAction,
   },
   {
     isIndex: false,

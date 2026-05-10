@@ -1,21 +1,24 @@
-import { useLocationManager, PAGE_SIZE } from "../../../../hooks/useLocationManager.hook";
 import { PlusCircle } from "lucide-react";
+import ManagerTable from "../../../../components/SuperAdmin/General/manager-table.component";
+import Pagination from "../../../../components/SuperAdmin/General/pagination.component";
+import { ManagerShell } from "../../../../components/SuperAdmin/General/Shells/manager-shell.component";
+import { StatsBar } from "../../../../components/SuperAdmin/General/stats-bar.component";
+import ManagerToolbar from "../../../../components/SuperAdmin/General/Toolbar/manager-toolbar.component";
+import ToolbarFilter from "../../../../components/SuperAdmin/General/Toolbar/toolbar-filter.component";
 import { CreateLocationModal } from "../../../../components/SuperAdmin/LocationManager/Forms/create-location-modal.component";
+import { EditLocationModal } from "../../../../components/SuperAdmin/LocationManager/Forms/edit-location-modal.component";
 import { ManageInventoryModal } from "../../../../components/SuperAdmin/LocationManager/Forms/manage-inventory-modal.component";
 import LocationRow from "../../../../components/SuperAdmin/LocationManager/location-row.component";
 import type { SortKey } from "../../../../hooks/useLocationManager.hook";
-import { ManagerShell } from "../../../../components/SuperAdmin/manager-shell.component";
-import { StatsBar } from "../../../../components/SuperAdmin/stats-bar.component";
-import Pagination from "../../../../components/SuperAdmin/pagination.component";
-import ManagerToolbar from "../../../../components/SuperAdmin/manager-toolbar.component";
-import ManagerTable from "../../../../components/SuperAdmin/manager-table.component";
-import ToolbarFilter from "../../../../components/SuperAdmin/toolbar-filter.component";
+import { PAGE_SIZE, useLocationManager } from "../../../../hooks/useLocationManager.hook";
 import { LOCATION_COLUMNS, SORT_FILTER_DATA } from "./location-manager.constants";
 
 export default function LocationManager() {
   const {
     showCreateModal,
     setShowCreateModal,
+    editingLocation,
+    setEditingLocation,
     managingLocation,
     setManagingLocation,
     search,
@@ -38,6 +41,14 @@ export default function LocationManager() {
         <CreateLocationModal
           onClose={() => setShowCreateModal(false)}
           onSuccess={() => setShowCreateModal(false)}
+        />
+      )}
+
+      {editingLocation && (
+        <EditLocationModal
+          location={editingLocation}
+          onClose={() => setEditingLocation(null)}
+          onSuccess={() => setEditingLocation(null)}
         />
       )}
 
@@ -84,6 +95,7 @@ export default function LocationManager() {
                   index={i}
                   pageSize={PAGE_SIZE}
                   safePage={safePage}
+                  onEdit={setEditingLocation}
                   onManage={setManagingLocation}
                   onDelete={handleDelete}
                 />

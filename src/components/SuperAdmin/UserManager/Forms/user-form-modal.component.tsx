@@ -1,7 +1,7 @@
-import { X, AlertCircle, Check } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useFetcher } from "react-router-dom";
 import type { User } from "../../../../types/user.entity";
+import { ModalShell } from "../../General/Shells/modal-shell.component";
 
 interface UserFormState {
   name: string;
@@ -77,157 +77,98 @@ export function UserFormModal({ user, onClose, onSuccess }: UserFormModalProps) 
   }
 
   return (
-    <div
-      style={{
-        position: "fixed",
-        inset: 0,
-        background: "rgba(0,0,0,0.4)",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        zIndex: 1050,
-      }}
-      onClick={onClose}
+    <ModalShell
+      title={isEditing ? "Edit user" : "Create new user"}
+      subtitle={isEditing ? `#${user.userId} · ${user.email}` : undefined}
+      width={420}
+      onClose={onClose}
+      onSubmit={handleSubmit}
+      isSubmitting={isSubmitting}
+      submitLabel={isEditing ? "Save changes" : "Create user"}
+      submittingLabel={isEditing ? "Saving…" : "Creating…"}
+      actionError={actionError}
     >
-      <div
-        className="bg-white rounded-3 shadow"
-        style={{ width: 420, maxWidth: "calc(100vw - 2rem)", padding: "1.5rem" }}
-        onClick={(e) => e.stopPropagation()}
-      >
-        <div className="d-flex align-items-center justify-content-between mb-3">
-          <div>
-            <h5 className="mb-0 fw-semibold" style={{ fontSize: 16 }}>
-              {isEditing ? "Edit user" : "Create new user"}
-            </h5>
-            {isEditing && (
-              <p className="text-secondary mb-0" style={{ fontSize: 12 }}>
-                #{user.userId} · {user.email}
-              </p>
-            )}
-          </div>
-          <button className="btn btn-sm btn-light p-1" onClick={onClose} aria-label="Close">
-            <X size={16} />
-          </button>
-        </div>
-
-        {actionError && (
-          <div
-            className="alert alert-danger d-flex align-items-center gap-2 py-2 mb-3"
-            style={{ fontSize: 13 }}
-          >
-            <AlertCircle size={14} />
-            {actionError}
-          </div>
-        )}
-
-        <div className="row g-2 mb-1">
-          <div className="col">
-            <label className="form-label small fw-medium text-secondary mb-1">First name</label>
-            <input
-              type="text"
-              className="form-control form-control-sm"
-              placeholder={isEditing ? undefined : "Jane"}
-              value={form.name}
-              onChange={field("name")}
-            />
-          </div>
-          <div className="col">
-            <label className="form-label small fw-medium text-secondary mb-1">Last name</label>
-            <input
-              type="text"
-              className="form-control form-control-sm"
-              placeholder={isEditing ? undefined : "Doe"}
-              value={form.surname}
-              onChange={field("surname")}
-            />
-          </div>
-        </div>
-
-        <div className="mb-3 mt-2">
-          <label className="form-label small fw-medium text-secondary mb-1">Email</label>
+      <div className="row g-2 mb-1">
+        <div className="col">
+          <label className="form-label small fw-medium text-secondary mb-1">First name</label>
           <input
-            type="email"
+            type="text"
             className="form-control form-control-sm"
-            placeholder={isEditing ? undefined : "jane@example.com"}
-            value={form.email}
-            onChange={field("email")}
+            placeholder={isEditing ? undefined : "Jane"}
+            value={form.name}
+            onChange={field("name")}
           />
         </div>
-
-        <div className="mb-3">
-          <label className="form-label small fw-medium text-secondary mb-1">
-            {isEditing ? (
-              <>
-                New password{" "}
-                <span className="text-secondary fw-normal" style={{ fontSize: 11 }}>
-                  (leave blank to keep current)
-                </span>
-              </>
-            ) : (
-              "Password"
-            )}
-          </label>
+        <div className="col">
+          <label className="form-label small fw-medium text-secondary mb-1">Last name</label>
           <input
-            type="password"
+            type="text"
             className="form-control form-control-sm"
-            placeholder="••••••••"
-            value={form.password}
-            onChange={field("password")}
+            placeholder={isEditing ? undefined : "Doe"}
+            value={form.surname}
+            onChange={field("surname")}
           />
-        </div>
-
-        <div className="mb-3">
-          <label className="form-label small fw-medium text-secondary mb-1">Account type</label>
-          <select
-            className="form-select form-select-sm"
-            value={form.userType}
-            onChange={field("userType")}
-          >
-            <option value="Client">Client</option>
-            <option value="Admin">Admin</option>
-          </select>
-        </div>
-
-        {form.userType === "Admin" && (
-          <div className="mb-3">
-            <label className="form-label small fw-medium text-secondary mb-1">Admin type</label>
-            <select
-              className="form-select form-select-sm"
-              value={form.adminType}
-              onChange={field("adminType")}
-            >
-              <option value="Location Admin">Location Admin</option>
-              <option value="Super Admin">Super Admin</option>
-            </select>
-          </div>
-        )}
-
-        <div
-          className="d-flex justify-content-end gap-2 pt-3 mt-1"
-          style={{ borderTop: "1px solid #f0f0f0" }}
-        >
-          <button className="btn btn-sm btn-light" onClick={onClose}>
-            Cancel
-          </button>
-          <button
-            className="btn btn-sm btn-brand d-flex align-items-center gap-1"
-            onClick={handleSubmit}
-            disabled={isSubmitting}
-          >
-            {isSubmitting ? (
-              <>
-                <span className="spinner-border spinner-border-sm" />
-                {isEditing ? "Saving…" : "Creating…"}
-              </>
-            ) : (
-              <>
-                <Check size={14} />
-                {isEditing ? "Save changes" : "Create user"}
-              </>
-            )}
-          </button>
         </div>
       </div>
-    </div>
+
+      <div className="mb-3 mt-2">
+        <label className="form-label small fw-medium text-secondary mb-1">Email</label>
+        <input
+          type="email"
+          className="form-control form-control-sm"
+          placeholder={isEditing ? undefined : "jane@example.com"}
+          value={form.email}
+          onChange={field("email")}
+        />
+      </div>
+
+      <div className="mb-3">
+        <label className="form-label small fw-medium text-secondary mb-1">
+          {isEditing ? (
+            <>
+              New password{" "}
+              <span className="text-secondary fw-normal" style={{ fontSize: 11 }}>
+                (leave blank to keep current)
+              </span>
+            </>
+          ) : (
+            "Password"
+          )}
+        </label>
+        <input
+          type="password"
+          className="form-control form-control-sm"
+          placeholder="••••••••"
+          value={form.password}
+          onChange={field("password")}
+        />
+      </div>
+
+      <div className="mb-3">
+        <label className="form-label small fw-medium text-secondary mb-1">Account type</label>
+        <select
+          className="form-select form-select-sm"
+          value={form.userType}
+          onChange={field("userType")}
+        >
+          <option value="Client">Client</option>
+          <option value="Admin">Admin</option>
+        </select>
+      </div>
+
+      {form.userType === "Admin" && (
+        <div className="mb-3">
+          <label className="form-label small fw-medium text-secondary mb-1">Admin type</label>
+          <select
+            className="form-select form-select-sm"
+            value={form.adminType}
+            onChange={field("adminType")}
+          >
+            <option value="Location Admin">Location Admin</option>
+            <option value="Super Admin">Super Admin</option>
+          </select>
+        </div>
+      )}
+    </ModalShell>
   );
 }

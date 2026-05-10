@@ -4,12 +4,12 @@ import { CreateVehicleModal } from "../../../../components/SuperAdmin/VehicleMan
 import { EditVehicleModal } from "../../../../components/SuperAdmin/VehicleManager/Forms/edit-vehicle-modal.component";
 import VehicleRow from "../../../../components/SuperAdmin/VehicleManager/vehicle-row.component";
 import type { TypeFilter, SortKey } from "../../../../hooks/useVehicleManager.hook";
-import { ManagerShell } from "../../../../components/SuperAdmin/manager-shell.component";
-import { StatsBar } from "../../../../components/SuperAdmin/stats-bar.component";
-import Pagination from "../../../../components/SuperAdmin/pagination.component";
-import ManagerToolbar from "../../../../components/SuperAdmin/manager-toolbar.component";
-import ManagerTable from "../../../../components/SuperAdmin/manager-table.component";
-import ToolbarFilter from "../../../../components/SuperAdmin/toolbar-filter.component";
+import { ManagerShell } from "../../../../components/SuperAdmin/General/Shells/manager-shell.component";
+import { StatsBar } from "../../../../components/SuperAdmin/General/stats-bar.component";
+import Pagination from "../../../../components/SuperAdmin/General/pagination.component";
+import ManagerToolbar from "../../../../components/SuperAdmin/General/Toolbar/manager-toolbar.component";
+import ManagerTable from "../../../../components/SuperAdmin/General/manager-table.component";
+import ToolbarFilter from "../../../../components/SuperAdmin/General/Toolbar/toolbar-filter.component";
 import { TYPE_FILTER_DATA, SORT_FILTER_DATA, VEHICLE_COLUMNS } from "./vehicle-manager.constants";
 
 export default function VehicleManager() {

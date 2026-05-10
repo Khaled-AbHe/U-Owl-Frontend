@@ -7,6 +7,7 @@ interface LocationRowProps {
   index: number;
   pageSize: number;
   safePage: number;
+  onEdit: (location: Location) => void;
   onManage: (location: Location) => void;
   onDelete: (location: Location) => void;
 }
@@ -16,6 +17,7 @@ export default function LocationRow({
   index,
   pageSize,
   safePage,
+  onEdit,
   onManage,
   onDelete,
 }: LocationRowProps) {
@@ -36,8 +38,11 @@ export default function LocationRow({
         </div>
       </td>
 
-      <td className="text-secondary small" style={{ verticalAlign: "middle" }}>
-        {location.lat.toFixed(4)}, {location.lon.toFixed(4)}
+      <td style={{ verticalAlign: "middle" }}>
+        <div className="fw-medium small">{location.address}</div>
+        <td className="text-secondary small" style={{ verticalAlign: "middle" }}>
+          Lon: {location.lon.toFixed(2)} / Lat: {location.lat.toFixed(2)}
+        </td>
       </td>
 
       <td style={{ verticalAlign: "middle" }}>
@@ -47,13 +52,21 @@ export default function LocationRow({
       <td style={{ verticalAlign: "middle" }}>
         <div className="d-flex align-items-center gap-1">
           <button
-            className="btn btn-sm btn-light p-1 d-flex align-items-center gap-1"
-            style={{ lineHeight: 1, fontSize: 12 }}
+            className="btn btn-sm btn-light p-1"
+            style={{ lineHeight: 1 }}
+            title={`Edit ${location.depotName}`}
+            aria-label={`Edit ${location.depotName}`}
+            onClick={() => onEdit(location)}
+          >
+            <Edit2 size={13} />
+          </button>
+          <button
+            className="btn btn-sm btn-light p-1"
+            style={{ lineHeight: 1 }}
             title={`Manage inventory for ${location.depotName}`}
             aria-label={`Manage inventory for ${location.depotName}`}
             onClick={() => onManage(location)}
           >
-            <Edit2 size={13} />
             <Package size={13} />
           </button>
           <button

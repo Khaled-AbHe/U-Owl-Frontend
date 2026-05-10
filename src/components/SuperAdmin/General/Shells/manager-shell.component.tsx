@@ -11,7 +11,7 @@ interface ManagerShellProps {
 
 /**
  * Outer page wrapper shared by all three SuperAdmin manager pages.
- * Renders the page chrome (title, subtitle, CTA button) and slots
+ * Renders the page chrome (title, subtitle, button) and slots
  * the stats bar, toolbar, table, and pagination in via children.
  */
 export function ManagerShell({

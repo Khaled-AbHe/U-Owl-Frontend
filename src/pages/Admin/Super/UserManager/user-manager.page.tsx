@@ -3,12 +3,12 @@ import { UserPlus } from "lucide-react";
 import { CreateUserModal } from "../../../../components/SuperAdmin/UserManager/Forms/create-user-modal.component";
 import { EditUserModal } from "../../../../components/SuperAdmin/UserManager/Forms/edit-user-modal.component";
 import UserRow from "../../../../components/SuperAdmin/UserManager/user-row.component";
-import Pagination from "../../../../components/SuperAdmin/pagination.component";
-import { ManagerShell } from "../../../../components/SuperAdmin/manager-shell.component";
-import { StatsBar } from "../../../../components/SuperAdmin/stats-bar.component";
-import ManagerToolbar from "../../../../components/SuperAdmin/manager-toolbar.component";
-import ManagerTable from "../../../../components/SuperAdmin/manager-table.component";
-import ToolbarFilter from "../../../../components/SuperAdmin/toolbar-filter.component";
+import Pagination from "../../../../components/SuperAdmin/General/pagination.component";
+import { ManagerShell } from "../../../../components/SuperAdmin/General/Shells/manager-shell.component";
+import { StatsBar } from "../../../../components/SuperAdmin/General/stats-bar.component";
+import ManagerToolbar from "../../../../components/SuperAdmin/General/Toolbar/manager-toolbar.component";
+import ManagerTable from "../../../../components/SuperAdmin/General/manager-table.component";
+import ToolbarFilter from "../../../../components/SuperAdmin/General/Toolbar/toolbar-filter.component";
 import { ROLE_FILTER_DATA, SORT_FILTER_DATA, USER_COLUMNS } from "./user-manager.constants";
 
 export default function UserManager() {

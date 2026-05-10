@@ -19,6 +19,7 @@ export function useLocationManager() {
   const [sortBy, setSortBy] = useState<SortKey>("id");
   const [page, setPage] = useState(1);
   const [showCreateModal, setShowCreateModal] = useState(false);
+  const [editingLocation, setEditingLocation] = useState<Location | null>(null);
   const [managingLocation, setManagingLocation] = useState<Location | null>(null);
 
   const isDeletingId =
@@ -86,6 +87,8 @@ export function useLocationManager() {
   return {
     showCreateModal,
     setShowCreateModal,
+    editingLocation,
+    setEditingLocation,
     managingLocation,
     setManagingLocation,
     search,
