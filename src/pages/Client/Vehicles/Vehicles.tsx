@@ -4,7 +4,7 @@ import {
   trucksCards,
   trucksStorageCards,
   dimensionsCards,
-} from "../../../data/vehicles-cards.data";
+} from "../../../data/vehicles-tables.data";
 import "./Vehicles.css"
 
 export default function Vehicles() {
