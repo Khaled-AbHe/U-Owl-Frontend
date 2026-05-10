@@ -1,7 +1,8 @@
 import {Link, type SetURLSearchParams} from "react-router-dom";
 import "./VehiclesList.css"
-import  { type VehicleType, type TruckType, type TrailerType}  from "./VehiclesType";
+import  { type VehicleType, type TruckType, type TrailerType}  from "./VehiclesType"
 import { getSubtypeImg } from "./VehiclesSubtypeImg";
+
 
 export interface Vehicle{
     vehicleId : number,
@@ -27,8 +28,8 @@ interface Props{
     setSearchParams : SetURLSearchParams
 }
 
-export default function VehiclesList({vehicles  ,searchParams , setSearchParams} : Props) {
-    const typeFilter = searchParams.get("type")
+export default function VehiclesList({ vehicles, searchParams, setSearchParams }: Props) {
+  const typeFilter = searchParams.get("type");
 
     const displayedVehicles = typeFilter
     ? vehicles?.filter(v => v.vehicleType.toLowerCase() === typeFilter.toLowerCase()) || [] : vehicles
@@ -56,9 +57,7 @@ export default function VehiclesList({vehicles  ,searchParams , setSearchParams}
                 }
             </div>
 
-            <div className="vehicle-list">
-                {vehicleElements}
-            </div>
-        </>
-    )
+      <div className="vehicle-list">{vehicleElements}</div>
+    </>
+  );
 }

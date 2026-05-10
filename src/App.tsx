@@ -25,9 +25,7 @@ export function App() {
                       key={index}
                       index={subRoute.isIndex}
                       path={subRoute.path}
-                      element={
-                        subRoute.element ? <subRoute.element /> : undefined
-                      }
+                      element={subRoute.element ? <subRoute.element /> : undefined}
                       action={subRoute.action}
                       loader={subRoute.loader}
                     />

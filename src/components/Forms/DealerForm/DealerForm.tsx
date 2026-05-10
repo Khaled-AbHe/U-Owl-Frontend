@@ -1,4 +1,4 @@
-import type ActionReturnMessage from "../../../interfaces/action-return.interface";
+import type ActionReturnMessage from "../../../types/action-return.interface";
 import InputField from "../Auth/InputField";
 import { Form } from "react-router-dom";
 
