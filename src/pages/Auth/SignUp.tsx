@@ -23,23 +23,11 @@ export default function SignUp() {
         </p>
       }
     >
-      <InputField
-        label="Name"
-        name="name"
-        placeholder="Enter your name"
-      />
-      <InputField
-        label="Email"
-        type="email"
-        name="email"
-        placeholder="Enter email"
-      />
-      <InputField
-        label="Password"
-        type="password"
-        name="password"
-        placeholder="Enter password"
-      />
+      <InputField label="Name" name="name" placeholder="Enter your first name" />
+
+      <InputField label="Surname" name="surname" placeholder="Enter your last name" />
+      <InputField label="Email" type="email" name="email" placeholder="Enter email" />
+      <InputField label="Password" type="password" name="password" placeholder="Enter password" />
     </AuthForm>
   );
 }

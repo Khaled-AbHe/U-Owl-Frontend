@@ -5,6 +5,7 @@ export async function signUpAction({ request }: any) {
   const formData = await request.formData();
   const userInfo = {
     name: formData.get("name"),
+    surname: formData.get("surname"),
     email: formData.get("email"),
     userType: "Client",
     password: formData.get("password"),

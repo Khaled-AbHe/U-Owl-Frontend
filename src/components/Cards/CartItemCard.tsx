@@ -1,7 +1,7 @@
 import { Trash2, Loader } from "lucide-react";
 import type { FetcherWithComponents } from "react-router-dom";
-import type { OrderItem } from "../../types/interfaces/payment-method.types";
 import { fmt } from "../../pages/Client/Cart/cart.utils";
+import type { OrderItem } from "../../types/order-item.entity";
 
 interface CartItemCardProps {
   item: OrderItem;
@@ -26,7 +26,7 @@ export default function CartItemCard({ item, removeFetcher, removingId }: CartIt
         <div className="cart-card__top">
           <div>
             <p className="cart-card__category">{item.vehicle.vehicleSubtype}</p>
-            <h3 className="cart-card__name">{item.vehicle.licencePlate}</h3>
+            <h3 className="cart-card__name">{item.vehicle.licensePlate}</h3>
           </div>
 
           {/* Remove button */}
