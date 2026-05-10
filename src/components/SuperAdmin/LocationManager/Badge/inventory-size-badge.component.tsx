@@ -1,5 +1,5 @@
 import type { Location } from "../../../../types/location.entity";
-import { StatusBadge } from "../../status-badge.component";
+import { StatusBadge } from "../../General/status-badge.component";
 
 interface Props {
   location: Location;

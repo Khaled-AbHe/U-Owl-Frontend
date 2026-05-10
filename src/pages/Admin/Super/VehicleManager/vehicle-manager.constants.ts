@@ -38,12 +38,12 @@ export const SORT_FILTER_DATA = [
 
 export const VEHICLE_COLUMNS = [
   { label: "#", width: 40 },
-  { label: "ID", width: 40 },
-  { label: "License Plate" },
-  { label: "Type", width: 100 },
+  { label: "ID", width: 60 },
+  { label: "License Plate", width: 110 },
+  { label: "Type" },
   { label: "Subtype" },
-  { label: "Status", width: 110 },
-  { label: "Safe", width: 110 },
-  { label: "Cost/km", width: 110 },
-  { label: "Actions", width: 110 },
+  { label: "Status" },
+  { label: "Safe" },
+  { label: "Cost/km", width: 100 },
+  { label: "Actions", width: 100 },
 ];

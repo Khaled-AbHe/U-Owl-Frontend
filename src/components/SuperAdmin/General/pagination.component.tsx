@@ -1,7 +1,7 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 interface PaginationProps {
-  pageSize: number;
+  listSize: number;
   safePage: number;
   filtered: any[];
   totalPages: number;
@@ -10,7 +10,7 @@ interface PaginationProps {
 
 export default function Pagination({
   safePage,
-  pageSize,
+  listSize,
   filtered,
   totalPages,
   setPage,
@@ -18,7 +18,7 @@ export default function Pagination({
   return (
     <div className="d-flex align-items-center justify-content-between mt-3">
       <span className="text-secondary small">
-        Showing {(safePage - 1) * pageSize + 1} - {Math.min(safePage * pageSize, filtered.length)}{" "}
+        Showing {(safePage - 1) * listSize + 1} - {Math.min(safePage * listSize, filtered.length)}{" "}
         of {filtered.length}
       </span>
       <div className="d-flex gap-1">

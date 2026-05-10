@@ -22,6 +22,8 @@ export function StatusBadge({ label, icon, style }: StatusBadgeProps) {
         fontSize: 11,
         fontWeight: 500,
         whiteSpace: "nowrap",
+        justifyContent: "center",
+        minWidth: 100,
         ...style,
       }}
     >

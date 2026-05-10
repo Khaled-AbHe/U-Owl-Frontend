@@ -3,10 +3,9 @@ import { useLoaderData, useFetcher } from "react-router-dom";
 import type { Location } from "../types/location.entity";
 import type { Vehicle } from "../types/vehicle.entity";
 import { MapPin, Truck, BarChart2, AlertCircle } from "lucide-react";
+import { LIST_SIZE } from "../pages/Admin/Super/manager.utils";
 
 export type SortKey = "id" | "name" | "inventory";
-
-export const PAGE_SIZE = 8;
 
 export function useLocationManager() {
   const { locations, vehicles } = useLoaderData() as {
@@ -41,9 +40,9 @@ export function useLocationManager() {
       });
   }, [locations, search, sortBy]);
 
-  const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+  const totalPages = Math.max(1, Math.ceil(filtered.length / LIST_SIZE));
   const safePage = Math.min(page, totalPages);
-  const slice = filtered.slice((safePage - 1) * PAGE_SIZE, safePage * PAGE_SIZE);
+  const slice = filtered.slice((safePage - 1) * LIST_SIZE, safePage * LIST_SIZE);
 
   const stats = [
     {

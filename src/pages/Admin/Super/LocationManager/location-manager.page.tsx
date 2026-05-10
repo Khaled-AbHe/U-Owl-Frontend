@@ -1,5 +1,4 @@
 import { PlusCircle } from "lucide-react";
-import ManagerTable from "../../../../components/SuperAdmin/General/manager-table.component";
 import Pagination from "../../../../components/SuperAdmin/General/pagination.component";
 import { ManagerShell } from "../../../../components/SuperAdmin/General/Shells/manager-shell.component";
 import { StatsBar } from "../../../../components/SuperAdmin/General/stats-bar.component";
@@ -10,8 +9,10 @@ import { EditLocationModal } from "../../../../components/SuperAdmin/LocationMan
 import { ManageInventoryModal } from "../../../../components/SuperAdmin/LocationManager/Forms/manage-inventory-modal.component";
 import LocationRow from "../../../../components/SuperAdmin/LocationManager/location-row.component";
 import type { SortKey } from "../../../../hooks/useLocationManager.hook";
-import { PAGE_SIZE, useLocationManager } from "../../../../hooks/useLocationManager.hook";
+import { useLocationManager } from "../../../../hooks/useLocationManager.hook";
 import { LOCATION_COLUMNS, SORT_FILTER_DATA } from "./location-manager.constants";
+import ManagerTable from "../../../../components/SuperAdmin/General/Table/manager-table.component";
+import { LIST_SIZE } from "../manager.utils";
 
 export default function LocationManager() {
   const {
@@ -78,37 +79,32 @@ export default function LocationManager() {
           />
         </ManagerToolbar>
 
-        {/* Table */}
         <ManagerTable columns={LOCATION_COLUMNS}>
-          <tbody>
-            {slice.length === 0 ? (
-              <tr>
-                <td colSpan={6} className="text-center text-secondary py-5">
-                  No locations found.
-                </td>
-              </tr>
-            ) : (
-              slice.map((loc, i) => (
-                <LocationRow
-                  key={loc.locationId}
-                  location={loc}
-                  index={i}
-                  pageSize={PAGE_SIZE}
-                  safePage={safePage}
-                  onEdit={setEditingLocation}
-                  onManage={setManagingLocation}
-                  onDelete={handleDelete}
-                />
-              ))
-            )}
-          </tbody>
+          {slice.length === 0 ? (
+            <div className="text-center text-secondary py-5" style={{ fontSize: 13 }}>
+              No locations found.
+            </div>
+          ) : (
+            slice.map((loc, i) => (
+              <LocationRow
+                key={loc.locationId}
+                location={loc}
+                index={i}
+                listSize={LIST_SIZE}
+                safePage={safePage}
+                onEdit={setEditingLocation}
+                onManage={setManagingLocation}
+                onDelete={handleDelete}
+              />
+            ))
+          )}
         </ManagerTable>
 
         {totalPages > 1 && (
           <Pagination
             filtered={filtered}
             safePage={safePage}
-            pageSize={PAGE_SIZE}
+            listSize={LIST_SIZE}
             totalPages={totalPages}
             setPage={setPage}
           />

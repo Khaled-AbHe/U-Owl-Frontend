@@ -15,9 +15,9 @@ export const SORT_FILTER_DATA = [
 
 export const LOCATION_COLUMNS = [
   { label: "#", width: 40 },
-  { label: "ID", width: 70 },
-  { label: "Depot" },
-  { label: "Address" },
+  { label: "ID", width: 60 },
+  { label: "Depot", align: "left" as const },
+  { label: "Address", align: "left" as const },
   { label: "Inventory" },
-  { label: "Actions", width: 110 },
+  { label: "Actions", width: 100 },
 ];

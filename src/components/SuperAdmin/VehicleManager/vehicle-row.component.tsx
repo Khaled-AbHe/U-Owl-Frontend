@@ -6,11 +6,16 @@ import {
   VehicleSubtypeBadge,
   SafetyBadge,
 } from "./Badge/vehicle-type-badge.component";
+import { VEHICLE_COLUMNS } from "../../../pages/Admin/Super/VehicleManager/vehicle-manager.constants";
+import { ManagerRow } from "../General/Table/manager-row.component";
+import { colsToGrid } from "../General/Table/manager-table.component";
+
+const GRID = colsToGrid(VEHICLE_COLUMNS);
 
 interface VehicleRowProps {
   vehicle: Vehicle;
   index: number;
-  pageSize: number;
+  listSize: number;
   safePage: number;
   onEdit: (vehicle: Vehicle) => void;
   onDelete: (vehicle: Vehicle) => void;
@@ -19,67 +24,74 @@ interface VehicleRowProps {
 export default function VehicleRow({
   vehicle,
   index,
-  pageSize,
+  listSize,
   safePage,
   onEdit,
   onDelete,
 }: VehicleRowProps) {
   return (
-    <tr>
-      <td className="text-secondary small ps-3" style={{ verticalAlign: "middle" }}>
-        {(safePage - 1) * pageSize + index + 1}
-      </td>
+    <ManagerRow grid={GRID}>
+      {/* # */}
+      <div className="d-flex text-secondary small" style={{ justifyContent: "center" }}>
+        {(safePage - 1) * listSize + index + 1}
+      </div>
 
-      <td className="text-secondary small" style={{ verticalAlign: "middle" }}>
+      {/* ID */}
+      <div className="d-flex text-secondary small" style={{ justifyContent: "center" }}>
         #{vehicle.vehicleId}
-      </td>
+      </div>
 
-      <td className="text-secondary small" style={{ verticalAlign: "middle" }}>
+      {/* License Plate */}
+      <div className="d-flex text-secondary small" style={{ justifyContent: "center" }}>
         {vehicle.licensePlate}
-      </td>
+      </div>
 
-      <td style={{ verticalAlign: "middle" }}>
+      {/* Type */}
+      <div className="d-flex" style={{ justifyContent: "center" }}>
         <VehicleTypeBadge vehicle={vehicle} />
-      </td>
+      </div>
 
-      <td style={{ verticalAlign: "middle" }}>
+      {/* Subtype */}
+      <div className="d-flex" style={{ justifyContent: "center" }}>
         <VehicleSubtypeBadge vehicle={vehicle} />
-      </td>
+      </div>
 
-      <td style={{ verticalAlign: "middle" }}>
+      {/* Status */}
+      <div className="d-flex" style={{ justifyContent: "center" }}>
         <ReservedBadge vehicle={vehicle} />
-      </td>
+      </div>
 
-      <td className="text-secondary small" style={{ verticalAlign: "middle" }}>
+      {/* Safe */}
+      <div className="d-flex" style={{ justifyContent: "center" }}>
         <SafetyBadge vehicle={vehicle} />
-      </td>
+      </div>
 
-      <td className="text-secondary small" style={{ verticalAlign: "middle" }}>
+      {/* Cost/km */}
+      <div className="d-flex text-secondary small" style={{ justifyContent: "center" }}>
         ${vehicle.costPerKm.toFixed(2)}/km
-      </td>
+      </div>
 
-      <td style={{ verticalAlign: "middle" }}>
-        <div className="d-flex gap-1">
-          <button
-            className="btn btn-sm btn-light p-1"
-            style={{ lineHeight: 1 }}
-            title={`Edit vehicle #${vehicle.vehicleId}`}
-            aria-label={`Edit vehicle #${vehicle.vehicleId}`}
-            onClick={() => onEdit(vehicle)}
-          >
-            <Edit2 size={13} />
-          </button>
-          <button
-            className="btn btn-sm btn-light p-1 text-danger"
-            style={{ lineHeight: 1 }}
-            title={`Delete vehicle #${vehicle.vehicleId}`}
-            aria-label={`Delete vehicle #${vehicle.vehicleId}`}
-            onClick={() => onDelete(vehicle)}
-          >
-            <Trash2 size={13} />
-          </button>
-        </div>
-      </td>
-    </tr>
+      {/* Actions */}
+      <div className="d-flex gap-1 " style={{ justifyContent: "center" }}>
+        <button
+          className="btn btn-sm btn-light p-1"
+          style={{ lineHeight: 1 }}
+          title={`Edit vehicle #${vehicle.vehicleId}`}
+          aria-label={`Edit vehicle #${vehicle.vehicleId}`}
+          onClick={() => onEdit(vehicle)}
+        >
+          <Edit2 size={13} />
+        </button>
+        <button
+          className="btn btn-sm btn-light p-1 text-danger"
+          style={{ lineHeight: 1 }}
+          title={`Delete vehicle #${vehicle.vehicleId}`}
+          aria-label={`Delete vehicle #${vehicle.vehicleId}`}
+          onClick={() => onDelete(vehicle)}
+        >
+          <Trash2 size={13} />
+        </button>
+      </div>
+    </ManagerRow>
   );
 }

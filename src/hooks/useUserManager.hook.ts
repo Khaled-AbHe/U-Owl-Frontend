@@ -3,11 +3,10 @@ import { useLoaderData, useFetcher } from "react-router-dom";
 import type { User } from "../types/user.entity";
 import { getRole } from "../pages/Admin/Super/UserManager/user-manager.utils";
 import { List, MapPin, Shield, User as UserIcon } from "lucide-react";
+import { LIST_SIZE } from "../pages/Admin/Super/manager.utils";
 
 export type RoleFilter = "" | "Client" | "Location Admin" | "Super Admin";
 export type SortKey = "name" | "id" | "type";
-
-export const PAGE_SIZE = 8;
 
 export function useUserManager() {
   const { users, currentUserId } = useLoaderData() as { users: User[]; currentUserId: number };
@@ -40,9 +39,9 @@ export function useUserManager() {
       });
   }, [users, search, roleFilter, sortBy, isDeletingId]);
 
-  const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+  const totalPages = Math.max(1, Math.ceil(filtered.length / LIST_SIZE));
   const safePage = Math.min(page, totalPages);
-  const slice = filtered.slice((safePage - 1) * PAGE_SIZE, safePage * PAGE_SIZE);
+  const slice = filtered.slice((safePage - 1) * LIST_SIZE, safePage * LIST_SIZE);
 
   const stats = [
     {

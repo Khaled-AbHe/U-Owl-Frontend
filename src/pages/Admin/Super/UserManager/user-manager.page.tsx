@@ -1,6 +1,5 @@
 import {
   useUserManager,
-  PAGE_SIZE,
   type RoleFilter,
   type SortKey,
 } from "../../../../hooks/useUserManager.hook";
@@ -12,9 +11,10 @@ import Pagination from "../../../../components/SuperAdmin/General/pagination.com
 import { ManagerShell } from "../../../../components/SuperAdmin/General/Shells/manager-shell.component";
 import { StatsBar } from "../../../../components/SuperAdmin/General/stats-bar.component";
 import ManagerToolbar from "../../../../components/SuperAdmin/General/Toolbar/manager-toolbar.component";
-import ManagerTable from "../../../../components/SuperAdmin/General/manager-table.component";
 import ToolbarFilter from "../../../../components/SuperAdmin/General/Toolbar/toolbar-filter.component";
 import { ROLE_FILTER_DATA, SORT_FILTER_DATA, USER_COLUMNS } from "./user-manager.constants";
+import ManagerTable from "../../../../components/SuperAdmin/General/Table/manager-table.component";
+import { LIST_SIZE } from "../manager.utils";
 
 export default function UserManager() {
   const {
@@ -79,37 +79,29 @@ export default function UserManager() {
         </ManagerToolbar>
 
         <ManagerTable columns={USER_COLUMNS}>
-          <tbody>
-            {slice.length === 0 ? (
-              <tr>
-                <td
-                  colSpan={5}
-                  className="text-center text-secondary py-5"
-                  style={{ fontSize: 13 }}
-                >
-                  No users match your search.
-                </td>
-              </tr>
-            ) : (
-              slice.map((u, i) => (
-                <UserRow
-                  key={u.userId}
-                  user={u}
-                  index={i}
-                  pageSize={PAGE_SIZE}
-                  safePage={safePage}
-                  currentUserId={currentUserId}
-                  onEdit={setEditingUser}
-                  onDelete={handleDelete}
-                />
-              ))
-            )}
-          </tbody>
+          {slice.length === 0 ? (
+            <div className="text-center text-secondary py-5" style={{ fontSize: 13 }}>
+              No users match your search.
+            </div>
+          ) : (
+            slice.map((u, i) => (
+              <UserRow
+                key={u.userId}
+                user={u}
+                index={i}
+                listSize={LIST_SIZE}
+                safePage={safePage}
+                currentUserId={currentUserId}
+                onEdit={setEditingUser}
+                onDelete={handleDelete}
+              />
+            ))
+          )}
         </ManagerTable>
 
         {totalPages > 1 && (
           <Pagination
-            pageSize={PAGE_SIZE}
+            listSize={LIST_SIZE}
             safePage={safePage}
             filtered={filtered}
             totalPages={totalPages}

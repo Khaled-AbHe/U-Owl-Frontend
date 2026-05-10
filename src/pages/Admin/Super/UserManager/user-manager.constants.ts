@@ -34,8 +34,8 @@ export const SORT_FILTER_DATA = [
 
 export const USER_COLUMNS = [
   { label: "#", width: 40 },
-  { label: "ID" },
-  { label: "User", width: 500 },
-  { label: "Role", width: 350 },
+  { label: "ID", width: 60 },
+  { label: "User", align: "left" as const },
+  { label: "Role", width: 260 },
   { label: "Actions", width: 100 },
 ];

@@ -1,7 +1,7 @@
 import { Truck, Package } from "lucide-react";
 import type { Vehicle, VehicleType } from "../../../../types/vehicle.entity";
 import { vehicleTypeStyles, reservedStyles } from "./vehicle-badge-color.constant";
-import { StatusBadge } from "../../status-badge.component";
+import { StatusBadge } from "../../General/status-badge.component";
 
 interface Props {
   vehicle: Vehicle;
@@ -25,7 +25,6 @@ export function VehicleSubtypeBadge({ vehicle }: Props) {
   return (
     <StatusBadge
       label={vehicle.vehicleSubtype}
-      icon={vehicleIcon(vehicle.vehicleType)}
       style={vehicleTypeStyles[vehicle.vehicleType] ?? {}}
     />
   );

@@ -3,7 +3,7 @@ import type { LucideProps } from "lucide-react";
 interface StatItem {
   label: string;
   value: number | string;
-  icon?: React.ForwardRefExoticComponent<
+  icon: React.ForwardRefExoticComponent<
     Omit<LucideProps, "ref"> & React.RefAttributes<SVGSVGElement>
   >;
 }
@@ -12,26 +12,34 @@ interface StatsBarProps {
   items: StatItem[];
 }
 
-/**
- * Renders a row of stat cards (total counts, breakdowns, etc.).
- */
 export function StatsBar({ items }: StatsBarProps) {
   return (
-    <div className="row g-3 mb-4">
+    <div
+      className="mb-4"
+      style={{
+        display: "grid",
+        gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+        gap: 16,
+      }}
+    >
       {items.map((s) => (
-        <div className="col-6 col-md-3" key={s.label}>
-          <div className="bg-white rounded-3 p-3 border" style={{ borderColor: "#f0f0f0" }}>
-            <div className="text-secondary small mb-1 d-flex align-items-center gap-1">
-              {s.icon && (
-                <span className="stat-icon">
-                  <s.icon size={16} />
-                </span>
-              )}
-              {s.label}
-            </div>
-            <div className="fw-semibold" style={{ fontSize: 22 }}>
-              {s.value}
-            </div>
+        <div
+          key={s.label}
+          className="d-flex flex-column bg-white rounded-3 p-3 border"
+          style={{
+            borderColor: "#f0f0f0",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <div className="text-primary h6 mb-1 d-flex gap-1" style={{ alignItems: "center" }}>
+            <span className="stat-icon">
+              <s.icon size={20} />
+            </span>
+            {s.label}
+          </div>
+          <div className="fw-semibold" style={{ fontSize: 22 }}>
+            {s.value}
           </div>
         </div>
       ))}
