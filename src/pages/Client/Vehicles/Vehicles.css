@@ -1,0 +1,94 @@
+/* ── Vehicles Page ── */
+.vehicles-list-container {
+  padding: 2rem;
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+/* ── Table ── */
+.vehicles-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #ddd;
+  font-size: 0.875rem;
+}
+
+.vehicles-table th,
+.vehicles-table td {
+  border: 1px solid #ddd;
+  padding: 0.75rem 1rem;
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* Left label column — left aligned */
+.vehicles-table__label {
+  text-align: left;
+  font-weight: 400;
+  color: #444;
+  white-space: nowrap;
+  width: 160px;
+}
+
+/* Top-left corner cell */
+.vehicles-table__corner {
+  text-align: left;
+  font-weight: 700;
+  font-size: 1rem;
+  width: 160px;
+}
+
+/* Truck header cells */
+.vehicles-table__truck-header {
+  font-weight: 400;
+}
+
+.vehicles-table__truck-header img {
+  display: block;
+  margin: 0 auto 0.4rem;
+  max-width: 100px;
+  height: auto;
+}
+
+.vehicles-table__truck-header .truck-type {
+  display: block;
+  color: #1f96f8;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.vehicles-table__truck-header .truck-desc {
+  display: block;
+  color: #555;
+  font-size: 0.8rem;
+  margin-top: 0.2rem;
+}
+
+/* Section header rows */
+.vehicles-table__section-header td {
+  text-align: left;
+  font-weight: 700;
+  font-size: 1rem;
+  background: #fff;
+  border-left: none;
+  border-right: none;
+  padding: 1.2rem 0 0.4rem;
+}
+
+/* Alternating row stripes */
+.vehicles-table tbody tr:not(.vehicles-table__section-header):nth-child(even) {
+  background: #f7f7f7;
+}
+
+/* Responsive scroll on small screens */
+@media (max-width: 768px) {
+  .vehicles-list-container {
+    padding: 1rem;
+  }
+
+  .vehicles-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}
