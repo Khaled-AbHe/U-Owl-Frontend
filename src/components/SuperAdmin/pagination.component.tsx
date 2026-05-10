@@ -18,8 +18,8 @@ export default function Pagination({
   return (
     <div className="d-flex align-items-center justify-content-between mt-3">
       <span className="text-secondary small">
-        Showing {(safePage - 1) * pageSize + 1}–{Math.min(safePage * pageSize, filtered.length)} of{" "}
-        {filtered.length}
+        Showing {(safePage - 1) * pageSize + 1} - {Math.min(safePage * pageSize, filtered.length)}{" "}
+        of {filtered.length}
       </span>
       <div className="d-flex gap-1">
         <button

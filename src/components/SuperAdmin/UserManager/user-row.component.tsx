@@ -30,6 +30,10 @@ export default function UserRow({
         {(safePage - 1) * pageSize + index + 1}
       </td>
 
+      <td className="text-secondary small" style={{ verticalAlign: "middle" }}>
+        #{user.userId}
+      </td>
+
       <td style={{ verticalAlign: "middle", overflow: "hidden" }}>
         <div className="d-flex align-items-center gap-2">
           <AvatarBadge user={user} />
@@ -46,10 +50,6 @@ export default function UserRow({
 
       <td style={{ verticalAlign: "middle" }}>
         <RoleBadge user={user} />
-      </td>
-
-      <td className="text-secondary small" style={{ verticalAlign: "middle" }}>
-        #{user.userId}
       </td>
 
       <td style={{ verticalAlign: "middle" }}>

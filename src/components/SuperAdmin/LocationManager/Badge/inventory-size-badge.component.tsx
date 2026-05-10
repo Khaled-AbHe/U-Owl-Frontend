@@ -1,4 +1,5 @@
 import type { Location } from "../../../../types/location.entity";
+import { StatusBadge } from "../../status-badge.component";
 
 interface Props {
   location: Location;
@@ -7,17 +8,17 @@ interface Props {
 type SizeKey = "empty" | "small" | "medium" | "large";
 
 const sizeStyles: Record<SizeKey, React.CSSProperties> = {
-  empty:  { background: "#F1EFE8", color: "#5F5E5A" },
-  small:  { background: "#E6F1FB", color: "#185FA5" },
+  empty: { background: "#F1EFE8", color: "#5F5E5A" },
+  small: { background: "#E6F1FB", color: "#185FA5" },
   medium: { background: "#E1F5EE", color: "#0F6E56" },
-  large:  { background: "#EEEDFE", color: "#534AB7" },
+  large: { background: "#EEEDFE", color: "#534AB7" },
 };
 
 const sizeLabels: Record<SizeKey, string> = {
-  empty:  "Empty",
-  small:  "Small",
+  empty: "Empty",
+  small: "Small",
   medium: "Medium",
-  large:  "Large",
+  large: "Large",
 };
 
 function getSizeKey(count: number): SizeKey {
@@ -29,23 +30,10 @@ function getSizeKey(count: number): SizeKey {
 
 export function InventorySizeBadge({ location }: Props) {
   const key = getSizeKey(location.inventory.length);
-  const style = sizeStyles[key];
-
   return (
-    <span
-      style={{
-        display: "inline-flex",
-        alignItems: "center",
-        gap: 4,
-        padding: "3px 9px",
-        borderRadius: 20,
-        fontSize: 11,
-        fontWeight: 500,
-        whiteSpace: "nowrap",
-        ...style,
-      }}
-    >
-      {location.inventory.length} · {sizeLabels[key]}
-    </span>
+    <StatusBadge
+      label={`${location.inventory.length} · ${sizeLabels[key]}`}
+      style={sizeStyles[key]}
+    />
   );
 }

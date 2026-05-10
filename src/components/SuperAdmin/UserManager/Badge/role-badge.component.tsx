@@ -2,6 +2,7 @@ import { Shield, MapPin, User } from "lucide-react";
 import { getRole } from "../../../../pages/Admin/Super/UserManager/user-manager.utils";
 import type BadgeProps from "./badge-props.interface";
 import { styles } from "./badge-color.constant";
+import { StatusBadge } from "../../status-badge.component";
 
 export function RoleBadge({ user }: BadgeProps) {
   const role = getRole(user);
@@ -12,22 +13,5 @@ export function RoleBadge({ user }: BadgeProps) {
     Client: <User size={11} />,
   };
 
-  return (
-    <span
-      style={{
-        display: "inline-flex",
-        alignItems: "center",
-        gap: 4,
-        padding: "3px 9px",
-        borderRadius: 20,
-        fontSize: 11,
-        fontWeight: 500,
-        whiteSpace: "nowrap",
-        ...styles[role],
-      }}
-    >
-      {icons[role]}
-      {role}
-    </span>
-  );
+  return <StatusBadge label={role} icon={icons[role]} style={styles[role]} />;
 }
