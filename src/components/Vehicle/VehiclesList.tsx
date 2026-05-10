@@ -3,9 +3,6 @@ import "./VehiclesList.css"
 import  { type VehicleType, type TruckType, type TrailerType}  from "./VehiclesType";
 import { getSubtypeImg } from "./VehiclesSubtypeImg";
 
-
-
-
 export interface Vehicle{
     vehicleId : number,
     licensePlate : string,
