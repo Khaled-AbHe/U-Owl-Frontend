@@ -2,6 +2,7 @@ import { useState, useMemo } from "react";
 import { useLoaderData, useFetcher } from "react-router-dom";
 import type { User } from "../types/user.entity";
 import { getRole } from "../pages/Admin/Super/UserManager/user-manager.utils";
+import { List, MapPin, Shield, User as UserIcon } from "lucide-react";
 
 export type RoleFilter = "" | "Client" | "Location Admin" | "Super Admin";
 export type SortKey = "name" | "id" | "type";
@@ -43,12 +44,28 @@ export function useUserManager() {
   const safePage = Math.min(page, totalPages);
   const slice = filtered.slice((safePage - 1) * PAGE_SIZE, safePage * PAGE_SIZE);
 
-  const stats = {
-    total: users.length,
-    clients: users.filter((u) => u.userType === "Client").length,
-    locAdmins: users.filter((u) => u.adminType === "Location Admin").length,
-    superAdmins: users.filter((u) => u.adminType === "Super Admin").length,
-  };
+  const stats = [
+    {
+      label: "Total users",
+      value: users.length,
+      icon: List,
+    },
+    {
+      label: "Clients",
+      value: users.filter((u) => u.userType === "Client").length,
+      icon: UserIcon,
+    },
+    {
+      label: "Location Admins",
+      value: users.filter((u) => u.adminType === "Location Admin").length,
+      icon: MapPin,
+    },
+    {
+      label: "Super Admins",
+      value: users.filter((u) => u.adminType === "Super Admin").length,
+      icon: Shield,
+    },
+  ];
 
   function handleDelete(u: User) {
     if (!window.confirm(`Delete ${u.name} ${u.surname}? This cannot be undone.`)) return;

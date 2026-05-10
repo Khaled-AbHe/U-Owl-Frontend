@@ -2,6 +2,7 @@ import { useState, useMemo } from "react";
 import { useLoaderData, useFetcher } from "react-router-dom";
 import type { Location } from "../types/location.entity";
 import type { Vehicle } from "../types/vehicle.entity";
+import { MapPin, Truck, BarChart2, AlertCircle } from "lucide-react";
 
 export type SortKey = "id" | "name" | "inventory";
 
@@ -42,20 +43,35 @@ export function useLocationManager() {
   const safePage = Math.min(page, totalPages);
   const slice = filtered.slice((safePage - 1) * PAGE_SIZE, safePage * PAGE_SIZE);
 
-  const stats = {
-    total: locations.length,
-    totalVehiclesAssigned: locations.reduce((sum, loc) => sum + loc.inventory.length, 0),
-    avgInventory:
-      locations.length > 0
-        ? Math.round(
-            locations.reduce((sum, loc) => sum + loc.inventory.length, 0) / locations.length,
-          )
-        : 0,
-    // Vehicles not yet assigned to any location
-    unassigned: vehicles.filter(
-      (v) => !locations.some((loc) => loc.inventory.some((inv) => inv.vehicleId === v.vehicleId)),
-    ).length,
-  };
+  const stats = [
+    {
+      label: "Total locations",
+      value: locations.length,
+      icon: MapPin,
+    },
+    {
+      label: "Vehicles assigned",
+      value: locations.reduce((sum, loc) => sum + loc.inventory.length, 0),
+      icon: Truck,
+    },
+    {
+      label: "Avg per location",
+      value:
+        locations.length > 0
+          ? Math.round(
+              locations.reduce((sum, loc) => sum + loc.inventory.length, 0) / locations.length,
+            )
+          : 0,
+      icon: BarChart2,
+    },
+    {
+      label: "Unassigned vehicles",
+      value: vehicles.filter(
+        (v) => !locations.some((loc) => loc.inventory.some((inv) => inv.vehicleId === v.vehicleId)),
+      ).length,
+      icon: AlertCircle,
+    },
+  ];
 
   function handleDelete(loc: Location) {
     if (!window.confirm(`Delete ${loc.depotName} This cannot be undone.`)) return;

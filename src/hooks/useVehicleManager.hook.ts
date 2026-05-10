@@ -1,6 +1,7 @@
 import { useState, useMemo } from "react";
 import { useLoaderData, useFetcher } from "react-router-dom";
 import type { Vehicle } from "../types/vehicle.entity";
+import { List, Truck, Container, CalendarClock } from "lucide-react";
 
 export type TypeFilter = "" | "Truck" | "Trailer";
 export type SortKey = "id" | "plate" | "type" | "subtype" | "cost";
@@ -44,12 +45,28 @@ export function useVehicleManager() {
   const safePage = Math.min(page, totalPages);
   const slice = filtered.slice((safePage - 1) * PAGE_SIZE, safePage * PAGE_SIZE);
 
-  const stats = {
-    total: vehicles.length,
-    trucks: vehicles.filter((v) => v.vehicleType === "Truck").length,
-    trailers: vehicles.filter((v) => v.vehicleType === "Trailer").length,
-    reserved: vehicles.filter((v) => v.isReserved).length,
-  };
+  const stats = [
+    {
+      label: "Total vehicles",
+      value: vehicles.length,
+      icon: List,
+    },
+    {
+      label: "Trucks",
+      value: vehicles.filter((v) => v.vehicleType === "Truck").length,
+      icon: Truck,
+    },
+    {
+      label: "Trailers",
+      value: vehicles.filter((v) => v.vehicleType === "Trailer").length,
+      icon: Container,
+    },
+    {
+      label: "Currently reserved",
+      value: vehicles.filter((v) => v.isReserved).length,
+      icon: CalendarClock,
+    },
+  ];
 
   function handleDelete(v: Vehicle) {
     if (

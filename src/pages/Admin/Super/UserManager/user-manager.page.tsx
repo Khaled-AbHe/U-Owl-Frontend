@@ -3,12 +3,13 @@ import { UserPlus } from "lucide-react";
 import { CreateUserModal } from "../../../../components/SuperAdmin/UserManager/Forms/create-user-modal.component";
 import { EditUserModal } from "../../../../components/SuperAdmin/UserManager/Forms/edit-user-modal.component";
 import UserRow from "../../../../components/SuperAdmin/UserManager/user-row.component";
-import type { RoleFilter, SortKey } from "../../../../hooks/useUserManager.hook";
 import Pagination from "../../../../components/SuperAdmin/pagination.component";
 import { ManagerShell } from "../../../../components/SuperAdmin/manager-shell.component";
 import { StatsBar } from "../../../../components/SuperAdmin/stats-bar.component";
 import ManagerToolbar from "../../../../components/SuperAdmin/manager-toolbar.component";
 import ManagerTable from "../../../../components/SuperAdmin/manager-table.component";
+import ToolbarFilter from "../../../../components/SuperAdmin/toolbar-filter.component";
+import { ROLE_FILTER_DATA, SORT_FILTER_DATA, USER_COLUMNS } from "./user-manager.constants";
 
 export default function UserManager() {
   const {
@@ -56,51 +57,19 @@ export default function UserManager() {
         addIcon={<UserPlus size={15} />}
         onClickAdd={() => setShowCreateModal(true)}
       >
-        <StatsBar
-          items={[
-            { label: "Total users", value: stats.total },
-            { label: "Clients", value: stats.clients },
-            { label: "Location admins", value: stats.locAdmins },
-            { label: "Super admins", value: stats.superAdmins },
-          ]}
-        />
+        <StatsBar items={stats} />
 
         <ManagerToolbar search={search} setSearch={setSearch} setPage={setPage}>
-          <select
-            className="form-select form-select-sm"
-            style={{ width: "auto" }}
-            value={roleFilter}
-            onChange={(e) => {
-              setRoleFilter(e.target.value as RoleFilter);
-              setPage(1);
-            }}
-          >
-            <option value="">All roles</option>
-            <option value="Client">Client</option>
-            <option value="Location Admin">Location Admin</option>
-            <option value="Super Admin">Super Admin</option>
-          </select>
-          <select
-            className="form-select form-select-sm"
-            style={{ width: "auto" }}
-            value={sortBy}
-            onChange={(e) => setSortBy(e.target.value as SortKey)}
-          >
-            <option value="name">Sort: Name</option>
-            <option value="id">Sort: ID</option>
-            <option value="type">Sort: Role</option>
-          </select>
+          <ToolbarFilter
+            options={ROLE_FILTER_DATA}
+            filterKey={roleFilter}
+            setFilter={setRoleFilter}
+            setPage={setPage}
+          />
+          <ToolbarFilter options={SORT_FILTER_DATA} filterKey={sortBy} setFilter={setSortBy} />
         </ManagerToolbar>
 
-        <ManagerTable
-          columns={[
-            { label: "#", width: 40 },
-            { label: "ID" },
-            { label: "User", width: 500 },
-            { label: "Role", width: 350 },
-            { label: "Actions", width: 100 },
-          ]}
-        >
+        <ManagerTable columns={USER_COLUMNS}>
           <tbody>
             {slice.length === 0 ? (
               <tr>

@@ -1,5 +1,5 @@
 import { useLocationManager, PAGE_SIZE } from "../../../../hooks/useLocationManager.hook";
-import { PlusCircle, MapPin, Truck, BarChart2, AlertCircle } from "lucide-react";
+import { PlusCircle } from "lucide-react";
 import { CreateLocationModal } from "../../../../components/SuperAdmin/LocationManager/Forms/create-location-modal.component";
 import { ManageInventoryModal } from "../../../../components/SuperAdmin/LocationManager/Forms/manage-inventory-modal.component";
 import LocationRow from "../../../../components/SuperAdmin/LocationManager/location-row.component";
@@ -9,6 +9,8 @@ import { StatsBar } from "../../../../components/SuperAdmin/stats-bar.component"
 import Pagination from "../../../../components/SuperAdmin/pagination.component";
 import ManagerToolbar from "../../../../components/SuperAdmin/manager-toolbar.component";
 import ManagerTable from "../../../../components/SuperAdmin/manager-table.component";
+import ToolbarFilter from "../../../../components/SuperAdmin/toolbar-filter.component";
+import { LOCATION_COLUMNS, SORT_FILTER_DATA } from "./location-manager.constants";
 
 export default function LocationManager() {
   const {
@@ -54,51 +56,19 @@ export default function LocationManager() {
         addIcon={<PlusCircle size={15} />}
         onClickAdd={() => setShowCreateModal(true)}
       >
-        <StatsBar
-          items={[
-            { label: "Total locations", icon: <MapPin size={16} />, value: stats.total },
-            {
-              label: "Vehicles assigned",
-              icon: <Truck size={16} />,
-              value: stats.totalVehiclesAssigned,
-            },
-            { label: "Avg per location", icon: <BarChart2 size={16} />, value: stats.avgInventory },
-            {
-              label: "Unassigned vehicles",
-              icon: <AlertCircle size={16} />,
-              value: stats.unassigned,
-            },
-          ]}
-        />
+        <StatsBar items={stats} />
 
-        {/* Toolbar */}
         <ManagerToolbar search={search} setSearch={setSearch} setPage={setPage}>
-          <select
-            className="form-select form-select-sm"
-            style={{ width: "auto" }}
-            value={sortBy}
-            onChange={(e) => {
-              setSortBy(e.target.value as SortKey);
-              setPage(1);
-            }}
-          >
-            <option value="id">Sort: ID</option>
-            <option value="name">Sort: Name</option>
-            <option value="inventory">Sort: Inventory size</option>
-          </select>
+          <ToolbarFilter
+            options={SORT_FILTER_DATA}
+            filterKey={sortBy}
+            setFilter={(v) => setSortBy(v as SortKey)}
+            setPage={setPage}
+          />
         </ManagerToolbar>
 
         {/* Table */}
-        <ManagerTable
-          columns={[
-            { label: "#", width: 40 },
-            { label: "ID", width: 70 },
-            { label: "Depot" },
-            { label: "Coordinates" },
-            { label: "Inventory" },
-            { label: "Actions", width: 90 },
-          ]}
-        >
+        <ManagerTable columns={LOCATION_COLUMNS}>
           <tbody>
             {slice.length === 0 ? (
               <tr>

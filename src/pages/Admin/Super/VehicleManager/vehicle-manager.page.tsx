@@ -9,6 +9,8 @@ import { StatsBar } from "../../../../components/SuperAdmin/stats-bar.component"
 import Pagination from "../../../../components/SuperAdmin/pagination.component";
 import ManagerToolbar from "../../../../components/SuperAdmin/manager-toolbar.component";
 import ManagerTable from "../../../../components/SuperAdmin/manager-table.component";
+import ToolbarFilter from "../../../../components/SuperAdmin/toolbar-filter.component";
+import { TYPE_FILTER_DATA, SORT_FILTER_DATA, VEHICLE_COLUMNS } from "./vehicle-manager.constants";
 
 export default function VehicleManager() {
   const {
@@ -55,57 +57,23 @@ export default function VehicleManager() {
         addIcon={<PlusCircle size={15} />}
         onClickAdd={() => setShowCreateModal(true)}
       >
-        <StatsBar
-          items={[
-            { label: "Total vehicles", value: stats.total },
-            { label: "Trucks", value: stats.trucks },
-            { label: "Trailers", value: stats.trailers },
-            { label: "Currently reserved", value: stats.reserved },
-          ]}
-        />
+        <StatsBar items={stats} />
 
-        {/* Toolbar */}
         <ManagerToolbar search={search} setSearch={setSearch} setPage={setPage}>
-          <select
-            className="form-select form-select-sm"
-            style={{ width: "auto" }}
-            value={typeFilter}
-            onChange={(e) => {
-              setTypeFilter(e.target.value as TypeFilter);
-              setPage(1);
-            }}
-          >
-            <option value="">All types</option>
-            <option value="Truck">Truck</option>
-            <option value="Trailer">Trailer</option>
-          </select>
-          <select
-            className="form-select form-select-sm"
-            style={{ width: "auto" }}
-            value={sortBy}
-            onChange={(e) => setSortBy(e.target.value as SortKey)}
-          >
-            <option value="id">Sort: ID</option>
-            <option value="plate">Sort: Plate</option>
-            <option value="type">Sort: Type</option>
-            <option value="subtype">Sort: Subtype</option>
-            <option value="cost">Sort: Cost/km</option>
-          </select>
+          <ToolbarFilter
+            options={TYPE_FILTER_DATA}
+            filterKey={typeFilter}
+            setFilter={(v) => setTypeFilter(v as TypeFilter)}
+            setPage={setPage}
+          />
+          <ToolbarFilter
+            options={SORT_FILTER_DATA}
+            filterKey={sortBy}
+            setFilter={(v) => setSortBy(v as SortKey)}
+          />
         </ManagerToolbar>
 
-        <ManagerTable
-          columns={[
-            { label: "#", width: 40 },
-            { label: "ID", width: 40 },
-            { label: "License Plate" },
-            { label: "Type", width: 100 },
-            { label: "Subtype" },
-            { label: "Status", width: 110 },
-            { label: "Safe", width: 110 },
-            { label: "Cost/km", width: 110 },
-            { label: "Actions", width: 110 },
-          ]}
-        >
+        <ManagerTable columns={VEHICLE_COLUMNS}>
           <tbody>
             {slice.length === 0 ? (
               <tr>

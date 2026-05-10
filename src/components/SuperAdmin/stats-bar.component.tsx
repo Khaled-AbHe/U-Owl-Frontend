@@ -1,9 +1,11 @@
-import type { ReactNode } from "react";
+import type { LucideProps } from "lucide-react";
 
 interface StatItem {
   label: string;
   value: number | string;
-  icon?: ReactNode;
+  icon?: React.ForwardRefExoticComponent<
+    Omit<LucideProps, "ref"> & React.RefAttributes<SVGSVGElement>
+  >;
 }
 
 interface StatsBarProps {
@@ -20,7 +22,11 @@ export function StatsBar({ items }: StatsBarProps) {
         <div className="col-6 col-md-3" key={s.label}>
           <div className="bg-white rounded-3 p-3 border" style={{ borderColor: "#f0f0f0" }}>
             <div className="text-secondary small mb-1 d-flex align-items-center gap-1">
-              {s.icon && <span className="stat-icon">{s.icon}</span>}
+              {s.icon && (
+                <span className="stat-icon">
+                  <s.icon size={16} />
+                </span>
+              )}
               {s.label}
             </div>
             <div className="fw-semibold" style={{ fontSize: 22 }}>
