@@ -1,31 +1,37 @@
 import { signInAction } from "../data/actions/Auth/sign-in.action";
 import signOutAction from "../data/actions/Auth/sign-out.action";
 import { signUpAction } from "../data/actions/Auth/sign-up.action";
-import { createUserAction } from "../data/actions/UserManager/create-user.action";
-import { updateUserAction } from "../data/actions/UserManager/update-user.action";
-import { deleteUserAction } from "../data/actions/UserManager/delete-user.action";
 import { cartPayAction } from "../data/actions/Cart/cart-pay.action";
 import { removeOrderItemAction } from "../data/actions/Cart/remove-vehicle.action";
 import { dealerFormAction } from "../data/actions/DealerForm/dealer-form.action";
+import { createUserAction } from "../data/actions/UserManager/create-user.action";
+import { deleteUserAction } from "../data/actions/UserManager/delete-user.action";
+import { updateUserAction } from "../data/actions/UserManager/update-user.action";
+import AdminLayout from "../layouts/admin.layout";
+import AuthLayout from "../layouts/auth.layout";
+import MainLayout from "../layouts/main.layout";
 import { BecomeAdealer, Cart, Home, Location, SignIn, SignUp, Vehicles } from "../pages";
 import LocationDashboard from "../pages/Admin/Location/location-dashboard.page";
 import SuperDashboard from "../pages/Admin/Super/Dashboard/super-dashboard.page";
+import LocationManager from "../pages/Admin/Super/LocationManager/location-manager.page";
 import UserManager from "../pages/Admin/Super/UserManager/user-manager.page";
-import cartLoader from "./loaders/client/cart.loader";
-import locationAdminLoader from "./loaders/admin/location/location-admin.loader";
-import signInLoader from "./loaders/auth/login.loader";
-import mainLayoutLoader from "./loaders/client/main-layout.loader";
-import superAdminLoader from "./loaders/admin/super/super-admin.loader";
-import userManagerLoader from "./loaders/admin/super/user-manager.loader";
-import vehiclesLoader from "./loaders/vehicles/vehicles.loader";
-import AdminLayout from "../layouts/admin.layout";
-import MainLayout from "../layouts/main.layout";
-import AuthLayout from "../layouts/auth.layout";
 import VehicleManager from "../pages/Admin/Super/VehicleManager/vehicle-manager.page";
+import { addVehicleToLocationAction } from "./actions/LocationManager/add-vehicle.action";
+import { createLocationAction } from "./actions/LocationManager/create-location.action";
+import { deleteLocationAction } from "./actions/LocationManager/delete-location.action";
+import { removeVehicleFromLocationAction } from "./actions/LocationManager/remove-vehicle.action";
 import { createVehicleAction } from "./actions/VehicleManager/create-vehicle.action";
 import { deleteVehicleAction } from "./actions/VehicleManager/delete-vehicle.action";
 import { updateVehicleAction } from "./actions/VehicleManager/update-vehicle.action";
+import locationAdminLoader from "./loaders/admin/location/location-admin.loader";
+import locationManagerLoader from "./loaders/admin/super/location-manager.loader";
+import superAdminLoader from "./loaders/admin/super/super-admin.loader";
+import userManagerLoader from "./loaders/admin/super/user-manager.loader";
 import vehicleManagerLoader from "./loaders/admin/super/vehicle-manager.loader";
+import signInLoader from "./loaders/auth/login.loader";
+import cartLoader from "./loaders/client/cart.loader";
+import mainLayoutLoader from "./loaders/client/main-layout.loader";
+import vehiclesLoader from "./loaders/vehicles/vehicles.loader";
 
 export const mainRoutes = [
   {
@@ -185,6 +191,42 @@ export const superRoutes = [
     element: undefined,
     action: deleteVehicleAction,
     loader: undefined,
+  },
+  {
+    isIndex: false,
+    label: "Locations",
+    path: "locations",
+    element: LocationManager,
+    action: undefined,
+    loader: locationManagerLoader,
+  },
+  {
+    isIndex: false,
+    label: "Create Location",
+    path: "locations/create",
+    element: undefined,
+    action: createLocationAction,
+  },
+  {
+    isIndex: false,
+    label: "Add Vehicle To Location",
+    path: "locations/addVehicle",
+    element: undefined,
+    action: addVehicleToLocationAction,
+  },
+  {
+    isIndex: false,
+    label: "Remove Vehicle From Location",
+    path: "locations/removeVehicle",
+    element: undefined,
+    action: removeVehicleFromLocationAction,
+  },
+  {
+    isIndex: false,
+    label: "Delete Location",
+    path: "locations/delete",
+    element: undefined,
+    action: deleteLocationAction,
   },
 ];
 
