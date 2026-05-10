@@ -16,7 +16,7 @@ interface VehicleRowProps {
   vehicle: Vehicle;
   index: number;
   listSize: number;
-  safePage: number;
+  currentPage: number;
   onEdit: (vehicle: Vehicle) => void;
   onDelete: (vehicle: Vehicle) => void;
 }
@@ -25,7 +25,7 @@ export default function VehicleRow({
   vehicle,
   index,
   listSize,
-  safePage,
+  currentPage,
   onEdit,
   onDelete,
 }: VehicleRowProps) {
@@ -33,7 +33,7 @@ export default function VehicleRow({
     <ManagerRow grid={GRID}>
       {/* # */}
       <div className="d-flex text-secondary small" style={{ justifyContent: "center" }}>
-        {(safePage - 1) * listSize + index + 1}
+        {(currentPage - 1) * listSize + index + 1}
       </div>
 
       {/* ID */}

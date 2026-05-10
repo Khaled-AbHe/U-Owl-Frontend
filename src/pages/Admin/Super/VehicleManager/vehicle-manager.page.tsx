@@ -1,11 +1,11 @@
-import { useVehicleManager } from "../../../../hooks/useVehicleManager.hook";
+import { useVehicleManager } from "../../../../hooks/managers/useVehicleManager.hook";
 import { PlusCircle } from "lucide-react";
 import { CreateVehicleModal } from "../../../../components/SuperAdmin/VehicleManager/Forms/create-vehicle-modal.component";
 import { EditVehicleModal } from "../../../../components/SuperAdmin/VehicleManager/Forms/edit-vehicle-modal.component";
 import VehicleRow from "../../../../components/SuperAdmin/VehicleManager/vehicle-row.component";
-import type { TypeFilter, SortKey } from "../../../../hooks/useVehicleManager.hook";
+import type { TypeFilter, SortKey } from "../../../../hooks/managers/useVehicleManager.hook";
 import { ManagerShell } from "../../../../components/SuperAdmin/General/Shells/manager-shell.component";
-import { StatsBar } from "../../../../components/SuperAdmin/General/stats-bar.component";
+import { StatsBar } from "../../../../components/SuperAdmin/General/Stats/stats-bar.component";
 import Pagination from "../../../../components/SuperAdmin/General/pagination.component";
 import ManagerToolbar from "../../../../components/SuperAdmin/General/Toolbar/manager-toolbar.component";
 import ToolbarFilter from "../../../../components/SuperAdmin/General/Toolbar/toolbar-filter.component";
@@ -27,8 +27,8 @@ export default function VehicleManager() {
     setSortBy,
     setPage,
     totalPages,
-    safePage,
-    slice,
+    currentPage,
+    visibleRows,
     filtered,
     stats,
     handleDelete,
@@ -58,7 +58,7 @@ export default function VehicleManager() {
         addIcon={<PlusCircle size={15} />}
         onClickAdd={() => setShowCreateModal(true)}
       >
-        <StatsBar items={stats} />
+        <StatsBar stats={stats} />
 
         <ManagerToolbar search={search} setSearch={setSearch} setPage={setPage}>
           <ToolbarFilter
@@ -75,18 +75,18 @@ export default function VehicleManager() {
         </ManagerToolbar>
 
         <ManagerTable columns={VEHICLE_COLUMNS}>
-          {slice.length === 0 ? (
+          {visibleRows.length === 0 ? (
             <div className="text-center text-secondary py-5" style={{ fontSize: 13 }}>
               No vehicles match your search.
             </div>
           ) : (
-            slice.map((v, i) => (
+            visibleRows.map((v, i) => (
               <VehicleRow
                 key={v.vehicleId}
                 vehicle={v}
                 index={i}
                 listSize={LIST_SIZE}
-                safePage={safePage}
+                currentPage={currentPage}
                 onEdit={setEditingVehicle}
                 onDelete={handleDelete}
               />
@@ -97,7 +97,7 @@ export default function VehicleManager() {
         {totalPages > 1 && (
           <Pagination
             listSize={LIST_SIZE}
-            safePage={safePage}
+            currentPage={currentPage}
             filtered={filtered}
             totalPages={totalPages}
             setPage={setPage}

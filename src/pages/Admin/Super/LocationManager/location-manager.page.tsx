@@ -1,15 +1,15 @@
 import { PlusCircle } from "lucide-react";
 import Pagination from "../../../../components/SuperAdmin/General/pagination.component";
 import { ManagerShell } from "../../../../components/SuperAdmin/General/Shells/manager-shell.component";
-import { StatsBar } from "../../../../components/SuperAdmin/General/stats-bar.component";
+import { StatsBar } from "../../../../components/SuperAdmin/General/Stats/stats-bar.component";
 import ManagerToolbar from "../../../../components/SuperAdmin/General/Toolbar/manager-toolbar.component";
 import ToolbarFilter from "../../../../components/SuperAdmin/General/Toolbar/toolbar-filter.component";
 import { CreateLocationModal } from "../../../../components/SuperAdmin/LocationManager/Forms/create-location-modal.component";
 import { EditLocationModal } from "../../../../components/SuperAdmin/LocationManager/Forms/edit-location-modal.component";
 import { ManageInventoryModal } from "../../../../components/SuperAdmin/LocationManager/Forms/manage-inventory-modal.component";
 import LocationRow from "../../../../components/SuperAdmin/LocationManager/location-row.component";
-import type { SortKey } from "../../../../hooks/useLocationManager.hook";
-import { useLocationManager } from "../../../../hooks/useLocationManager.hook";
+import type { SortKey } from "../../../../hooks/managers/useLocationManager.hook";
+import { useLocationManager } from "../../../../hooks/managers/useLocationManager.hook";
 import { LOCATION_COLUMNS, SORT_FILTER_DATA } from "./location-manager.constants";
 import ManagerTable from "../../../../components/SuperAdmin/General/Table/manager-table.component";
 import { LIST_SIZE } from "../manager.utils";
@@ -28,8 +28,8 @@ export default function LocationManager() {
     setSortBy,
     setPage,
     totalPages,
-    safePage,
-    slice,
+    currentPage,
+    visibleRows,
     filtered,
     stats,
     vehicles,
@@ -68,7 +68,7 @@ export default function LocationManager() {
         addIcon={<PlusCircle size={15} />}
         onClickAdd={() => setShowCreateModal(true)}
       >
-        <StatsBar items={stats} />
+        <StatsBar stats={stats} />
 
         <ManagerToolbar search={search} setSearch={setSearch} setPage={setPage}>
           <ToolbarFilter
@@ -80,18 +80,18 @@ export default function LocationManager() {
         </ManagerToolbar>
 
         <ManagerTable columns={LOCATION_COLUMNS}>
-          {slice.length === 0 ? (
+          {visibleRows.length === 0 ? (
             <div className="text-center text-secondary py-5" style={{ fontSize: 13 }}>
               No locations found.
             </div>
           ) : (
-            slice.map((loc, i) => (
+            visibleRows.map((loc, i) => (
               <LocationRow
                 key={loc.locationId}
                 location={loc}
                 index={i}
                 listSize={LIST_SIZE}
-                safePage={safePage}
+                currentPage={currentPage}
                 onEdit={setEditingLocation}
                 onManage={setManagingLocation}
                 onDelete={handleDelete}
@@ -103,7 +103,7 @@ export default function LocationManager() {
         {totalPages > 1 && (
           <Pagination
             filtered={filtered}
-            safePage={safePage}
+            currentPage={currentPage}
             listSize={LIST_SIZE}
             totalPages={totalPages}
             setPage={setPage}

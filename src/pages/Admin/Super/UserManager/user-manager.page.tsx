@@ -2,14 +2,14 @@ import {
   useUserManager,
   type RoleFilter,
   type SortKey,
-} from "../../../../hooks/useUserManager.hook";
+} from "../../../../hooks/managers/useUserManager.hook";
 import { UserPlus } from "lucide-react";
 import { CreateUserModal } from "../../../../components/SuperAdmin/UserManager/Forms/create-user-modal.component";
 import { EditUserModal } from "../../../../components/SuperAdmin/UserManager/Forms/edit-user-modal.component";
 import UserRow from "../../../../components/SuperAdmin/UserManager/user-row.component";
 import Pagination from "../../../../components/SuperAdmin/General/pagination.component";
 import { ManagerShell } from "../../../../components/SuperAdmin/General/Shells/manager-shell.component";
-import { StatsBar } from "../../../../components/SuperAdmin/General/stats-bar.component";
+import { StatsBar } from "../../../../components/SuperAdmin/General/Stats/stats-bar.component";
 import ManagerToolbar from "../../../../components/SuperAdmin/General/Toolbar/manager-toolbar.component";
 import ToolbarFilter from "../../../../components/SuperAdmin/General/Toolbar/toolbar-filter.component";
 import { ROLE_FILTER_DATA, SORT_FILTER_DATA, USER_COLUMNS } from "./user-manager.constants";
@@ -30,8 +30,8 @@ export default function UserManager() {
     setSortBy,
     setPage,
     totalPages,
-    safePage,
-    slice,
+    currentPage,
+    visibleRows,
     filtered,
     stats,
     currentUserId,
@@ -62,7 +62,7 @@ export default function UserManager() {
         addIcon={<UserPlus size={15} />}
         onClickAdd={() => setShowCreateModal(true)}
       >
-        <StatsBar items={stats} />
+        <StatsBar stats={stats} />
 
         <ManagerToolbar search={search} setSearch={setSearch} setPage={setPage}>
           <ToolbarFilter
@@ -79,18 +79,18 @@ export default function UserManager() {
         </ManagerToolbar>
 
         <ManagerTable columns={USER_COLUMNS}>
-          {slice.length === 0 ? (
+          {visibleRows.length === 0 ? (
             <div className="text-center text-secondary py-5" style={{ fontSize: 13 }}>
               No users match your search.
             </div>
           ) : (
-            slice.map((u, i) => (
+            visibleRows.map((u, i) => (
               <UserRow
                 key={u.userId}
                 user={u}
                 index={i}
                 listSize={LIST_SIZE}
-                safePage={safePage}
+                currentPage={currentPage}
                 currentUserId={currentUserId}
                 onEdit={setEditingUser}
                 onDelete={handleDelete}
@@ -102,7 +102,7 @@ export default function UserManager() {
         {totalPages > 1 && (
           <Pagination
             listSize={LIST_SIZE}
-            safePage={safePage}
+            currentPage={currentPage}
             filtered={filtered}
             totalPages={totalPages}
             setPage={setPage}

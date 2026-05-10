@@ -11,7 +11,7 @@ interface LocationRowProps {
   location: Location;
   index: number;
   listSize: number;
-  safePage: number;
+  currentPage: number;
   onEdit: (location: Location) => void;
   onManage: (location: Location) => void;
   onDelete: (location: Location) => void;
@@ -21,7 +21,7 @@ export default function LocationRow({
   location,
   index,
   listSize,
-  safePage,
+  currentPage,
   onEdit,
   onManage,
   onDelete,
@@ -30,7 +30,7 @@ export default function LocationRow({
     <ManagerRow grid={GRID}>
       {/* # */}
       <div className="d-flex text-secondary small" style={{ justifyContent: "center" }}>
-        {(safePage - 1) * listSize + index + 1}
+        {(currentPage - 1) * listSize + index + 1}
       </div>
 
       {/* ID */}

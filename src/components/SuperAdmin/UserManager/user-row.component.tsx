@@ -12,7 +12,7 @@ interface UserRowProps {
   user: User;
   index: number;
   listSize: number;
-  safePage: number;
+  currentPage: number;
   currentUserId: number;
   onEdit: (user: User) => void;
   onDelete: (user: User) => void;
@@ -22,7 +22,7 @@ export default function UserRow({
   user,
   index,
   listSize,
-  safePage,
+  currentPage,
   currentUserId,
   onEdit,
   onDelete,
@@ -33,7 +33,7 @@ export default function UserRow({
     <ManagerRow grid={GRID}>
       {/* # */}
       <div className="d-flex text-secondary small" style={{ justifyContent: "center" }}>
-        {(safePage - 1) * listSize + index + 1}
+        {(currentPage - 1) * listSize + index + 1}
       </div>
 
       {/* ID */}
