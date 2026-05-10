@@ -1,4 +1,9 @@
-import { useUserManager, PAGE_SIZE } from "../../../../hooks/useUserManager.hook";
+import {
+  useUserManager,
+  PAGE_SIZE,
+  type RoleFilter,
+  type SortKey,
+} from "../../../../hooks/useUserManager.hook";
 import { UserPlus } from "lucide-react";
 import { CreateUserModal } from "../../../../components/SuperAdmin/UserManager/Forms/create-user-modal.component";
 import { EditUserModal } from "../../../../components/SuperAdmin/UserManager/Forms/edit-user-modal.component";
@@ -63,10 +68,14 @@ export default function UserManager() {
           <ToolbarFilter
             options={ROLE_FILTER_DATA}
             filterKey={roleFilter}
-            setFilter={setRoleFilter}
+            setFilter={(u) => setRoleFilter(u as RoleFilter)}
             setPage={setPage}
           />
-          <ToolbarFilter options={SORT_FILTER_DATA} filterKey={sortBy} setFilter={setSortBy} />
+          <ToolbarFilter
+            options={SORT_FILTER_DATA}
+            filterKey={sortBy}
+            setFilter={(u) => setSortBy(u as SortKey)}
+          />
         </ManagerToolbar>
 
         <ManagerTable columns={USER_COLUMNS}>

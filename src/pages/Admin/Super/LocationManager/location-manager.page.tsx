@@ -105,15 +105,13 @@ export default function LocationManager() {
         </ManagerTable>
 
         {totalPages > 1 && (
-          <div className="mt-3">
-            <Pagination
-              filtered={filtered}
-              safePage={safePage}
-              pageSize={PAGE_SIZE}
-              totalPages={totalPages}
-              setPage={setPage}
-            />
-          </div>
+          <Pagination
+            filtered={filtered}
+            safePage={safePage}
+            pageSize={PAGE_SIZE}
+            totalPages={totalPages}
+            setPage={setPage}
+          />
         )}
       </ManagerShell>
     </>

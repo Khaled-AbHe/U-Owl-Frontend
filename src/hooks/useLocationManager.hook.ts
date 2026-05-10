@@ -28,6 +28,7 @@ export function useLocationManager() {
   const filtered = useMemo(() => {
     return (locations ?? [])
       .filter((loc) => loc.locationId !== isDeletingId)
+      .filter((loc) => loc.locationId !== isDeletingId)
       .filter((loc) => {
         const haystack = `${loc.depotName} ${loc.phoneNumber}`.toLowerCase();
         return haystack.includes(search.toLowerCase());
@@ -75,7 +76,7 @@ export function useLocationManager() {
   ];
 
   function handleDelete(loc: Location) {
-    if (!window.confirm(`Delete ${loc.depotName} This cannot be undone.`)) return;
+    if (!window.confirm(`Delete ${loc.depotName}? This cannot be undone.`)) return;
     const fd = new FormData();
     fd.append("locationId", String(loc.locationId));
     deleteFetcher.submit(fd, {

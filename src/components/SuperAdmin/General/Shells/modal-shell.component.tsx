@@ -1,4 +1,4 @@
-import { X, AlertCircle, Check } from "lucide-react";
+import { AlertCircle, Check } from "lucide-react";
 
 interface ModalShellProps {
   title: string;
@@ -63,9 +63,6 @@ export function ModalShell({
               </p>
             )}
           </div>
-          <button className="btn btn-sm btn-light p-1" onClick={onClose} aria-label="Close">
-            <X size={16} />
-          </button>
         </div>
 
         {/* Error */}

@@ -40,9 +40,9 @@ export default function LocationRow({
 
       <td style={{ verticalAlign: "middle" }}>
         <div className="fw-medium small">{location.address}</div>
-        <td className="text-secondary small" style={{ verticalAlign: "middle" }}>
+        <div className="text-secondary small" style={{ verticalAlign: "middle" }}>
           Lon: {location.lon.toFixed(2)} / Lat: {location.lat.toFixed(2)}
-        </td>
+        </div>
       </td>
 
       <td style={{ verticalAlign: "middle" }}>

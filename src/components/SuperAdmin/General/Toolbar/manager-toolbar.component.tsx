@@ -27,7 +27,7 @@ export default function ManagerToolbar({
             type="text"
             className="form-control form-control-sm"
             style={{ paddingLeft: 30 }}
-            placeholder="Search by name or email…"
+            placeholder="Search"
             value={search}
             onChange={(e) => {
               setSearch(e.target.value);
