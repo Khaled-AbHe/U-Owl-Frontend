@@ -55,7 +55,7 @@ export const mainRoutes = [
   {
     isIndex: false,
     label: "Become A Dealer",
-    path: "dealer",
+    path: "joinDealer",
     element: BecomeAdealer,
     action: dealerFormAction,
     loader: undefined,
