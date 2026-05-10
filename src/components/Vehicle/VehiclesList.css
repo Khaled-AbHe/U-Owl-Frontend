@@ -29,10 +29,9 @@
   margin-bottom: clamp(1.5rem, 3vh, 2rem);
 }
 
-.vehicle-list-filter-buttons>a {
+.vehicle-list-filter-buttons > a {
   text-decoration: none;
 }
-
 
 .vehicle-tile {
   display: flex;
@@ -45,8 +44,8 @@
 
 .vehicle-tile img {
   width: 100%;
-  height: 130px;      
-  object-fit: cover;   
+  height: 130px;
+  object-fit: cover;
 }
 
 .vehicle-info {
