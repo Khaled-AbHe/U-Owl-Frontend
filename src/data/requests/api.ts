@@ -63,7 +63,12 @@ export const createLocation = async (location: any) =>
     method: "POST",
     body: JSON.stringify(location),
   });
-export const getAllLocation = async () => await request("/locations/all");
+export const updateLocation = async (id: string, location: any) =>
+  await request(`/locations/${id}`, {
+    method: "PATCH",
+    body: JSON.stringify(location),
+  });
+export const getAllLocations = async () => await request("/locations/all");
 export const addVehicleToLocation = async (vehicle: any) =>
   await request("/locations/addVehicle", {
     method: "POST",
@@ -73,6 +78,16 @@ export const removeVehicleFromLocation = async (vehicle: any) =>
   await request("/locations/removeVehicle", {
     method: "PATCH",
     body: JSON.stringify(vehicle),
+  });
+
+export const deleteLocationById = async (id: string) =>
+  await request(`"/locations/${id}"`, {
+    method: "DELETE",
+  });
+
+export const getAllVehiclesFromLocation = async (id: string) =>
+  await request(`"/locations/${id}/vehicles"`, {
+    method: "GET",
   });
 
 // Requêtes User

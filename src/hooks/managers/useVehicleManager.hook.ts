@@ -1,16 +1,18 @@
 import { useState, useMemo } from "react";
 import { useLoaderData, useFetcher } from "react-router-dom";
-import type { Vehicle } from "../types/vehicle.entity";
+import type { Vehicle } from "../../types/vehicle.entity";
+import { List, Truck, Container, CalendarClock } from "lucide-react";
+import { LIST_SIZE } from "../../pages/Admin/Super/manager.utils";
 
 export type TypeFilter = "" | "Truck" | "Trailer";
 export type SortKey = "id" | "plate" | "type" | "subtype" | "cost";
 
-export const PAGE_SIZE = 8;
-
 export function useVehicleManager() {
+  //// Data
   const { vehicles } = useLoaderData() as { vehicles: Vehicle[] };
   const deleteFetcher = useFetcher();
 
+  //// UI
   const [search, setSearch] = useState("");
   const [typeFilter, setTypeFilter] = useState<TypeFilter>("");
   const [sortBy, setSortBy] = useState<SortKey>("id");
@@ -18,16 +20,19 @@ export function useVehicleManager() {
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [editingVehicle, setEditingVehicle] = useState<Vehicle | null>(null);
 
+  //// List
   const isDeletingId =
     deleteFetcher.state !== "idle" ? Number(deleteFetcher.formData?.get("vehicleId")) : null;
 
+  // useMemo caches the result of a calculation between re-renders, which makes things faster
   const filtered = useMemo(() => {
     return vehicles
-      .filter((v) => v.vehicleId !== isDeletingId)
+      .filter((v) => v.vehicleId !== isDeletingId) // removes the object thats being deleted
       .filter((v) => {
-        const haystack = `${v.licensePlate} ${v.vehicleType} ${v.vehicleSubtype}`.toLowerCase();
+        // filter for the search bar
+        const haystack = `${v.licensePlate} ${v.vehicleType} ${v.vehicleSubtype}`.toLowerCase(); // creates a reference
         return (
-          haystack.includes(search.toLowerCase()) && (!typeFilter || v.vehicleType === typeFilter)
+          haystack.includes(search.toLowerCase()) && (!typeFilter || v.vehicleType === typeFilter) // returns elements that contains what you search based on the reference
         );
       })
       .sort((a, b) => {
@@ -38,19 +43,37 @@ export function useVehicleManager() {
         if (sortBy === "cost") return a.costPerKm - b.costPerKm;
         return 0;
       });
-  }, [vehicles, search, typeFilter, sortBy, isDeletingId]);
+  }, [vehicles, search, typeFilter, sortBy, isDeletingId]); // it will only recalculate if these variables change
 
-  const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
-  const safePage = Math.min(page, totalPages);
-  const slice = filtered.slice((safePage - 1) * PAGE_SIZE, safePage * PAGE_SIZE);
+  const totalPages = Math.max(1, Math.ceil(filtered.length / LIST_SIZE));
+  const currentPage = Math.min(page, totalPages);
+  const visibleRows = filtered.slice((currentPage - 1) * LIST_SIZE, currentPage * LIST_SIZE);
 
-  const stats = {
-    total: vehicles.length,
-    trucks: vehicles.filter((v) => v.vehicleType === "Truck").length,
-    trailers: vehicles.filter((v) => v.vehicleType === "Trailer").length,
-    reserved: vehicles.filter((v) => v.isReserved).length,
-  };
+  //// Stats
+  const stats = [
+    {
+      label: "Total vehicles",
+      count: vehicles.length,
+      icon: List,
+    },
+    {
+      label: "Trucks",
+      count: vehicles.filter((v) => v.vehicleType === "Truck").length,
+      icon: Truck,
+    },
+    {
+      label: "Trailers",
+      count: vehicles.filter((v) => v.vehicleType === "Trailer").length,
+      icon: Container,
+    },
+    {
+      label: "Currently reserved",
+      count: vehicles.filter((v) => v.isReserved).length,
+      icon: CalendarClock,
+    },
+  ];
 
+  //// Handlers
   function handleDelete(v: Vehicle) {
     if (
       !window.confirm(
@@ -79,8 +102,8 @@ export function useVehicleManager() {
     setSortBy,
     setPage,
     totalPages,
-    safePage,
-    slice,
+    currentPage,
+    visibleRows,
     filtered,
     stats,
     handleDelete,

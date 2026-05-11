@@ -1,16 +1,16 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 interface PaginationProps {
-  pageSize: number;
-  safePage: number;
+  listSize: number;
+  currentPage: number;
   filtered: any[];
   totalPages: number;
   setPage: (value: React.SetStateAction<number>) => void;
 }
 
 export default function Pagination({
-  safePage,
-  pageSize,
+  currentPage,
+  listSize,
   filtered,
   totalPages,
   setPage,
@@ -18,13 +18,13 @@ export default function Pagination({
   return (
     <div className="d-flex align-items-center justify-content-between mt-3">
       <span className="text-secondary small">
-        Showing {(safePage - 1) * pageSize + 1}–{Math.min(safePage * pageSize, filtered.length)} of{" "}
-        {filtered.length}
+        Showing {(currentPage - 1) * listSize + 1} -{" "}
+        {Math.min(currentPage * listSize, filtered.length)} of {filtered.length}
       </span>
       <div className="d-flex gap-1">
         <button
           className="btn btn-sm btn-light"
-          disabled={safePage === 1}
+          disabled={currentPage === 1}
           onClick={() => setPage((p) => p - 1)}
           aria-label="Previous page"
         >
@@ -33,7 +33,7 @@ export default function Pagination({
         {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
           <button
             key={p}
-            className={`btn btn-sm ${p === safePage ? "btn-brand" : "btn-light"}`}
+            className={`btn btn-sm ${p === currentPage ? "btn-brand" : "btn-light"}`}
             onClick={() => setPage(p)}
           >
             {p}
@@ -41,7 +41,7 @@ export default function Pagination({
         ))}
         <button
           className="btn btn-sm btn-light"
-          disabled={safePage === totalPages}
+          disabled={currentPage === totalPages}
           onClick={() => setPage((p) => p + 1)}
           aria-label="Next page"
         >

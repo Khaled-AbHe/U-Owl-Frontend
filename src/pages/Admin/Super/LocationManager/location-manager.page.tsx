@@ -1,28 +1,29 @@
-import { useVehicleManager } from "../../../../hooks/managers/useVehicleManager.hook";
 import { PlusCircle } from "lucide-react";
-import { CreateVehicleModal } from "../../../../components/SuperAdmin/VehicleManager/Forms/create-vehicle-modal.component";
-import { EditVehicleModal } from "../../../../components/SuperAdmin/VehicleManager/Forms/edit-vehicle-modal.component";
-import VehicleRow from "../../../../components/SuperAdmin/VehicleManager/vehicle-row.component";
-import type { TypeFilter, SortKey } from "../../../../hooks/managers/useVehicleManager.hook";
+import Pagination from "../../../../components/SuperAdmin/General/pagination.component";
 import { ManagerShell } from "../../../../components/SuperAdmin/General/Shells/manager-shell.component";
 import { StatsBar } from "../../../../components/SuperAdmin/General/Stats/stats-bar.component";
-import Pagination from "../../../../components/SuperAdmin/General/pagination.component";
 import ManagerToolbar from "../../../../components/SuperAdmin/General/Toolbar/manager-toolbar.component";
 import ToolbarFilter from "../../../../components/SuperAdmin/General/Toolbar/toolbar-filter.component";
-import { TYPE_FILTER_DATA, SORT_FILTER_DATA, VEHICLE_COLUMNS } from "./vehicle-manager.constants";
+import { CreateLocationModal } from "../../../../components/SuperAdmin/LocationManager/Forms/create-location-modal.component";
+import { EditLocationModal } from "../../../../components/SuperAdmin/LocationManager/Forms/edit-location-modal.component";
+import { ManageInventoryModal } from "../../../../components/SuperAdmin/LocationManager/Forms/manage-inventory-modal.component";
+import LocationRow from "../../../../components/SuperAdmin/LocationManager/location-row.component";
+import type { SortKey } from "../../../../hooks/managers/useLocationManager.hook";
+import { useLocationManager } from "../../../../hooks/managers/useLocationManager.hook";
+import { LOCATION_COLUMNS, SORT_FILTER_DATA } from "./location-manager.constants";
 import ManagerTable from "../../../../components/SuperAdmin/General/Table/manager-table.component";
 import { LIST_SIZE } from "../manager.utils";
 
-export default function VehicleManager() {
+export default function LocationManager() {
   const {
     showCreateModal,
     setShowCreateModal,
-    editingVehicle,
-    setEditingVehicle,
+    editingLocation,
+    setEditingLocation,
+    managingLocation,
+    setManagingLocation,
     search,
     setSearch,
-    typeFilter,
-    setTypeFilter,
     sortBy,
     setSortBy,
     setPage,
@@ -31,30 +32,39 @@ export default function VehicleManager() {
     visibleRows,
     filtered,
     stats,
+    vehicles,
     handleDelete,
-  } = useVehicleManager();
+  } = useLocationManager();
 
   return (
     <>
       {showCreateModal && (
-        <CreateVehicleModal
+        <CreateLocationModal
           onClose={() => setShowCreateModal(false)}
           onSuccess={() => setShowCreateModal(false)}
         />
       )}
 
-      {editingVehicle && (
-        <EditVehicleModal
-          vehicle={editingVehicle}
-          onClose={() => setEditingVehicle(null)}
-          onSuccess={() => setEditingVehicle(null)}
+      {editingLocation && (
+        <EditLocationModal
+          location={editingLocation}
+          onClose={() => setEditingLocation(null)}
+          onSuccess={() => setEditingLocation(null)}
+        />
+      )}
+
+      {managingLocation && (
+        <ManageInventoryModal
+          locationId={managingLocation.locationId}
+          allVehicles={vehicles}
+          onClose={() => setManagingLocation(null)}
         />
       )}
 
       <ManagerShell
-        title="Vehicle Manager"
-        subtitle="Manage all vehicles across the platform"
-        addLabel="Add vehicle"
+        title="Location Manager"
+        subtitle="Manage all depots and their vehicle inventory"
+        addLabel="Add location"
         addIcon={<PlusCircle size={15} />}
         onClickAdd={() => setShowCreateModal(true)}
       >
@@ -62,32 +72,28 @@ export default function VehicleManager() {
 
         <ManagerToolbar search={search} setSearch={setSearch} setPage={setPage}>
           <ToolbarFilter
-            options={TYPE_FILTER_DATA}
-            filterKey={typeFilter}
-            setFilter={(v) => setTypeFilter(v as TypeFilter)}
-            setPage={setPage}
-          />
-          <ToolbarFilter
             options={SORT_FILTER_DATA}
             filterKey={sortBy}
             setFilter={(v) => setSortBy(v as SortKey)}
+            setPage={setPage}
           />
         </ManagerToolbar>
 
-        <ManagerTable columns={VEHICLE_COLUMNS}>
+        <ManagerTable columns={LOCATION_COLUMNS}>
           {visibleRows.length === 0 ? (
             <div className="text-center text-secondary py-5" style={{ fontSize: 13 }}>
-              No vehicles match your search.
+              No locations found.
             </div>
           ) : (
-            visibleRows.map((v, i) => (
-              <VehicleRow
-                key={v.vehicleId}
-                vehicle={v}
+            visibleRows.map((loc, i) => (
+              <LocationRow
+                key={loc.locationId}
+                location={loc}
                 index={i}
                 listSize={LIST_SIZE}
                 currentPage={currentPage}
-                onEdit={setEditingVehicle}
+                onEdit={setEditingLocation}
+                onManage={setManagingLocation}
                 onDelete={handleDelete}
               />
             ))
@@ -96,9 +102,9 @@ export default function VehicleManager() {
 
         {totalPages > 1 && (
           <Pagination
-            listSize={LIST_SIZE}
-            currentPage={currentPage}
             filtered={filtered}
+            currentPage={currentPage}
+            listSize={LIST_SIZE}
             totalPages={totalPages}
             setPage={setPage}
           />
