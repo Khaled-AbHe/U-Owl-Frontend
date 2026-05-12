@@ -13,12 +13,12 @@ const SUPER_NAV_ITEMS = [
 const LOCATION_NAV_ITEMS = [
   {
     label: "Vehicles",
-    path: "/locationAdmin/fleet",
+    path: "/locationAdmin/vehicles",
     icon: Truck,
   },
   {
     label: "Location Settings",
-    path: "/locationAdmin/reservations",
+    path: "/locationAdmin/settings",
     icon: Map,
   },
 ];

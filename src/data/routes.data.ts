@@ -14,8 +14,6 @@ import AdminLayout from "../layouts/admin.layout";
 import AuthLayout from "../layouts/auth.layout";
 import MainLayout from "../layouts/main.layout";
 import { BecomeAdealer, Cart, Home, Location, SignIn, SignUp, Vehicles } from "../pages";
-import LocationDashboard from "../pages/Admin/Location/location-dashboard.page";
-import SuperDashboard from "../pages/Admin/Super/Dashboard/super-dashboard.page";
 import LocationManager from "../pages/Admin/Super/LocationManager/location-manager.page";
 import UserManager from "../pages/Admin/Super/UserManager/user-manager.page";
 import VehicleManager from "../pages/Admin/Super/VehicleManager/vehicle-manager.page";
@@ -38,6 +36,8 @@ import signInLoader from "./loaders/auth/login.loader";
 import cartLoader from "./loaders/client/cart.loader";
 import mainLayoutLoader from "./loaders/client/main-layout.loader";
 import vehiclesLoader from "./loaders/vehicles/vehicles.loader";
+import LocationSettings from "../pages/Admin/Location/LocationSettings/location-settings.page";
+import LocationVehicleManager from "../pages/Admin/Location/VehicleManager/loc-vehicle-manager.page";
 
 export const mainRoutes = [
   {
@@ -128,14 +128,6 @@ export const authRoutes = [
 export const superRoutes = [
   {
     isIndex: true,
-    label: "Dashboard",
-    path: "dashboard",
-    element: SuperDashboard,
-    action: undefined,
-    loader: undefined,
-  },
-  {
-    isIndex: false,
     label: "Users",
     path: "users",
     element: UserManager,
@@ -278,9 +270,17 @@ export const superRoutes = [
 export const locationRoutes = [
   {
     isIndex: true,
-    label: "Dashboard",
-    path: "dashboard",
-    element: LocationDashboard,
+    label: "Vehicles",
+    path: "vehicles",
+    element: LocationVehicleManager,
+    action: undefined,
+    loader: undefined,
+  },
+  {
+    isIndex: false,
+    label: "Settings",
+    path: "settings",
+    element: LocationSettings,
     action: undefined,
     loader: undefined,
   },

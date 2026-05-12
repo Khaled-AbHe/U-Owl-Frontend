@@ -20,9 +20,9 @@ export async function signInAction({ request }: any) {
     if (user.userType == "Client") {
       return redirect("/");
     } else if (user.adminType == "Super Admin") {
-      return redirect("/superAdmin/dashboard");
+      return redirect("/superAdmin/users");
     } else if (user.adminType == "Location Admin") {
-      return redirect("/locationAdmin/dashboard");
+      return redirect("/locationAdmin/vehicles");
     }
   } catch (error: any) {
     // 5. Échec : On "return" un message d'erreur au lieu de le "throw"
