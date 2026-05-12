@@ -22,8 +22,9 @@ export const findDealerFormById = async (dealerFormId: string) => {
   return await request(`/dealerform/find/${dealerFormId}`);
 };
 
-export const updateDealerForm = async (dealerFormId: string) => {
+export const updateDealerForm = async (dealerFormId: string, dealerForm: any) => {
   return await request(`/dealerform/update/${dealerFormId}`, {
-    method: "UPDATE",
+    method: "PATCH",
+    body: JSON.stringify(dealerForm),
   });
 };

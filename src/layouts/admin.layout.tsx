@@ -1,16 +1,5 @@
 import { Form, Link, NavLink, Outlet, useLoaderData } from "react-router-dom";
-import {
-  LayoutDashboard,
-  Users,
-  MapPin,
-  Truck,
-  Settings,
-  LogOut,
-  Shield,
-  CalendarCheck,
-  ClipboardList,
-  FormIcon,
-} from "lucide-react";
+import { Users, MapPin, Truck, LogOut, Shield, FormIcon, Map } from "lucide-react";
 import { U_OWL_LOGO } from "../assets";
 import type { User } from "../types/user.entity";
 
@@ -18,23 +7,20 @@ const SUPER_NAV_ITEMS = [
   { label: "Users", path: "/superAdmin/users", icon: Users },
   { label: "Locations", path: "/superAdmin/locations", icon: MapPin },
   { label: "Vehicles", path: "/superAdmin/vehicles", icon: Truck },
-  { label: "Forms", path: "/superAdmin/forms", icon: FormIcon },
+  { label: "Forms", path: "/superAdmin/dealerForms", icon: FormIcon },
 ];
 
 const LOCATION_NAV_ITEMS = [
   {
-    label: "Dashboard",
-    path: "/locationAdmin/dashboard",
-    icon: LayoutDashboard,
+    label: "Vehicles",
+    path: "/locationAdmin/fleet",
+    icon: Truck,
   },
-  { label: "Fleet", path: "/locationAdmin/fleet", icon: Truck },
   {
-    label: "Reservations",
+    label: "Location Settings",
     path: "/locationAdmin/reservations",
-    icon: CalendarCheck,
+    icon: Map,
   },
-  { label: "Reports", path: "/locationAdmin/reports", icon: ClipboardList },
-  { label: "Settings", path: "/locationAdmin/settings", icon: Settings },
 ];
 
 export default function AdminLayout() {

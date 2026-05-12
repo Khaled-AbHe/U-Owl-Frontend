@@ -5,11 +5,11 @@ interface ModalShellProps {
   subtitle?: string;
   width?: number;
   onClose: () => void;
-  // Footer
-  submitLabel: string;
-  submittingLabel: string;
-  isSubmitting: boolean;
-  onSubmit: () => void;
+  // Footer — all optional; omitting onSubmit renders a close-only footer
+  submitLabel?: string;
+  submittingLabel?: string;
+  isSubmitting?: boolean;
+  onSubmit?: () => void;
   // Error
   actionError?: string | null;
   children: React.ReactNode;
@@ -22,11 +22,13 @@ export function ModalShell({
   onClose,
   submitLabel,
   submittingLabel,
-  isSubmitting,
+  isSubmitting = false,
   onSubmit,
   actionError,
   children,
 }: ModalShellProps) {
+  const hasSubmit = onSubmit !== undefined;
+
   return (
     <div
       style={{
@@ -52,7 +54,7 @@ export function ModalShell({
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="d-flex align-items-start justify-content-between mb-3">
+        <div className="d-flex mb-3 justify-content-center">
           <div>
             <h5 className="mb-0 fw-semibold" style={{ fontSize: 16 }}>
               {title}
@@ -85,25 +87,27 @@ export function ModalShell({
           style={{ borderTop: "1px solid #f0f0f0" }}
         >
           <button className="btn btn-sm btn-light" onClick={onClose}>
-            Cancel
+            {hasSubmit ? "Cancel" : "Close"}
           </button>
-          <button
-            className="btn btn-sm btn-brand d-flex align-items-center gap-1"
-            onClick={onSubmit}
-            disabled={isSubmitting}
-          >
-            {isSubmitting ? (
-              <>
-                <span className="spinner-border spinner-border-sm" />
-                {submittingLabel}
-              </>
-            ) : (
-              <>
-                <Check size={14} />
-                {submitLabel}
-              </>
-            )}
-          </button>
+          {hasSubmit && (
+            <button
+              className="btn btn-sm btn-brand d-flex align-items-center gap-1"
+              onClick={onSubmit}
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? (
+                <>
+                  <span className="spinner-border spinner-border-sm" />
+                  {submittingLabel}
+                </>
+              ) : (
+                <>
+                  <Check size={14} />
+                  {submitLabel}
+                </>
+              )}
+            </button>
+          )}
         </div>
       </div>
     </div>
