@@ -3,9 +3,9 @@ import type { ReactNode } from "react";
 interface ManagerShellProps {
   title: string;
   subtitle: string;
-  addLabel: string;
-  addIcon: ReactNode;
-  onClickAdd: () => void;
+  addLabel?: string;
+  addIcon?: ReactNode;
+  onClickAdd?: () => void;
   children: ReactNode;
 }
 
@@ -22,6 +22,9 @@ export function ManagerShell({
   onClickAdd,
   children,
 }: ManagerShellProps) {
+  const hasButton: boolean =
+    addLabel !== undefined && addIcon !== undefined && onClickAdd !== undefined;
+
   return (
     <div className="page">
       <div className="page-content">
@@ -30,13 +33,15 @@ export function ManagerShell({
             <h4 className="mb-1 fw-semibold">{title}</h4>
             <p className="text-secondary small mb-0">{subtitle}</p>
           </div>
-          <button
-            className="btn btn-sm btn-brand d-flex align-items-center gap-2"
-            onClick={onClickAdd}
-          >
-            {addIcon}
-            {addLabel}
-          </button>
+          {hasButton && (
+            <button
+              className="btn btn-sm btn-brand d-flex align-items-center gap-2"
+              onClick={onClickAdd}
+            >
+              {addIcon}
+              {addLabel}
+            </button>
+          )}
         </div>
         {children}
       </div>
