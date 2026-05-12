@@ -1,5 +1,5 @@
 import type ActionReturnMessage from "../../../types/action-return.interface";
-import { payCartTotal } from "../../requests/api";
+import { payCartTotal } from "../../requests/cart.api";
 
 export async function cartPayAction({ request }: any): Promise<ActionReturnMessage> {
   const formData = await request.formData();

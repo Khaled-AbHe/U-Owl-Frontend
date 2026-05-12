@@ -1,5 +1,5 @@
-import { requireSuperAdmin } from "../../../requests/auth";
-import { getAllUsers } from "../../../requests/api";
+import { requireSuperAdmin } from "../../../requests/auth.api";
+import { getAllUsers } from "../../../requests/user.api";
 
 export default async function userManagerLoader({ request }: any) {
   const currentUser = await requireSuperAdmin(request);

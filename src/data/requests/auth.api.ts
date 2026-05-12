@@ -1,30 +1,36 @@
 import { redirect } from "react-router-dom";
-import { request } from "./api";
+import { request } from "./api-constants";
 
 // Requêtes Auth
-export const signInUser = async (creds: any) =>
-  await request("/auth/signin", {
+export const signInUser = async (creds: any) => {
+  return await request("/auth/signin", {
     method: "POST",
     body: JSON.stringify(creds),
   });
+};
 
-export const signUpUser = async (creds: any) =>
-  await request("/auth/signup", {
+export const signUpUser = async (creds: any) => {
+  return await request("/auth/signup", {
     method: "POST",
     body: JSON.stringify(creds),
   });
+};
 
-export const signOutUser = async () =>
-  await request("/auth/signout", {
+export const signOutUser = async () => {
+  return await request("/auth/signout", {
     method: "POST",
   });
+};
 
-export const getCurrentUser = async () => await request("/auth/whoami");
+export const getCurrentUser = async () => {
+  return await request("/auth/whoami");
+};
 
-export const changePassword = async (id: string, password: string) =>
-  await request(`/users/${id}/changePassword/${password}`, {
+export const changePassword = async (userId: string, password: string) => {
+  return await request(`/users/${userId}/changePassword/${password}`, {
     method: "PATCH",
   });
+};
 
 // Guards
 export async function requireAuth(loaderRequest: any) {

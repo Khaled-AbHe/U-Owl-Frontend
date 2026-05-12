@@ -1,5 +1,5 @@
-import { getIsRoadSafe, updateVehicle } from "../../requests/api";
 import type ActionReturnMessage from "../../../types/action-return.interface";
+import { getIsRoadSafe, updateVehicle } from "../../requests/vehicle.api";
 import { isFieldValid, isPresent, RegExpList } from "../actions.helpers";
 
 export async function updateVehicleAction({ request }: any): Promise<ActionReturnMessage> {

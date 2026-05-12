@@ -1,5 +1,5 @@
 import { redirect } from "react-router-dom";
-import { signOutUser } from "../../requests/auth";
+import { signOutUser } from "../../requests/auth.api";
 
 export default async function signOutAction() {
   try {

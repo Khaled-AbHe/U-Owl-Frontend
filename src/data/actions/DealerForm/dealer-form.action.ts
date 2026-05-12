@@ -1,4 +1,5 @@
 import type ActionReturnMessage from "../../../types/action-return.interface";
+import { createDealerForm } from "../../requests/dealer-form.api";
 import { isFieldValid, isPresent, RegExpList } from "../actions.helpers";
 
 export async function dealerFormAction({ request }: any): Promise<ActionReturnMessage> {
@@ -72,12 +73,24 @@ export async function dealerFormAction({ request }: any): Promise<ActionReturnMe
     };
   }
 
-  // ── All validations passed ────────────────────────────────────────────────
+  // ── All validations passed
 
   try {
-    // TODO: API stuff
+    await createDealerForm({
+      fullName: creds.fullName,
+      businessName: creds.businessName,
+      email: creds.yourEmail,
+      businessEmail: creds.businessEmail,
+      phoneNumber: creds.phoneNumber,
+      city: creds.city,
+      postalCode: creds.postalCode,
+      status: "Pending",
+    });
     return { type: "success", message: "Application Received!" };
-  } catch {
-    return { type: "error", message: "Something went wrong. Please try again." };
+  } catch (error: any) {
+    return {
+      type: "error",
+      message: error.message ?? "Something went wrong. Please try again.",
+    };
   }
 }

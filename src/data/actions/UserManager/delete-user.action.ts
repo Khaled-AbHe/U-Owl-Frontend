@@ -1,5 +1,5 @@
-import { deleteUserById } from "../../requests/api";
 import type ActionReturnMessage from "../../../types/action-return.interface";
+import { deleteUserById } from "../../requests/user.api";
 
 export async function deleteUserAction({ request }: any): Promise<ActionReturnMessage> {
   const formData = await request.formData();
