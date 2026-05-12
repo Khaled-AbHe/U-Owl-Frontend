@@ -1,5 +1,5 @@
 import { redirect } from "react-router-dom";
-import { getCurrentUser } from "../../requests/auth";
+import { getCurrentUser } from "../../requests/auth.api";
 
 export default async function signInLoader() {
   try {

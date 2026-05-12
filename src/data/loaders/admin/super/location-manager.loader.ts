@@ -1,5 +1,6 @@
-import { getAllLocations, getAllVehicles } from "../../../requests/api";
-import { requireSuperAdmin } from "../../../requests/auth";
+import { requireSuperAdmin } from "../../../requests/auth.api";
+import { getAllLocations } from "../../../requests/location.api";
+import { getAllVehicles } from "../../../requests/vehicle.api";
 
 export default async function locationManagerLoader({ request }: any) {
   await requireSuperAdmin(request);

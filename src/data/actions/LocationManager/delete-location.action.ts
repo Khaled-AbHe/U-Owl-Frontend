@@ -1,5 +1,5 @@
-import { deleteLocationById } from "../../requests/api";
 import type ActionReturnMessage from "../../../types/action-return.interface";
+import { deleteLocationById } from "../../requests/location.api";
 
 export async function deleteLocationAction({ request }: any): Promise<ActionReturnMessage> {
   const formData = await request.formData();

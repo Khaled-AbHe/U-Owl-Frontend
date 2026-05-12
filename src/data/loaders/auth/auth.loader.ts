@@ -1,4 +1,4 @@
-import { requireAuth } from "../../requests/auth";
+import { requireAuth } from "../../requests/auth.api";
 
 export default async function authLoader({ request }: any) {
   // On attend que requireAuth vérifie la session auprès de NestJS

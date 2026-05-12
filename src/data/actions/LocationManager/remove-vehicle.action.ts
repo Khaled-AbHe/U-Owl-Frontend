@@ -1,5 +1,5 @@
-import { removeVehicleFromLocation } from "../../requests/api";
 import type ActionReturnMessage from "../../../types/action-return.interface";
+import { removeVehicleFromLocation } from "../../requests/location.api";
 
 export async function removeVehicleFromLocationAction({
   request,

@@ -1,4 +1,4 @@
-import { getCurrentUser } from "../../requests/auth";
+import { getCurrentUser } from "../../requests/auth.api";
 
 export default async function mainLayoutLoader() {
   try {

@@ -1,5 +1,5 @@
-import { deleteVehicleById } from "../../requests/api";
 import type ActionReturnMessage from "../../../types/action-return.interface";
+import { deleteVehicleById } from "../../requests/vehicle.api";
 
 export async function deleteVehicleAction({ request }: any): Promise<ActionReturnMessage> {
   const formData = await request.formData();

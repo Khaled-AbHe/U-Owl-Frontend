@@ -1,4 +1,4 @@
-import { signUpUser } from "../../requests/auth";
+import { signUpUser } from "../../requests/auth.api";
 import type ActionReturnMessage from "../../../types/action-return.interface";
 import { isFieldValid, isPresent, RegExpList } from "../actions.helpers";
 

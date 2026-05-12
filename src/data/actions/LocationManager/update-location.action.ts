@@ -1,5 +1,5 @@
-import { updateLocation } from "../../requests/api";
 import type ActionReturnMessage from "../../../types/action-return.interface";
+import { updateLocation } from "../../requests/location.api";
 import { isPresent } from "../actions.helpers";
 
 export async function updateLocationAction({ request }: any): Promise<ActionReturnMessage> {

@@ -1,6 +1,6 @@
-import { updateUser } from "../../requests/api";
 import type ActionReturnMessage from "../../../types/action-return.interface";
-import { changePassword } from "../../requests/auth";
+import { changePassword } from "../../requests/auth.api";
+import { updateUser } from "../../requests/user.api";
 import { isFieldValid, isPresent, RegExpList } from "../actions.helpers";
 
 export async function updateUserAction({ request }: any): Promise<ActionReturnMessage> {

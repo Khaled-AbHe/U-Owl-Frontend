@@ -3,7 +3,7 @@ import { config, Map as MapT, Marker, Popup } from "@maptiler/sdk";
 import "@maptiler/sdk/dist/maptiler-sdk.css";
 import "./map.css";
 import { GeocodingControl } from "@maptiler/geocoding-control/maptilersdk";
-import { MAPTILER_API_KEY } from "../../data/requests/map-api-import";
+import { MAPTILER_API_KEY } from "../../data/requests/api-constants";
 
 export default function Map() {
   const container = useRef<HTMLDivElement>(null);

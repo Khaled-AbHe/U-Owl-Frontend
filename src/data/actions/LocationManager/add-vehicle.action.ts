@@ -1,5 +1,5 @@
-import { addVehicleToLocation } from "../../requests/api";
 import type ActionReturnMessage from "../../../types/action-return.interface";
+import { addVehicleToLocation } from "../../requests/location.api";
 
 export async function addVehicleToLocationAction({ request }: any): Promise<ActionReturnMessage> {
   const formData = await request.formData();
