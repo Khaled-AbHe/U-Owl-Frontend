@@ -20,7 +20,7 @@ export const navCards = [
     title: "Become a Dealer",
     desc: "Partner with U-Owl and grow your business by renting our products.",
     cta: "Learn more",
-    to: "/joinDealer",
+    to: "/dealer",
   },
 ];
 

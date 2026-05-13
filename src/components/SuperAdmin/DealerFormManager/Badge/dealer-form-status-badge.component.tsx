@@ -9,7 +9,7 @@ interface Props {
 
 const icons: Record<DealerFormStatus, React.ReactNode> = {
   Pending: <Clock size={11} />,
-  Approved: <CheckCircle size={11} />,
+  Accepted: <CheckCircle size={11} />,
   Declined: <XCircle size={11} />,
 };
 

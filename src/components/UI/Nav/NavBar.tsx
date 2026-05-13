@@ -5,15 +5,9 @@ import { useNavBar } from "../../../hooks/useNavBar.hook";
 import { MobileDrawer } from "./MobileDrawer";
 import { NavActions } from "./NavActions";
 import { type NavItem, NavLinks } from "./NavLinks";
-import { NavSearch } from "./NavSearch";
 
 /** Labels in routes.data.ts that belong in the main nav (excludes Cart, etc.) */
-const NAV_ITEM_LABELS = new Set([
-  "Home",
-  "Vehicles",
-  "Find Location",
-  "Become A Dealer",
-]);
+const NAV_ITEM_LABELS = new Set(["Home", "Vehicles", "Find Location", "Become A Dealer"]);
 
 interface NavBarProps {
   imageSrcPath: string;
@@ -22,21 +16,10 @@ interface NavBarProps {
 }
 
 function NavBar({ imageSrcPath, navItems, user }: NavBarProps) {
-  const {
-    searchOpen,
-    searchQuery,
-    setSearchQuery,
-    menuOpen,
-    toggleSearch,
-    toggleMenu,
-  } = useNavBar();
+  const { menuOpen, toggleMenu } = useNavBar();
 
-  const mainItems = navItems.filter(
-    (i) => NAV_ITEM_LABELS.has(i.label) && i.path !== undefined,
-  );
-  const cartItem = navItems.find(
-    (i) => i.label === "Cart" && i.path !== undefined,
-  );
+  const mainItems = navItems.filter((i) => NAV_ITEM_LABELS.has(i.label) && i.path !== undefined);
+  const cartItem = navItems.find((i) => i.label === "Cart" && i.path !== undefined);
 
   return (
     <nav className={styles.navbarMain}>
@@ -54,29 +37,13 @@ function NavBar({ imageSrcPath, navItems, user }: NavBarProps) {
         />
 
         {/* Desktop right actions */}
-        <div
-          className={`${styles.navbarActions} ${styles.navbarActionsDesktop}`}
-        >
-          <NavSearch
-            isOpen={searchOpen}
-            query={searchQuery}
-            onToggle={toggleSearch}
-            onQueryChange={setSearchQuery}
-          />
+        <div className={`${styles.navbarActions} ${styles.navbarActionsDesktop}`}>
           <div className={styles.navbarDivider} />
           <NavActions user={user} cartItem={cartItem} />
         </div>
 
         {/* Mobile right actions + burger */}
-        <div
-          className={`${styles.navbarActions} ${styles.navbarActionsMobile}`}
-        >
-          <NavSearch
-            isOpen={searchOpen}
-            query={searchQuery}
-            onToggle={toggleSearch}
-            onQueryChange={setSearchQuery}
-          />
+        <div className={`${styles.navbarActions} ${styles.navbarActionsMobile}`}>
           <NavActions user={user} cartItem={cartItem} />
           <button
             className={`${styles.btnIcon} ${styles.burgerBtn}`}
@@ -91,14 +58,7 @@ function NavBar({ imageSrcPath, navItems, user }: NavBarProps) {
       </div>
 
       {/* ── Mobile drawer ── */}
-      <MobileDrawer
-        isOpen={menuOpen}
-        items={mainItems}
-        searchOpen={searchOpen}
-        searchQuery={searchQuery}
-        onSearchToggle={toggleSearch}
-        onSearchQueryChange={setSearchQuery}
-      />
+      <MobileDrawer isOpen={menuOpen} items={mainItems} />
     </nav>
   );
 }

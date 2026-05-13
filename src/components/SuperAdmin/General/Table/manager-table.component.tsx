@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import ManagerTableHeader from "./manager-table-header.component";
 
 export interface ColumnDef {
   label: string;
@@ -35,23 +36,14 @@ export default function ManagerTable({ columns, children }: ManagerTableProps) {
         style={{ display: "grid", gridTemplateColumns: grid, padding: "6px 0" }}
       >
         {columns.map((col) => (
-          <div
-            key={col.label}
-            className="text-primary fw-medium"
-            style={{
-              fontSize: 14,
-              textTransform: "uppercase",
-              letterSpacing: ".05em",
-              textAlign: col.align ?? "center",
-            }}
-          >
-            {col.label}
-          </div>
+          <ManagerTableHeader label={col.label} align={col.align} />
         ))}
       </div>
 
       {/* Body — each ManagerRow must receive and apply the same grid string */}
-      <div>{children}</div>
+      <div>
+        {children}
+      </div>
     </div>
   );
 }

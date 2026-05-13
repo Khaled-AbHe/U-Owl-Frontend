@@ -5,8 +5,6 @@ const DESKTOP_BREAKPOINT = 992;
 
 export function useNavBar() {
   const location = useLocation();
-  const [searchOpen, setSearchOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
 
   // Close mobile menu when viewport becomes desktop-sized
@@ -23,15 +21,10 @@ export function useNavBar() {
     setMenuOpen(false);
   }, [location.pathname]);
 
-  const toggleSearch = () => setSearchOpen((o) => !o);
   const toggleMenu = () => setMenuOpen((o) => !o);
 
   return {
-    searchOpen,
-    searchQuery,
-    setSearchQuery,
     menuOpen,
-    toggleSearch,
     toggleMenu,
   };
 }

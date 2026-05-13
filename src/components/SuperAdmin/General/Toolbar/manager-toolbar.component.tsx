@@ -31,7 +31,7 @@ export default function ManagerToolbar({
             value={search}
             onChange={(e) => {
               setSearch(e.target.value);
-              setPage(1);
+              setPage(1); // when you search, it sets it to the first page to avoid complications
             }}
           />
         </div>
