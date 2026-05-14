@@ -3,6 +3,8 @@
   padding: 2rem;
   font-family: Arial, sans-serif;
   color: #333;
+  margin-left: 200px;
+  margin-right: 200px;
 }
 
 /* ── Table ── */
@@ -79,16 +81,22 @@
 .vehicles-table tbody tr:not(.vehicles-table__section-header):nth-child(even) {
   background: #f7f7f7;
 }
+.vehicles-list-container h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #111;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
 
-/* Responsive scroll on small screens */
-@media (max-width: 768px) {
-  .vehicles-list-container {
-    padding: 1rem;
-  }
+.vehicles-list-container h5 {
+  font-size: 1rem;
+  font-weight: 400;
+  color: #666;
+  text-align: center;
+  margin-bottom: 2rem;
+}
 
-  .vehicles-table {
-    display: block;
-    overflow-x: auto;
-    white-space: nowrap;
-  }
+.vehicles-table__section-header td {
+  padding-left: 2rem; 
 }
