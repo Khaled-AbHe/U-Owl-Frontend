@@ -37,12 +37,14 @@
 .location-card {
   border: 1px solid #bfdbfe;
   border-radius: 12px;
-  padding: rem;
-  margin-top: 1rem;
+  padding: 1rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
   background: #eff6ff;
-  max-width: 1000px;
-  margin-left: 600px;
-  margin-right: 500px;
+  width: 100%;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .location-card-header {
