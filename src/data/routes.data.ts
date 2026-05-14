@@ -38,6 +38,7 @@ import mainLayoutLoader from "./loaders/client/main-layout.loader";
 import vehiclesLoader from "./loaders/vehicles/vehicles.loader";
 import LocationSettings from "../pages/Admin/Location/LocationSettings/location-settings.page";
 import LocationVehicleManager from "../pages/Admin/Location/VehicleManager/loc-vehicle-manager.page";
+import locationLoader from "./loaders/client/location.loader";
 
 export const mainRoutes = [
   {
@@ -62,7 +63,7 @@ export const mainRoutes = [
     path: "location",
     element: Location,
     action: undefined,
-    loader: undefined,
+    loader: locationLoader,
   },
   {
     isIndex: false,
