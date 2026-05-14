@@ -38,6 +38,8 @@ import mainLayoutLoader from "./loaders/client/main-layout.loader";
 import vehiclesLoader from "./loaders/vehicles/vehicles.loader";
 import LocationSettings from "../pages/Admin/Location/LocationSettings/location-settings.page";
 import LocationVehicleManager from "../pages/Admin/Location/VehicleManager/loc-vehicle-manager.page";
+import locationLoader from "./loaders/client/location.loader";
+import { addVehicleToCartAction } from "./actions/Cart/add-vehicle.action";
 
 export const mainRoutes = [
   {
@@ -62,7 +64,7 @@ export const mainRoutes = [
     path: "location",
     element: Location,
     action: undefined,
-    loader: undefined,
+    loader: locationLoader,
   },
   {
     isIndex: false,
@@ -96,6 +98,15 @@ export const mainRoutes = [
     action: removeOrderItemAction,
     loader: undefined,
   },
+
+  {
+    isIndex: false,
+    label: "Cart Add",
+    path: "cart/add",
+    element: undefined,
+    action: addVehicleToCartAction,
+    loader: undefined,
+  }
 ];
 
 export const authRoutes = [

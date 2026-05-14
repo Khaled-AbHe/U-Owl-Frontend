@@ -9,3 +9,4 @@ export interface Location {
   phoneNumber: string;
   inventory: Vehicle[];
 }
+
