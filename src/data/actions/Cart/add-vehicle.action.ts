@@ -6,7 +6,6 @@ export async function addVehicleToCartAction({ request }: any): Promise<ActionRe
 
   const vehicleId = Number(formData.get("vehicleId"));
   const distance = Number(formData.get("distance"));
-  console.log("vehicleId:", vehicleId, "distance:", distance)
 
   if (isNaN(vehicleId) || isNaN(distance)) {
     return { type: "error", message: "Invalid vehicle or distance." };
